@@ -9,6 +9,28 @@ BiasPoint is a desktop-style application that runs locally: a React user interfa
 
 Most simulators stop at "run a simulation, look at a waveform". BiasPoint adds an **analysis graph**: simulations, calculations, measurements, sweeps, Monte Carlo runs, requirements and plots connected as nodes. A graph is saved with the project and recomputed when the circuit changes. Only the parts that changed are recomputed; the rest comes from a cache that survives restarts.
 
+## Why I built it
+
+**Automating simulations and the calculations on their results.** When a simulation finished, I usually needed to do something with the results: compute a power or an efficiency, compare two runs, check a requirement. Each time that meant three manual steps:
+
+1. Export the data.
+2. Paste it into Excel.
+3. Write the formulas there.
+
+Then I changed a single part value and had to do it all over again. It wasted time, and every export and every hand-written formula was another chance to make a mistake.
+
+In BiasPoint those calculations live in the analysis graph next to the circuit. When the circuit changes, they run again by themselves.
+
+**Models that are easy to read and easy to make.** The models manufacturers supply are often hard to read: a list of cryptic parameters that says little about how the part behaves. Making your own model was just as tedious, whether from a datasheet, from its characteristic curves or from your own measurements.
+
+The part editor in BiasPoint builds a real part from an equivalent-circuit template and fits it to the data you have:
+
+- values from the datasheet;
+- curves exported from the manufacturer's tools, like the Murata capacitors below;
+- your own measurements.
+
+It then shows the model's characteristics against those points, so you can see how well the part is modelled.
+
 ---
 
 ## A worked example: checking a filter design
