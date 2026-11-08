@@ -11,6 +11,7 @@ from typing import Any
 
 from bpt.document.drawing import Drawing
 from bpt.document.model import (
+    Component,
     Graph,
     GraphEdge,
     GraphGroup,
@@ -80,13 +81,88 @@ def sallen_key() -> Project:
                     tran=".tran 5u 5m")  # fmt: skip
 
 
+# Parts the example makes like a user would in the part editor: an op-amp from its datasheet's
+# typical values (Microchip MCP6002: 1 MHz, 0.6 V/us, rail-to-rail) and a class 2 ceramic
+# capacitor whose capacitance falls with DC bias (half at 6.3 V, typical of a small X7R).
+MCP6002_FORM = {"aol": "400k", "gbw": "1meg", "sr": "600k", "vos": "1m", "ib": "1p",
+                "cmrr": "76", "psrr": "86", "vohigh": "25m", "volow": "25m", "iout": "23m",
+                "iq": "100u"}  # fmt: skip
+X7R_FORM = {"Cnom": "10n", "vhalf": "6.3"}  # ESR and ESL as the template has them
+
+
+def real_parts() -> list[Component]:
+    """The MCP6002 and the 10 nF X7R capacitor of ``filter_design_check`` ("My parts")."""
+    from bpt.models import templates as tpl
+    from bpt.models.standard_templates import standard_templates
+    from bpt.models.user_templates import component_from_template
+
+    opamp = next(t for t in standard_templates() if t.name == "Op-amp macromodel")
+    mcp = component_from_template(
+        opamp, MCP6002_FORM, "My parts", "MCP6002",
+        description="1 MHz rail-to-rail CMOS op-amp, 1.8-6 V (typical datasheet values)",
+        metadata={"manufacturer": "Microchip", "part_number": "MCP6002"},
+    )  # fmt: skip
+    x7r = tpl.template_component(tpl.get("mlcc"), X7R_FORM, "My parts", "10nF X7R 0402")
+    return [mcp, x7r]
+
+
 def filter_design_check() -> Project:
     """The Sallen-Key filter checked by one analysis graph: the design formula against the
-    simulation, the spread of a production batch (Monte Carlo with a yield) and what C2 does."""
+    simulation, the spread of a production batch (Monte Carlo with a yield), what C2 does, and
+    the same filter built of real parts (an op-amp and an X7R capacitor made from datasheets)."""
     from bpt.graph.catalog import CATALOG
+    from bpt.library.components import component_sheets
 
-    project = sallen_key()
-    project.name = "filter_design_check"
+    d = Drawing()
+    d.part("vsource", "V1", (0, 0), dc="2.5", ac="1", tran="SIN(2.5 1 1k)")
+    d.part("vsource", "V2", (-1016, 0), dc="5")
+    project = Project(name="filter_design_check", sheets=[d.sheet])
+    mcp, x7r = real_parts()
+    _top, mcp_sheets = component_sheets(project, mcp)
+    project.sheets += mcp_sheets
+    _top, x7r_sheets = component_sheets(project, x7r)
+    real = 3302  # the real filter: the same drawing lower down
+    for dy, (r1, r2, c1, c2, u) in ((0, ("R1", "R2", "C1", "C2", "U1")),
+                                    (real, ("R3", "R4", "C3", "C4", "U2"))):  # fmt: skip
+        d.part("resistor", r1, (1016, -1016 + dy), rot=270, R="10k")
+        d.part("resistor", r2, (2540, -1016 + dy), rot=270, R="10k")
+        d.part("capacitor", c1, (3302, -1778 + dy), rot=270, C="22n")
+        if dy == 0:
+            d.part("capacitor", c2, (3302, 0), C="10n")
+            d.part("opamp_ideal", u, (4064, -889))
+        else:
+            d.block(x7r_sheets[0], c2, (3302, dy))
+            d.block(mcp_sheets[0], u, (4064, -889 + dy))
+        fb = -508 if dy == 0 else 0  # the real op-amp's V- pin is where the ideal one has none
+        d.wire(d.pin(r1, "2"), d.pin(r2, "1"))
+        d.wire(d.pin(r2, "2"), d.pin(u, "+"))
+        d.wire((3302, -1016 + dy), d.pin(c2, "1"))
+        d.wire((1778, -1016 + dy), (1778, -1778 + dy), d.pin(c1, "1"))
+        d.wire(d.pin(c1, "2"), (4826, -1778 + dy), (4826, -889 + dy))
+        d.wire(d.pin(u, "out"), (5207, -889 + dy))
+        d.wire(d.pin(u, "-"), (3556, -762 + dy), (3556, fb + dy), (4826, fb + dy),
+               (4826, -889 + dy))  # fmt: skip
+        d.wire(d.pin(c2, "2"), (3302, 762 + dy))
+        d.gnd((3302, 762 + dy))
+    d.wire(d.pin("V1", "+"), (0, -1016), d.pin("R1", "1"))
+    d.wire(d.pin("R3", "1"), (508, -1016 + real))
+    d.wire(d.pin("V1", "-"), (0, 762))
+    d.gnd((0, 762))
+    d.wire(d.pin("V2", "-"), (-1016, 762))
+    d.gnd((-1016, 762))
+    d.wire(d.pin("V2", "+"), (-1016, -508))
+    d.power("VCC", (-1016, -508))
+    d.wire(d.pin("U2", "V+"), (4064, 1778))
+    d.power("VCC", (4064, 1778))
+    d.wire(d.pin("U2", "V-"), (4064, 3048))
+    d.gnd((4064, 3048))
+    d.label("in", (254, -1016))
+    d.label("in", (508, -1016 + real))
+    d.label("out", (5080, -889))
+    d.label("out_real", (5080, -889 + real))
+    project = _project("filter_design_check", d, "ac", ac=".ac dec 50 10 1meg",
+                       tran=".tran 5u 5m")  # fmt: skip
+    project.sheets += mcp_sheets + x7r_sheets
 
     def n(id_: str, type_: str, x: float, y: float, title: str = "", **params: Any) -> GraphNode:
         return GraphNode(id=id_, type=type_, version=CATALOG[type_].version, title=title,
@@ -141,6 +217,26 @@ def filter_design_check() -> Project:
         n("fc_sw", "measure/basic", 1140, 2600, "f-3dB and peak", op="f3db, max"),
         n("make_sw", "table/make", 1900, 2600, name="against C2"),
         n("table_sw", "view/table", 1900, 2780, "f-3dB and peak against C2"),
+        # 4. The same filter of real parts
+        n("ac_real", "sim/ac", 380, 3360, "AC to 1 MHz", points=50, start="10 Hz", stop="1 MHz"),
+        n("both", "core/signal", 760, 3360, "Ideal and real", expr="V(out); V(out_real)"),
+        n("bode_real", "view/plot", 1140, 3300, "Ideal against real parts", lines="-3 dB"),
+        n("fc_real", "measure/basic", 1520, 3300, "f-3dB, peak, deepest", op="f3db, max, min"),
+        n("make_real", "table/make", 1900, 3300, name="ideal / real"),
+        n("table_real", "view/table", 1900, 3480, "Ideal against real"),
+        n("cnom", "math/number", 380, 3820, value="10 nF", name="C2 (X7R) nominal"),
+        n("bias", "math/number", 380, 3980, value="2.5 V", name="DC across C2"),
+        n("vhalf", "math/number", 380, 4140, value="6.3 V", name="V½ of the X7R"),
+        n(
+            "c_bias",
+            "view/equation",
+            760,
+            3900,
+            "C2 under bias",
+            expr="a/(1+(b/c)^2)",
+            unit="F",
+            name="C2 at 2.5 V",
+        ),
     ]
     edges = [
         e("circuit", "circuit", "ac", "circuit"),
@@ -166,6 +262,17 @@ def filter_design_check() -> Project:
         e("fc_sw", "value", "make_sw", "values"),
         e("fc_sw", "max", "make_sw", "values"),
         e("make_sw", "table", "table_sw", "table"),
+        e("circuit", "circuit", "ac_real", "circuit"),
+        e("ac_real", "run", "both", "run"),
+        e("both", "signals", "bode_real", "signals"),
+        e("both", "signals", "fc_real", "signal"),
+        e("fc_real", "value", "make_real", "values"),
+        e("fc_real", "max", "make_real", "values"),
+        e("fc_real", "min", "make_real", "values"),
+        e("make_real", "table", "table_real", "table"),
+        e("cnom", "value", "c_bias", "a"),
+        e("bias", "value", "c_bias", "b"),
+        e("vhalf", "value", "c_bias", "c"),
     ]
     groups = [
         GraphGroup(id="g1", title="1 · Design formula against the simulation", color="violet",
@@ -174,6 +281,8 @@ def filter_design_check() -> Project:
                    rect=(340, 1100, 2000, 1000)),
         GraphGroup(id="g3", title="3 · What C2 does", color="emerald",
                    rect=(340, 2160, 2000, 960)),
+        GraphGroup(id="g4", title="4 · Real parts: an MCP6002 and an X7R capacitor",
+                   color="amber", rect=(340, 3220, 2000, 1160)),
     ]  # fmt: skip
     notes = [
         GraphNote(id="n1", pos=(-40, 960), size=(360, 120), text=(
@@ -185,6 +294,12 @@ def filter_design_check() -> Project:
         GraphNote(id="n3", pos=(0, 2600), size=(320, 120), text=(
             "C2 swept through four values: one curve each, and a table of f-3dB and the peak. "
             "A smaller C2 raises fc and Q (the response peaks); a larger one flattens it.")),
+        GraphNote(id="n4", pos=(0, 3500), size=(320, 220), text=(
+            "The same filter of real parts made in the part editor: an MCP6002 op-amp from its "
+            "datasheet and a 10 nF X7R capacitor that loses capacitance under DC bias. C2 sees "
+            "2.5 V, so f-3dB moves up by about 15 %. Above 70 kHz the op-amp runs out of gain "
+            "and the signal leaks through C1: the real filter stops at about -67 dB and rises "
+            "again, the ideal one keeps falling.")),
     ]  # fmt: skip
     project.graphs = [Graph(name="Design check", nodes=nodes, edges=edges, groups=groups,
                             notes=notes)]  # fmt: skip

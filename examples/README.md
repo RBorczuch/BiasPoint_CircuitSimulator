@@ -6,7 +6,7 @@ Open them from **File → Open example…** (you get an unsaved copy) or open a 
 | --- | --- | --- |
 | `rc_lowpass.bpt` | First-order RC filter, fc = 159 Hz | `.tran` step response, `.ac` Bode plot |
 | `sallen_key_lowpass.bpt` | Second-order active filter with an ideal op-amp (fc ≈ 1 kHz, Q ≈ 0.74) | `.ac`, `.tran` with a 1 kHz sine |
-| `filter_design_check.bpt` | The same Sallen-Key filter checked by one analysis graph (**Analysis** workspace, F5): the design formula against the simulated f-3dB, a batch of 200 filters with R ±1 % and C ±5 % (Monte Carlo histogram and a 1.10–1.20 kHz requirement with its yield), and a sweep of C2 with a table | analysis graph *Design check* |
+| `filter_design_check.bpt` | The same Sallen-Key filter checked by one analysis graph (**Analysis** workspace, F5): the design formula against the simulated f-3dB, a batch of 200 filters with R ±1 % and C ±5 % (Monte Carlo histogram and a 1.10–1.20 kHz requirement with its yield), a sweep of C2 with a table, and the same filter built of real parts made in the part editor (an MCP6002 op-amp from its datasheet and a 10 nF X7R capacitor that loses capacitance under DC bias) | analysis graph *Design check*; `.ac` to 1 MHz |
 | `ce_amplifier.bpt` | 2N3904 common-emitter stage with divider bias (gain ≈ RC/RE) | `.tran`, `.ac`, `.op` bias point |
 | `half_wave_rectifier.bpt` | Diode, reservoir capacitor and load on a 50 Hz sine | `.tran` ripple |
 | `lm2596_module.bpt` | 12 V → 5 V at 1 A from an LM2596 step-down module: a module component built of real parts and an LM2596 IC component (behavioural, from the datasheet). Enter the module, then the IC, and probe on every level | `.tran` start-up and ripple |

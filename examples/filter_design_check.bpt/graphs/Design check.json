@@ -389,6 +389,171 @@
       "size": null,
       "params": {},
       "param_inputs": []
+    },
+    {
+      "id": "ac_real",
+      "type": "sim/ac",
+      "version": 1,
+      "title": "AC to 1 MHz",
+      "bypass": false,
+      "pos": [
+        380.0,
+        3360.0
+      ],
+      "size": null,
+      "params": {
+        "points": 50,
+        "start": "10 Hz",
+        "stop": "1 MHz"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "both",
+      "type": "core/signal",
+      "version": 1,
+      "title": "Ideal and real",
+      "bypass": false,
+      "pos": [
+        760.0,
+        3360.0
+      ],
+      "size": null,
+      "params": {
+        "expr": "V(out); V(out_real)"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "bode_real",
+      "type": "view/plot",
+      "version": 1,
+      "title": "Ideal against real parts",
+      "bypass": false,
+      "pos": [
+        1140.0,
+        3300.0
+      ],
+      "size": null,
+      "params": {
+        "lines": "-3 dB"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "fc_real",
+      "type": "measure/basic",
+      "version": 2,
+      "title": "f-3dB, peak, deepest",
+      "bypass": false,
+      "pos": [
+        1520.0,
+        3300.0
+      ],
+      "size": null,
+      "params": {
+        "op": "f3db, max, min"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "make_real",
+      "type": "table/make",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        1900.0,
+        3300.0
+      ],
+      "size": null,
+      "params": {
+        "name": "ideal / real"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "table_real",
+      "type": "view/table",
+      "version": 1,
+      "title": "Ideal against real",
+      "bypass": false,
+      "pos": [
+        1900.0,
+        3480.0
+      ],
+      "size": null,
+      "params": {},
+      "param_inputs": []
+    },
+    {
+      "id": "cnom",
+      "type": "math/number",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        380.0,
+        3820.0
+      ],
+      "size": null,
+      "params": {
+        "value": "10 nF",
+        "name": "C2 (X7R) nominal"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "bias",
+      "type": "math/number",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        380.0,
+        3980.0
+      ],
+      "size": null,
+      "params": {
+        "value": "2.5 V",
+        "name": "DC across C2"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "vhalf",
+      "type": "math/number",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        380.0,
+        4140.0
+      ],
+      "size": null,
+      "params": {
+        "value": "6.3 V",
+        "name": "V½ of the X7R"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "c_bias",
+      "type": "view/equation",
+      "version": 1,
+      "title": "C2 under bias",
+      "bypass": false,
+      "pos": [
+        760.0,
+        3900.0
+      ],
+      "size": null,
+      "params": {
+        "expr": "a/(1+(b/c)^2)",
+        "unit": "F",
+        "name": "C2 at 2.5 V"
+      },
+      "param_inputs": []
     }
   ],
   "edges": [
@@ -529,6 +694,72 @@
       "output": "table",
       "target": "table_sw",
       "input": "table"
+    },
+    {
+      "source": "circuit",
+      "output": "circuit",
+      "target": "ac_real",
+      "input": "circuit"
+    },
+    {
+      "source": "ac_real",
+      "output": "run",
+      "target": "both",
+      "input": "run"
+    },
+    {
+      "source": "both",
+      "output": "signals",
+      "target": "bode_real",
+      "input": "signals"
+    },
+    {
+      "source": "both",
+      "output": "signals",
+      "target": "fc_real",
+      "input": "signal"
+    },
+    {
+      "source": "fc_real",
+      "output": "value",
+      "target": "make_real",
+      "input": "values"
+    },
+    {
+      "source": "fc_real",
+      "output": "max",
+      "target": "make_real",
+      "input": "values"
+    },
+    {
+      "source": "fc_real",
+      "output": "min",
+      "target": "make_real",
+      "input": "values"
+    },
+    {
+      "source": "make_real",
+      "output": "table",
+      "target": "table_real",
+      "input": "table"
+    },
+    {
+      "source": "cnom",
+      "output": "value",
+      "target": "c_bias",
+      "input": "a"
+    },
+    {
+      "source": "bias",
+      "output": "value",
+      "target": "c_bias",
+      "input": "b"
+    },
+    {
+      "source": "vhalf",
+      "output": "value",
+      "target": "c_bias",
+      "input": "c"
     }
   ],
   "groups": [
@@ -563,6 +794,17 @@
         2160.0,
         2000.0,
         960.0
+      ]
+    },
+    {
+      "id": "g4",
+      "title": "4 · Real parts: an MCP6002 and an X7R capacitor",
+      "color": "amber",
+      "rect": [
+        340.0,
+        3220.0,
+        2000.0,
+        1160.0
       ]
     }
   ],
@@ -601,6 +843,18 @@
       "size": [
         320.0,
         120.0
+      ]
+    },
+    {
+      "id": "n4",
+      "text": "The same filter of real parts made in the part editor: an MCP6002 op-amp from its datasheet and a 10 nF X7R capacitor that loses capacitance under DC bias. C2 sees 2.5 V, so f-3dB moves up by about 15 %. Above 70 kHz the op-amp runs out of gain and the signal leaks through C1: the real filter stops at about -67 dB and rises again, the ideal one keeps falling.",
+      "pos": [
+        0.0,
+        3500.0
+      ],
+      "size": [
+        320.0,
+        220.0
       ]
     }
   ],

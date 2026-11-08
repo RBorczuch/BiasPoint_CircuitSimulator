@@ -209,7 +209,16 @@ export const useSimulation = create<SimState>((set, get) => ({
         meta.signals.map((s) => s.name),
         meta.scale,
       ).find((g) => g.title === 'Nets')
-      for (const signal of named?.signals.slice(0, 4) ?? []) get().addTrace(signal)
+      // Nets labelled on the top sheet: not power nets (flat in AC) nor nets inside a part's
+      // equivalent circuit ("V(U2.inn)").
+      const labels = new Set(
+        (useProject.getState().project?.sheets[0]?.labels ?? []).map((l) => l.text.toLowerCase()),
+      )
+      const top = (named?.signals ?? []).filter(
+        (name) =>
+          !name.slice(2, -1).includes('.') && (!labels.size || labels.has(name.slice(2, -1).toLowerCase())),
+      )
+      for (const signal of top.slice(0, 4)) get().addTrace(signal)
     }
     if (meta.status === 'ok') void loadProbes(meta, opValues)
     void loadStress(meta)

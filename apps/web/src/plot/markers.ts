@@ -109,6 +109,7 @@ export function markersPlugin(
         ctx.font = `${10 * ratio}px Inter, "Segoe UI", sans-serif`
         ctx.textAlign = 'left' // (uPlot leaves the axes' alignment set)
         ctx.textBaseline = 'alphabetic'
+        const taken: [number, number, number, number][] = [] // labels drawn: x, y, w, h
         for (const m of get()) {
           const scale = m.pane === pane ? scaleOf(m.series) : undefined
           if (!scale || !u.scales[scale]) continue
@@ -126,7 +127,12 @@ export function markersPlugin(
           const h = 14 * ratio
           let lx = px + 7 * ratio
           if (lx + w > left + width) lx = px - 7 * ratio - w
-          const ly = Math.max(top, py - h - 4 * ratio)
+          let ly = Math.max(top, py - h - 4 * ratio)
+          // Markers close together: their labels go one under another.
+          const overlaps = () =>
+            taken.some(([x, y, tw, th]) => lx < x + tw && x < lx + w && ly < y + th && y < ly + h)
+          for (let k = 0; k < 8 && overlaps(); k++) ly += h + 2 * ratio
+          taken.push([lx, ly, w, h])
           ctx.fillStyle = background
           ctx.fillRect(lx, ly, w, h)
           ctx.fillStyle = m.color

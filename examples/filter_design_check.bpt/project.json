@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "id": "01a1bcfb-4aac-7015-bbe9-0df38a512e0d",
+  "id": "01a1bd21-db11-7012-9185-4720b87e7d5f",
   "name": "filter_design_check",
   "parameters": {},
   "models": {},
@@ -10,7 +10,7 @@
     "cards": {
       "op": ".op",
       "dc": ".dc V1 0 5 0.1",
-      "ac": ".ac dec 50 10 100k",
+      "ac": ".ac dec 50 10 1meg",
       "tran": ".tran 5u 5m"
     },
     "temperature": "",
@@ -29,8 +29,16 @@
   "symbol_standard": null,
   "sheets": [
     {
-      "id": "01a1bcfb-4aac-7000-9a81-e50aac970116",
+      "id": "01a1bd21-dac8-7000-aac2-2d12406d2dbe",
       "name": "root"
+    },
+    {
+      "id": "01a1bd21-db0e-7000-971d-44ac1c140c78",
+      "name": "MCP6002"
+    },
+    {
+      "id": "01a1bd21-db0f-7005-9384-e41b762b7f5b",
+      "name": "10nF X7R 0402"
     }
   ]
 }

@@ -529,7 +529,7 @@ function Canvas({ graph }: { graph: Graph }) {
         colorMode={theme}
         zoomOnDoubleClick={false}
         deleteKeyCode={['Delete', 'Backspace']}
-        minZoom={0.2}
+        minZoom={0.1} // a large graph fits the canvas
         fitView
         fitViewOptions={{ padding: 0.2, maxZoom: 1 }}
       >

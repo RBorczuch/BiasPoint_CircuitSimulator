@@ -13,19 +13,25 @@ Most simulators stop at "run a simulation, look at a waveform". BiasPoint adds a
 
 ## A worked example: checking a filter design
 
-The project `examples/filter_design_check.bpt` (**File → Open example… → Filter design check**) takes a second-order Sallen-Key low-pass filter (R1 = R2 = 10 kΩ, C1 = 22 nF, C2 = 10 nF, ideal op-amp) and answers three questions a designer asks in one graph:
+The project `examples/filter_design_check.bpt` (**File → Open example… → Filter design check**) takes a second-order Sallen-Key low-pass filter (R1 = R2 = 10 kΩ, C1 = 22 nF, C2 = 10 nF) and answers four questions a designer asks, in one graph:
 
 1. **Does the circuit do what the formula says?**
 2. **What will a production batch look like, with real part tolerances?**
 3. **What happens if I change C2?**
+4. **What changes when the ideal parts are replaced by real ones?** Here these are an op-amp and a ceramic capacitor, both made from their datasheets in the part editor.
 
-Press **F5** in the **Analysis** workspace. The whole graph (one AC sweep, a batch of 200 Monte Carlo runs and a 4-point parameter sweep) runs in a few seconds.
+Press **F5** in the **Analysis** workspace. The whole graph runs in a few seconds: two AC sweeps, a batch of 200 Monte Carlo runs and a 4-point parameter sweep.
 
-![The schematic](assets/screenshots/01-schematic.png)
+The schematic holds the filter twice:
+
+- **Top:** with an ideal op-amp and ideal capacitors.
+- **Bottom:** built of real parts. U2 is an MCP6002 op-amp powered from 5 V, and C4 is a 10 nF X7R ceramic capacitor. The input is biased at 2.5 V, as in a single-supply circuit.
+
+![The schematic: the ideal filter and the same filter of real parts](assets/screenshots/01-schematic.png)
 
 ### The whole graph
 
-Three groups, each with a note that explains what it shows. Every box is a node, and every wire carries data: a circuit, a simulation run, a signal, a number or a table.
+Four groups, each with a note that explains what it shows. Every box is a node, and every wire carries data: a circuit, a simulation run, a signal, a number or a table.
 
 ![The analysis graph](assets/screenshots/02-graph-overview.png)
 
@@ -59,9 +65,44 @@ A **Sweep** node sets C2 to 4.7, 10, 22 and 47 nF. The plot shows one curve per 
 
 ![C2 sweep](assets/screenshots/05-c2-sweep.png)
 
+### 4 · Creating real parts
+
+Ideal parts answer "does the topology work?". Real parts answer "will the board work?". BiasPoint makes a real part from its datasheet: you pick an equivalent-circuit template, type the datasheet values or points, and the part editor shows the part's characteristics, simulated, against those points.
+
+**An op-amp from its datasheet values.** The steps:
+
+1. Open **File → New part…** and choose the template **Op-amp macromodel**.
+2. Enter the typical values from the MCP6002 datasheet: open-loop gain 400k (112 dB), GBW 1 MHz, slew rate 0.6 V/µs, offset 1 mV, bias current 1 pA, output swing 25 mV from each rail, output current 23 mA. CMRR, PSRR and the supply current are under *Advanced*.
+3. Check the open-loop gain Aol(f), computed by simulating the macromodel. GBW is a handle you can drag on the chart, and datasheet points can be pasted or traced from a picture of the datasheet's plot and fitted.
+4. Click **Save to library**. The part goes to *My parts*.
+
+![The part editor: an op-amp macromodel from datasheet values](assets/screenshots/07-part-editor-opamp.png)
+
+**A ceramic capacitor that loses capacitance under DC bias.** Class 2 ceramics (X5R, X7R) lose a large part of their capacitance with DC voltage, and small packages lose the most. The steps:
+
+1. Choose the template **MLCC class 2 (DC bias)**.
+2. Enter C = 10 nF.
+3. Paste points of the capacitance against DC voltage, read from the manufacturer's DC-bias chart. The example uses illustrative values typical of a small 0402 X7R part.
+4. Click **Fit**. It finds V½, the voltage at which the capacitance halves: **6.3 V**, with an error of 0.04 %. The model's curve now goes through the points.
+
+![The part editor: a class 2 ceramic capacitor fitted to its DC-bias curve](assets/screenshots/08-part-editor-x7r.png)
+
+### 5 · Using them: the ideal filter against the real one
+
+The saved parts are placed from the library like any other part. A placed part brings its equivalent circuit into the project, so the project opens and simulates on any computer, even without your library. In the example, U2 and C4 are these two parts.
+
+The fourth group of the graph runs both filters and compares them:
+
+- **The cut-off moves by 14 %.** C2 has 2.5 V across it. An Equation node shows how much capacitance is left: 10 nF / (1 + (2.5 / 6.3)²) = **8.64 nF**. As a result, f-3dB moves from **1.122 kHz to 1.283 kHz**. The ideal model cannot show this, and in a filter with ±5 % parts it is the largest error.
+- **The stop band leaks.** As the frequency rises, the MCP6002's loop gain falls (GBW is 1 MHz) and its closed-loop output impedance rises. The signal that leaks through C1 to the output is no longer held down. The real filter reaches only about **−67 dB** at 72 kHz and then rises back to −49 dB at 1 MHz. The ideal one keeps falling to −119 dB. This is a well-known limitation of Sallen-Key filters, and it shows up only with a real op-amp model.
+
+![Real parts against ideal ones](assets/screenshots/09-real-parts.png)
+
 ### The quick path: Simulate
 
-For everyday work there is the classic LTspice-like workflow: choose an analysis (OP / DC / AC / TRAN), press F5 and probe nets on the schematic. The waveform viewer has panes, Bode plots and XY plots, can compare a run with the previous one, and offers cursors, crosshairs and markers. In the screenshot, the **-3 dB marker** was placed from the markers menu and lands on 1.123 kHz.
+For everyday work there is the classic LTspice-like workflow: choose an analysis (OP / DC / AC / TRAN), press F5 and probe nets on the schematic. The waveform viewer has panes, Bode plots and XY plots, can compare a run with the previous one, and offers cursors, crosshairs and markers.
+
+The screenshot shows the same comparison: V(out) of the ideal filter in orange and V(out_real) of the real one in blue. The **-3 dB markers**, placed from the markers menu, land on **1.123 kHz** and **1.284 kHz**, and the bar under the plot shows their difference. The leak-through above 70 kHz is easy to see.
 
 ![Simulate workspace](assets/screenshots/06-simulate-bode-markers.png)
 
@@ -73,6 +114,7 @@ For everyday work there is the classic LTspice-like workflow: choose an analysis
 | Tolerances | `.step` + scripts, or a separate tool | Monte Carlo node → histogram → requirement with yield |
 | Many measurements | `.meas` lines, results in a log | Measure nodes with outputs, tables and plots |
 | Sweeps | curves you read by eye | a family of curves + a table of measured values |
+| Real parts | vendor models, if there are any | parts made from the datasheet in minutes (values or fitted curves), embedded in the project |
 | Re-running | everything again | only what changed; the cache survives restarts |
 | Sharing the reasoning | screenshots and notes | the graph is saved in the project, with groups and notes |
 

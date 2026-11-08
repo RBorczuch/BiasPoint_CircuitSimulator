@@ -85,7 +85,7 @@ def test_example_simulates(name: str, tmp_path: Path) -> None:
 @ngspice_marks[1]
 def test_the_filter_design_check_graph(tmp_path: Path) -> None:
     """The showcase graph: formula f0 = 1.07 kHz, simulated f-3dB 1.12 kHz (Q = 0.74), a batch
-    of 200 with most of it within 1.10-1.20 kHz, and a table row per C2."""
+    of 200 with most of it within 1.10-1.20 kHz, a table row per C2, and real parts."""
     from bpt.examples import filter_design_check
     from bpt.graph.executor import ResultCache, execute
     from tests.test_graph import _Ctx
@@ -103,6 +103,13 @@ def test_the_filter_design_check_graph(tmp_path: Path) -> None:
     assert results["measure"].outputs["value"].value == pytest.approx(1122, rel=5e-3)
     assert "PASS" in results["spec"].state.summary[0] or "FAIL" in results["spec"].state.summary[0]
     assert len(results["make_sw"].outputs["table"].rows) == 4
+    # Real parts: the X7R loses capacitance under 2.5 V (f-3dB up ~14 %) and the op-amp's
+    # finite gain lets the signal leak through at high frequencies.
+    assert results["c_bias"].outputs["value"].value == pytest.approx(8.64e-9, rel=1e-3)
+    ideal, real = results["make_real"].outputs["table"].rows
+    assert results["make_real"].outputs["table"].columns == ["signal", "f-3dB", "max", "min"]
+    assert real[1] / ideal[1] == pytest.approx(1.14, abs=0.03)
+    assert real[3] > 100 * ideal[3]  # deepest attenuation: about -67 dB against -119 dB
 
 
 @ngspice_marks[0]

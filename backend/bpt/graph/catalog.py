@@ -1487,7 +1487,10 @@ def make_table(name: str, values: list[Value]) -> TableValue:
             columns, units = [first.param], [""]
             for f in families:
                 member = leaf(f)
-                columns.append(member.name if isinstance(member, ScalarValue) else f.param)
+                name = member.name if isinstance(member, ScalarValue) else f.param
+                if first.values and name.endswith(f"({first.values[0]})"):
+                    name = name[: -len(first.values[0]) - 2]  # "f-3dB(V(out))" of each signal
+                columns.append(name)
                 units.append(member.unit if isinstance(member, ScalarValue) else "")
             rows: list[list[float | str]] = []
             for k, point in enumerate(first.values):
