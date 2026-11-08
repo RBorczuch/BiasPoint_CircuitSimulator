@@ -125,6 +125,13 @@ For everyday work there is the classic LTspice-like workflow: choose an analysis
 
 The screenshot shows the same comparison: V(out) of the ideal filter in orange and V(out_real) of the real one in blue. The **-3 dB markers**, placed from the markers menu, land on **1.123 kHz** and **1.113 kHz**, and the bar under the plot shows their difference. The leak-through above 70 kHz is easy to see.
 
+The phase tells the same story:
+
+- **Ideal filter:** the phase approaches −180°, as a second-order low-pass should. It matches the analytic transfer function to within 2·10⁻⁶.
+- **Real filter:** the phase keeps falling past −180° and reaches about −315° at 1 MHz. Above the dip at 72 kHz the gain rises again while the phase keeps lagging. This is non-minimum-phase behaviour: the signal leaking through C1 reaches the output with the opposite sign to the filtered one.
+
+The viewer draws the phase unwrapped, so crossing −180° does not show up as a false jump to +180°.
+
 ![Simulate workspace](assets/screenshots/06-simulate-bode-markers.png)
 
 ### Why a graph?

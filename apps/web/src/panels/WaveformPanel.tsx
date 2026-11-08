@@ -50,7 +50,7 @@ import { revealSignal } from '@/lib/reveal'
 import { useTheme } from '@/lib/theme'
 import { formatValue, signalUnit } from '@/lib/units'
 import { OpTable } from '@/panels/OpTable'
-import { axisPrefix, axisTitle, scaleName, tickLabels } from '@/plot/format'
+import { axisPrefix, axisTitle, phaseDegrees, scaleName, tickLabels } from '@/plot/format'
 import { SignalPicker } from '@/plot/SignalPicker'
 import { plotsToSvg, SVG_THEMES, svgToPng } from '@/plot/svg'
 import { xyPath } from '@/plot/xy'
@@ -167,7 +167,7 @@ async function queryRun(
       const im = s.im
       ac.set(trace.id, [
         s.re.map((re, i) => 20 * Math.log10(Math.max(Math.hypot(re, im[i]), 1e-15))),
-        s.re.map((re, i) => (Math.atan2(im[i], re) * 180) / Math.PI),
+        phaseDegrees(s.re, im),
       ])
     } else if (s.max && s.min) {
       const raw = s.max.every((v, i) => v === s.min?.[i])

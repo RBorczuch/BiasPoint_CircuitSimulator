@@ -100,3 +100,22 @@ export function groupSignals(names: string[], scale: string | null | undefined):
   for (const group of groups) group.signals.sort(natural.compare)
   return groups.filter((g) => g.signals.length > 0)
 }
+
+/**
+ * Phase in degrees of complex samples, unwrapped: a curve going past -180° goes on to -190°
+ * instead of jumping to +170° (a wrapped Bode phase looks like a step that is not there).
+ */
+export function phaseDegrees(re: ArrayLike<number>, im: ArrayLike<number>): number[] {
+  const out: number[] = []
+  let offset = 0
+  for (let i = 0; i < re.length; i++) {
+    const wrapped = (Math.atan2(im[i], re[i]) * 180) / Math.PI
+    if (i > 0) {
+      const step = wrapped + offset - out[i - 1]
+      if (step > 180) offset -= 360 * Math.round(step / 360)
+      else if (step < -180) offset += 360 * Math.round(-step / 360)
+    }
+    out.push(wrapped + offset)
+  }
+  return out
+}

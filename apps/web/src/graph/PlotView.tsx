@@ -6,7 +6,7 @@ import type { PlotSeries } from '@/api/types'
 import { useTheme } from '@/lib/theme'
 import { formatValue } from '@/lib/units'
 import { crosshairPlugin } from '@/plot/crosshair'
-import { axisPrefix, axisTitle, tickLabels } from '@/plot/format'
+import { axisPrefix, axisTitle, phaseDegrees, tickLabels } from '@/plot/format'
 import { scaledMove, syncOnEnter } from '@/plot/scaled'
 import { xyPath } from '@/plot/xy'
 import { PALETTES, usePlot } from '@/store/plot'
@@ -39,8 +39,7 @@ const unitOfKey = (key: string) => key.replace(/\|r$/, '').replace(/^-$/, '')
 export function values(s: PlotSeries, complex: string): { y: (number | null)[]; unit: string } {
   if (s.re && s.im) {
     const im = s.im
-    if (complex === 'phase')
-      return { y: s.re.map((re, i) => (Math.atan2(im[i], re) * 180) / Math.PI), unit: '°' }
+    if (complex === 'phase') return { y: phaseDegrees(s.re, im), unit: '°' }
     const mag = s.re.map((re, i) => Math.hypot(re, im[i]))
     if (complex === 'mag') return { y: mag, unit: s.unit }
     return { y: mag.map((m) => 20 * Math.log10(Math.max(m, 1e-15))), unit: 'dB' }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { axisPrefix, axisTitle, groupSignals, tickLabels } from './format'
+import { axisPrefix, axisTitle, groupSignals, phaseDegrees, tickLabels } from './format'
 
 describe('plot axes', () => {
   it('picks one SI prefix per axis', () => {
@@ -35,5 +35,14 @@ describe('signal browser', () => {
       { title: 'Unnamed nets', signals: ['V(N002)'] },
       { title: 'Internal nodes', signals: ['V(_c1_esr)'] },
     ])
+  })
+})
+
+describe('phase', () => {
+  it('is unwrapped: past -180 degrees it goes on instead of jumping to +180', () => {
+    const deg = [-170, -179, 175, 120, 45] // as atan2 gives them (wrapped)
+    const rad = deg.map((d) => (d * Math.PI) / 180)
+    const out = phaseDegrees(rad.map(Math.cos), rad.map(Math.sin))
+    expect(out.map((v) => Math.round(v))).toEqual([-170, -179, -185, -240, -315])
   })
 })
