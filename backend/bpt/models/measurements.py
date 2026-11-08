@@ -136,7 +136,10 @@ def read_csv(text: str) -> Table:
     )
 
     def cells(line: str) -> list[str]:
-        return line.split() if delimiter == " " else line.split(delimiter)
+        parts = line.split() if delimiter == " " else line.split(delimiter)
+        while parts and not parts[-1].strip():  # "1e3,16.8," (Murata SimSurfing ends rows so)
+            parts.pop()
+        return parts
 
     rows: list[list[float]] = []
     header: list[str] | None = None

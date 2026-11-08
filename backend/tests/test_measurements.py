@@ -32,6 +32,25 @@ def test_a_semicolon_file_with_decimal_commas() -> None:
     assert table.skipped == 2  # the comment and the header
 
 
+SIMSURFING = """#GRM155R71C103KA01,,
+#In Production,,
+#2026/11/09,,
+#z,,
+#DC0V 25degC,,
+Frequency[Hz],Impedance[ohm],
+99.99999999999999,167138.04418778114,
+104.57921513303334,159841.7414379658,
+"""
+
+
+def test_a_murata_simsurfing_export() -> None:
+    """Murata's exports end every row with a comma: the empty last cell is not a column."""
+    table = read_csv(SIMSURFING)
+    assert [c.name for c in table.columns] == ["Frequency[Hz]", "Impedance[ohm]"]
+    assert [c.unit for c in table.columns] == ["Hz", "Ω"]
+    assert table.rows[1] == [104.57921513303334, 159841.7414379658]
+
+
 def test_csv_to_points_in_the_characteristics_units(client: TestClient) -> None:
     summary = client.post("/api/measurements/csv", headers=H, json={"text": KEYSIGHT}).json()
     assert summary["rows"] == 3 and summary["columns"][0]["scale"] == 1e3

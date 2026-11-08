@@ -19,6 +19,7 @@ from bpt.document.model import (
     GraphNote,
     ModelCard,
     Project,
+    Sheet,
     Simulation,
 )
 from bpt.document.storage import save_project
@@ -87,11 +88,19 @@ def sallen_key() -> Project:
 MCP6002_FORM = {"aol": "400k", "gbw": "1meg", "sr": "600k", "vos": "1m", "ib": "1p",
                 "cmrr": "76", "psrr": "86", "vohigh": "25m", "volow": "25m", "iout": "23m",
                 "iq": "100u"}  # fmt: skip
-X7R_FORM = {"Cnom": "10n", "vhalf": "6.3"}  # ESR and ESL as the template has them
+# Murata capacitors fitted to Murata's SimSurfing curves (see bpt/example_parts.py): the X7R's
+# C and V½ to its DC-bias curve, ESR and ESL to its |Z|(f); the C0G's ESR and ESL to |Z|(f).
+X7R_FORM = {"Cnom": "10.12n", "vhalf": "43.63", "esr": "94.89m", "esl": "349.6p"}
+C0G_FORM = {"Cnom": "22n", "esr": "20.7m", "esl": "464.3p"}
+# Vishay CRCW0603 thick-film resistor; the datasheet gives no parasitics: typical of 0603.
+RESISTOR_FORM = {"Rnom": "10k", "ls": "0.4n", "cp": "0.05p"}
 
 
 def real_parts() -> list[Component]:
-    """The MCP6002 and the 10 nF X7R capacitor of ``filter_design_check`` ("My parts")."""
+    """The real parts of ``filter_design_check`` ("My parts"): the MCP6002, two Murata
+    capacitors fitted to Murata's data and a Vishay resistor."""
+    from bpt import example_parts as data
+    from bpt.document.model import Characteristic
     from bpt.models import templates as tpl
     from bpt.models.standard_templates import standard_templates
     from bpt.models.user_templates import component_from_template
@@ -102,8 +111,43 @@ def real_parts() -> list[Component]:
         description="1 MHz rail-to-rail CMOS op-amp, 1.8-6 V (typical datasheet values)",
         metadata={"manufacturer": "Microchip", "part_number": "MCP6002"},
     )  # fmt: skip
-    x7r = tpl.template_component(tpl.get("mlcc"), X7R_FORM, "My parts", "10nF X7R 0402")
-    return [mcp, x7r]
+    murata = "Murata SimSurfing, 25 °C"
+    x7r = tpl.template_component(tpl.get("mlcc"), X7R_FORM, "My parts", "GRM155R71C103KA01")
+    x7r = x7r.model_copy(update={
+        "description": "10 nF ±10 % X7R 16 V 0402. C and V½ fitted to Murata's DC-bias curve "
+                       "(RMS 0.35 %), ESR and ESL to its |Z|(f) (RMS 7.9 %)",
+        "metadata": {"manufacturer": "Murata", "part_number": "GRM155R71C103KA01",
+                     "technology": "X7R", "package": "0402"},
+        "ratings": {"voltage": "16"},
+        "characteristics": [
+            Characteristic(name="C(V)", x_unit="V", y_unit="F", points=data.GRM155R71C103KA01_CV,
+                           source=f"{murata}, 1 Vrms"),
+            Characteristic(name="|Z|(f)", x_unit="Hz", y_unit="Ω", points=data.GRM155R71C103KA01_Z,
+                           source=f"{murata}, 0 V DC"),
+        ],
+    })  # fmt: skip
+    c0g = tpl.template_component(tpl.get("capacitor"), C0G_FORM, "My parts", "GRM2165C1H223JA01")
+    c0g = c0g.model_copy(update={
+        "description": "22 nF ±5 % C0G 50 V 0805. ESR and ESL fitted to Murata's |Z|(f) "
+                       "(RMS 14 %; the real ESR changes with frequency, the model's does not)",
+        "metadata": {"manufacturer": "Murata", "part_number": "GRM2165C1H223JA01",
+                     "technology": "C0G", "package": "0805"},
+        "ratings": {"voltage": "50"},
+        "characteristics": [
+            Characteristic(name="|Z|(f)", x_unit="Hz", y_unit="Ω", points=data.GRM2165C1H223JA01_Z,
+                           source=f"{murata}, 0 V DC"),
+        ],
+    })  # fmt: skip
+    res = tpl.template_component(tpl.get("resistor"), RESISTOR_FORM, "My parts",
+                                 "CRCW060310K0FKEA")  # fmt: skip
+    res = res.model_copy(update={
+        "description": "10 kΩ ±1 % thick-film resistor 0603, 0.1 W, 75 V. Series inductance "
+                       "and shunt capacitance typical of 0603 (not given in the datasheet)",
+        "metadata": {"manufacturer": "Vishay", "part_number": "CRCW060310K0FKEA",
+                     "technology": "thick film", "package": "0603"},
+        "ratings": {"power": "0.1", "voltage": "75"},
+    })  # fmt: skip
+    return [mcp, x7r, c0g, res]
 
 
 def filter_design_check() -> Project:
@@ -117,22 +161,28 @@ def filter_design_check() -> Project:
     d.part("vsource", "V1", (0, 0), dc="2.5", ac="1", tran="SIN(2.5 1 1k)")
     d.part("vsource", "V2", (-1016, 0), dc="5")
     project = Project(name="filter_design_check", sheets=[d.sheet])
-    mcp, x7r = real_parts()
-    _top, mcp_sheets = component_sheets(project, mcp)
-    project.sheets += mcp_sheets
-    _top, x7r_sheets = component_sheets(project, x7r)
+    placed: list[Sheet] = []
+    tops: dict[str, Sheet] = {}
+    for part in real_parts():
+        _top, sheets = component_sheets(project, part)
+        project.sheets += sheets
+        placed += sheets
+        tops[part.name] = sheets[0]
     real = 3302  # the real filter: the same drawing lower down
     for dy, (r1, r2, c1, c2, u) in ((0, ("R1", "R2", "C1", "C2", "U1")),
                                     (real, ("R3", "R4", "C3", "C4", "U2"))):  # fmt: skip
-        d.part("resistor", r1, (1016, -1016 + dy), rot=270, R="10k")
-        d.part("resistor", r2, (2540, -1016 + dy), rot=270, R="10k")
-        d.part("capacitor", c1, (3302, -1778 + dy), rot=270, C="22n")
-        if dy == 0:
+        if dy == 0:  # all ideal
+            d.part("resistor", r1, (1016, -1016), rot=270, R="10k")
+            d.part("resistor", r2, (2540, -1016), rot=270, R="10k")
+            d.part("capacitor", c1, (3302, -1778), rot=270, C="22n")
             d.part("capacitor", c2, (3302, 0), C="10n")
             d.part("opamp_ideal", u, (4064, -889))
-        else:
-            d.block(x7r_sheets[0], c2, (3302, dy))
-            d.block(mcp_sheets[0], u, (4064, -889 + dy))
+        else:  # all real
+            d.block(tops["CRCW060310K0FKEA"], r1, (1016, -1016 + dy), rot=270)
+            d.block(tops["CRCW060310K0FKEA"], r2, (2540, -1016 + dy), rot=270)
+            d.block(tops["GRM2165C1H223JA01"], c1, (3302, -1778 + dy), rot=270)
+            d.block(tops["GRM155R71C103KA01"], c2, (3302, dy))
+            d.block(tops["MCP6002"], u, (4064, -889 + dy))
         fb = -508 if dy == 0 else 0  # the real op-amp's V- pin is where the ideal one has none
         d.wire(d.pin(r1, "2"), d.pin(r2, "1"))
         d.wire(d.pin(r2, "2"), d.pin(u, "+"))
@@ -162,7 +212,7 @@ def filter_design_check() -> Project:
     d.label("out_real", (5080, -889 + real))
     project = _project("filter_design_check", d, "ac", ac=".ac dec 50 10 1meg",
                        tran=".tran 5u 5m")  # fmt: skip
-    project.sheets += mcp_sheets + x7r_sheets
+    project.sheets += placed
 
     def n(id_: str, type_: str, x: float, y: float, title: str = "", **params: Any) -> GraphNode:
         return GraphNode(id=id_, type=type_, version=CATALOG[type_].version, title=title,
@@ -224,9 +274,9 @@ def filter_design_check() -> Project:
         n("fc_real", "measure/basic", 1520, 3300, "f-3dB, peak, deepest", op="f3db, max, min"),
         n("make_real", "table/make", 1900, 3300, name="ideal / real"),
         n("table_real", "view/table", 1900, 3480, "Ideal against real"),
-        n("cnom", "math/number", 380, 3820, value="10 nF", name="C2 (X7R) nominal"),
+        n("cnom", "math/number", 380, 3820, value="10.12 nF", name="C2 at 0 V (fitted)"),
         n("bias", "math/number", 380, 3980, value="2.5 V", name="DC across C2"),
-        n("vhalf", "math/number", 380, 4140, value="6.3 V", name="V½ of the X7R"),
+        n("vhalf", "math/number", 380, 4140, value="43.63 V", name="V½ (fitted)"),
         n(
             "c_bias",
             "view/equation",
@@ -276,16 +326,16 @@ def filter_design_check() -> Project:
     ]
     groups = [
         GraphGroup(id="g1", title="1 · Design formula against the simulation", color="violet",
-                   rect=(-40, -80, 2000, 1000)),
+                   rect=(-40, -80, 2000, 1140)),
         GraphGroup(id="g2", title="2 · A production batch: R ±1 %, C ±5 %", color="sky",
-                   rect=(340, 1100, 2000, 1000)),
+                   rect=(-40, 1100, 2380, 1000)),
         GraphGroup(id="g3", title="3 · What C2 does", color="emerald",
-                   rect=(340, 2160, 2000, 960)),
-        GraphGroup(id="g4", title="4 · Real parts: an MCP6002 and an X7R capacitor",
-                   color="amber", rect=(340, 3220, 2000, 1160)),
+                   rect=(-40, 2160, 2380, 960)),
+        GraphGroup(id="g4", title="4 · All ideal against all real parts", color="amber",
+                   rect=(-40, 3220, 2380, 1160)),
     ]  # fmt: skip
     notes = [
-        GraphNote(id="n1", pos=(-40, 960), size=(360, 120), text=(
+        GraphNote(id="n1", pos=(0, 900), size=(340, 120), text=(
             "The textbook formula gives f0. The simulation shows the -3 dB frequency is higher: "
             "Q = 0.74, not 0.707, so the response peaks a little before it falls.")),
         GraphNote(id="n2", pos=(0, 1300), size=(320, 140), text=(
@@ -294,11 +344,12 @@ def filter_design_check() -> Project:
         GraphNote(id="n3", pos=(0, 2600), size=(320, 120), text=(
             "C2 swept through four values: one curve each, and a table of f-3dB and the peak. "
             "A smaller C2 raises fc and Q (the response peaks); a larger one flattens it.")),
-        GraphNote(id="n4", pos=(0, 3500), size=(320, 220), text=(
-            "The same filter of real parts made in the part editor: an MCP6002 op-amp from its "
-            "datasheet and a 10 nF X7R capacitor that loses capacitance under DC bias. C2 sees "
-            "2.5 V, so f-3dB moves up by about 15 %. Above 70 kHz the op-amp runs out of gain "
-            "and the signal leaks through C1: the real filter stops at about -67 dB and rises "
+        GraphNote(id="n4", pos=(0, 3500), size=(320, 240), text=(
+            "The same filter with every part real: Vishay CRCW0603 resistors, Murata C0G and "
+            "X7R capacitors fitted to Murata's measured curves, and an MCP6002 op-amp. This "
+            "16 V X7R keeps its capacitance at 2.5 V (Murata's data: +1.3 %), so f-3dB stays "
+            "within 1 %. The difference is at high frequencies: the op-amp's loop gain falls "
+            "and the signal leaks through C1, the real filter stops at about -68 dB and rises "
             "again, the ideal one keeps falling.")),
     ]  # fmt: skip
     project.graphs = [Graph(name="Design check", nodes=nodes, edges=edges, groups=groups,

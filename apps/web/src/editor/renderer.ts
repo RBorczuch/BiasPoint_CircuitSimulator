@@ -284,8 +284,9 @@ export class SchematicRenderer {
     const g = this.grid.clear()
     if (!this.showGrid) return
     const { scale, x, y } = this.view
-    const width = this.app.renderer.width / this.app.renderer.resolution
-    const height = this.app.renderer.height / this.app.renderer.resolution
+    // CSS pixels: renderer.width already is (divided by the resolution, the grid covered only a
+    // part of the sheet on a scaled display).
+    const { width, height } = this.app.screen
     let step = GRID
     while (step * scale < 8) step *= 5
     const size = Math.max(1, Math.min(2, step * scale * 0.08))

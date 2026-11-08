@@ -1,0 +1,367 @@
+{
+  "id": "01a1bd43-37b6-7024-b2f7-2bb5267fd67d",
+  "name": "CRCW060310K0FKEA",
+  "instances": [
+    {
+      "id": "01a1bd43-37b6-7016-9b16-8034ed9383e9",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "{Rnom}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1143,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bd43-37b6-7018-8a71-ae3fb87a1f28",
+      "ref": "L1",
+      "symbol": "bpt:inductor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "L": "{ls}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2159,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bd43-37b6-701b-bd8c-b5c8fbbd8b97",
+      "ref": "C1",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "{cp}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1651,
+        635
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a1bd43-37b6-7014-b6f1-5621460bb96b",
+      "points": [
+        [
+          508,
+          0
+        ],
+        [
+          762,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-7015-8572-f32ceafc45f6",
+      "points": [
+        [
+          2540,
+          0
+        ],
+        [
+          2794,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-7017-973e-cceea60ada28",
+      "points": [
+        [
+          1524,
+          0
+        ],
+        [
+          1778,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-7019-b743-c37655b3a83c",
+      "points": [
+        [
+          508,
+          635
+        ],
+        [
+          1270,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-701a-8a99-e72be019f1b3",
+      "points": [
+        [
+          2032,
+          635
+        ],
+        [
+          2794,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-701c-a447-06b0e4aa1c42",
+      "points": [
+        [
+          508,
+          0
+        ],
+        [
+          508,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-701d-9c22-055fb05a8c96",
+      "points": [
+        [
+          2794,
+          0
+        ],
+        [
+          2794,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-701e-bc7c-b7b926985140",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          508,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-701f-986d-38043e2583e7",
+      "points": [
+        [
+          2794,
+          0
+        ],
+        [
+          3302,
+          0
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [
+    {
+      "id": "01a1bd43-37b6-7022-b3e9-ed9e5e74dda6",
+      "at": [
+        508,
+        0
+      ]
+    },
+    {
+      "id": "01a1bd43-37b6-7023-b3e6-d8606215dbb1",
+      "at": [
+        2794,
+        0
+      ]
+    }
+  ],
+  "labels": [
+    {
+      "id": "01a1bd43-37b6-7020-8cc4-c5ddc263a5a7",
+      "kind": "port",
+      "text": "1",
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a1bd43-37b6-7021-9c6d-b539fa08673c",
+      "kind": "port",
+      "text": "2",
+      "at": [
+        3302,
+        0
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {
+    "Rnom": "10k",
+    "ls": "0.4n",
+    "cp": "0.05p"
+  },
+  "port_sides": {
+    "1": "left",
+    "2": "right"
+  },
+  "port_order": [
+    "1",
+    "2"
+  ],
+  "form": [],
+  "symbol": {
+    "id": "sheet:CRCW060310K0FKEA",
+    "name": "Resistor",
+    "description": "Resistance with series inductance and parallel capacitance",
+    "ref_prefix": "R",
+    "pins": [
+      {
+        "number": "1",
+        "name": "",
+        "at": [
+          0,
+          -381
+        ],
+        "length": 127,
+        "orientation": "up",
+        "type": "passive",
+        "implicit_net": null
+      },
+      {
+        "number": "2",
+        "name": "",
+        "at": [
+          0,
+          381
+        ],
+        "length": 127,
+        "orientation": "down",
+        "type": "passive",
+        "implicit_net": null
+      }
+    ],
+    "graphics": [
+      {
+        "kind": "rect",
+        "start": [
+          -102,
+          -254
+        ],
+        "end": [
+          102,
+          254
+        ],
+        "fill": false
+      }
+    ],
+    "spice": {
+      "element": "R",
+      "nodes": [
+        "1",
+        "2"
+      ]
+    },
+    "power_net": null,
+    "default_params": {
+      "R": "1k"
+    },
+    "default_model": null,
+    "category": "Passive",
+    "ref_at": [
+      152,
+      -64
+    ],
+    "value_at": [
+      152,
+      64
+    ],
+    "value_param": "R",
+    "parasitics": [],
+    "variants": [],
+    "looks": [],
+    "version": 1,
+    "updated": "",
+    "changes": "",
+    "kind": null,
+    "group": "Resistors",
+    "metadata": {},
+    "ratings": {}
+  },
+  "component": {
+    "id": "cmp:My parts/CRCW060310K0FKEA",
+    "name": "CRCW060310K0FKEA",
+    "kind": "resistor",
+    "description": "10 kΩ ±1 % thick-film resistor 0603, 0.1 W, 75 V. Series inductance and shunt capacitance typical of 0603 (not given in the datasheet)",
+    "category": "",
+    "metadata": {
+      "manufacturer": "Vishay",
+      "part_number": "CRCW060310K0FKEA",
+      "technology": "thick film",
+      "package": "0603"
+    },
+    "ratings": {
+      "power": "0.1",
+      "voltage": "75"
+    },
+    "template": {
+      "name": "resistor",
+      "values": {
+        "Rnom": "10k",
+        "ls": "0.4n",
+        "cp": "0.05p"
+      }
+    },
+    "characteristics": [],
+    "version": 1,
+    "updated": "",
+    "changes": "",
+    "history": []
+  },
+  "owner": "cmp:My parts/CRCW060310K0FKEA",
+  "variants": [],
+  "variant_label": ""
+}

@@ -18,16 +18,24 @@ The project `examples/filter_design_check.bpt` (**File → Open example… → F
 1. **Does the circuit do what the formula says?**
 2. **What will a production batch look like, with real part tolerances?**
 3. **What happens if I change C2?**
-4. **What changes when the ideal parts are replaced by real ones?** Here these are an op-amp and a ceramic capacitor, both made from their datasheets in the part editor.
+4. **What changes when every ideal part is replaced by a real one?** The real parts come from the manufacturers' data, made in the part editor: Murata capacitors fitted to Murata's measured curves, Vishay resistors and a Microchip op-amp.
 
 Press **F5** in the **Analysis** workspace. The whole graph runs in a few seconds: two AC sweeps, a batch of 200 Monte Carlo runs and a 4-point parameter sweep.
 
 The schematic holds the filter twice:
 
-- **Top:** with an ideal op-amp and ideal capacitors.
-- **Bottom:** built of real parts. U2 is an MCP6002 op-amp powered from 5 V, and C4 is a 10 nF X7R ceramic capacitor. The input is biased at 2.5 V, as in a single-supply circuit.
+- **Top:** all ideal.
+- **Bottom:** all real. R3 and R4 are Vishay CRCW060310K0FKEA resistors, C3 is a Murata GRM2165C1H223JA01 capacitor (22 nF C0G 0805) and C4 a Murata GRM155R71C103KA01 (10 nF X7R 0402). U2 is a Microchip MCP6002 op-amp powered from 5 V. The input is biased at 2.5 V, as in a single-supply circuit.
 
-![The schematic: the ideal filter and the same filter of real parts](assets/screenshots/01-schematic.png)
+Clicking a part shows everything about it in the side panel. For C4 that is the manufacturer, part number, package and rated voltage, the fitted values and the equivalent circuit (C with its DC-bias law, ESR, ESL). Further down the panel, its characteristics are simulated and drawn **against Murata's measured points**: |Z|(f), phase, ESR(f) and C(V).
+
+![The schematic with the real capacitor C4 selected](assets/screenshots/01-schematic.png)
+
+![The side panel: the part's impedance, phase, ESR and C(V) against Murata's points](assets/screenshots/14-properties-murata-curves.png)
+
+The op-amp shows its datasheet values, each of which can be overridden for this one placed part:
+
+![The side panel of the MCP6002](assets/screenshots/11-schematic-opamp.png)
 
 ### The whole graph
 
@@ -52,7 +60,7 @@ A **Monte Carlo** node makes 200 copies of the circuit with every resistor and c
 
 - 200 AC sweeps, run in parallel;
 - 200 responses on one plot;
-- the f-3dB of each, shown as a **histogram** (mean 1.123 kHz, σ ≈ 18 Hz);
+- the f-3dB of each, shown as a **histogram** (mean 1.124 kHz, σ ≈ 19 Hz);
 - a **Specification** node that checks the requirement "f-3dB between 1.10 and 1.20 kHz".
 
 The result: **182 of 200 pass (91 % yield)**. The node reports FAIL and lists the runs outside the limits. This is the kind of answer that otherwise takes a script and an afternoon.
@@ -65,44 +73,57 @@ A **Sweep** node sets C2 to 4.7, 10, 22 and 47 nF. The plot shows one curve per 
 
 ![C2 sweep](assets/screenshots/05-c2-sweep.png)
 
-### 4 · Creating real parts
+### 4 · Creating real parts from the manufacturer's data
 
-Ideal parts answer "does the topology work?". Real parts answer "will the board work?". BiasPoint makes a real part from its datasheet: you pick an equivalent-circuit template, type the datasheet values or points, and the part editor shows the part's characteristics, simulated, against those points.
+Ideal parts answer "does the topology work?". Real parts answer "will the board work?". BiasPoint makes a real part from its data: you pick an equivalent-circuit template, type the datasheet values or import the manufacturer's curves, and the part editor fits the model to them and shows the fit.
+
+**Capacitors from Murata's measured curves.** Murata publishes measured characteristics of its capacitors in [SimSurfing](https://ds.murata.co.jp/simsurfing/mlcc.html?lcid=en-us). The steps:
+
+1. In SimSurfing, export the *DC Bias* and the *Frequency (|Z|)* characteristics of GRM155R71C103KA01 as CSV.
+2. In BiasPoint, open **File → New part…** and choose the template **MLCC class 2 (DC bias)**.
+3. Click **Import CSV…** on the C(V) chart and pick the columns. Units in the headers ("DC Bias[V]", "Capacitance[F]") are understood.
+4. Click **Fit**. The model C(V) = C / (1 + (V/V½)²) gets **C = 10.13 nF and V½ = 43.4 V**, with an error of 0.28 % RMS.
+5. Import the |Z|(f) curve and fit again, this time for ESR and ESL. The result is **ESR ≈ 91 mΩ and ESL ≈ 342 pH**, with an error of 7 % RMS. Murata measures the two curves at different AC levels, and an X7R's capacitance also depends on the AC level, so a single C cannot match both exactly.
+6. Click **Save to library**. The measured points are kept with the part.
+
+![Importing Murata's CSV export](assets/screenshots/13-csv-import.png)
+
+![The C(V) model fitted to Murata's DC-bias curve](assets/screenshots/08-part-editor-x7r.png)
+
+![The impedance of the real capacitor: model against Murata's |Z|(f), with the self-resonance at 85 MHz](assets/screenshots/10-part-editor-x7r-impedance.png)
+
+The C0G capacitor GRM2165C1H223JA01 is made the same way from its |Z|(f). Its capacitance does not change with DC bias, and the fit gives ESR 20.7 mΩ and ESL 464 pH, with an error of 14 % RMS. Most of that error comes from the template's constant ESR, while the real ESR changes with frequency.
+
+**Resistors:** CRCW060310K0FKEA (10 kΩ ±1 % 0603, 0.1 W, 75 V). Vishay does not publish its parasitics, so its series inductance and shunt capacitance are values typical of the 0603 size.
 
 **An op-amp from its datasheet values.** The steps:
 
-1. Open **File → New part…** and choose the template **Op-amp macromodel**.
+1. Choose the template **Op-amp macromodel**.
 2. Enter the typical values from the MCP6002 datasheet: open-loop gain 400k (112 dB), GBW 1 MHz, slew rate 0.6 V/µs, offset 1 mV, bias current 1 pA, output swing 25 mV from each rail, output current 23 mA. CMRR, PSRR and the supply current are under *Advanced*.
-3. Check the open-loop gain Aol(f), computed by simulating the macromodel. GBW is a handle you can drag on the chart, and datasheet points can be pasted or traced from a picture of the datasheet's plot and fitted.
-4. Click **Save to library**. The part goes to *My parts*.
+3. Check the open-loop gain Aol(f), computed by simulating the macromodel. GBW is a handle you can drag on the chart.
 
 ![The part editor: an op-amp macromodel from datasheet values](assets/screenshots/07-part-editor-opamp.png)
 
-**A ceramic capacitor that loses capacitance under DC bias.** Class 2 ceramics (X5R, X7R) lose a large part of their capacitance with DC voltage, and small packages lose the most. The steps:
+### 5 · Using them: all ideal against all real
 
-1. Choose the template **MLCC class 2 (DC bias)**.
-2. Enter C = 10 nF.
-3. Paste points of the capacitance against DC voltage, read from the manufacturer's DC-bias chart. The example uses illustrative values typical of a small 0402 X7R part.
-4. Click **Fit**. It finds V½, the voltage at which the capacitance halves: **6.3 V**, with an error of 0.04 %. The model's curve now goes through the points.
-
-![The part editor: a class 2 ceramic capacitor fitted to its DC-bias curve](assets/screenshots/08-part-editor-x7r.png)
-
-### 5 · Using them: the ideal filter against the real one
-
-The saved parts are placed from the library like any other part. A placed part brings its equivalent circuit into the project, so the project opens and simulates on any computer, even without your library. In the example, U2 and C4 are these two parts.
+The saved parts are placed from the library like any other part. A placed part brings its equivalent circuit into the project, so the project opens and simulates on any computer, even without your library.
 
 The fourth group of the graph runs both filters and compares them:
 
-- **The cut-off moves by 14 %.** C2 has 2.5 V across it. An Equation node shows how much capacitance is left: 10 nF / (1 + (2.5 / 6.3)²) = **8.64 nF**. As a result, f-3dB moves from **1.122 kHz to 1.283 kHz**. The ideal model cannot show this, and in a filter with ±5 % parts it is the largest error.
-- **The stop band leaks.** As the frequency rises, the MCP6002's loop gain falls (GBW is 1 MHz) and its closed-loop output impedance rises. The signal that leaks through C1 to the output is no longer held down. The real filter reaches only about **−67 dB** at 72 kHz and then rises back to −49 dB at 1 MHz. The ideal one keeps falling to −119 dB. This is a well-known limitation of Sallen-Key filters, and it shows up only with a real op-amp model.
+- **The cut-off stays put: 1.113 kHz against 1.122 kHz (−0.8 %).** A common rule of thumb says X7R capacitors lose a large part of their capacitance under DC voltage. With a typical "V½ = 6.3 V" model, C2 would lose 14 % at its 2.5 V and the cut-off would move up by 14 %. Murata's measured data for this part says otherwise: a 16 V, 10 nF X7R gains 1.3 % at 2.5 V and loses only 11 % at its full 16 V. An Equation node shows the fitted model's value at 2.5 V: **10.09 nF**. The DC-bias trap is real for parts with a high capacitance for their size and voltage, but not for this one, and only the manufacturer's data tells you which case you have.
+- **The stop band leaks.** As the frequency rises, the MCP6002's loop gain falls (GBW is 1 MHz) and its closed-loop output impedance rises. The signal that leaks through C1 to the output is no longer held down. The real filter reaches only about **−68 dB** at 72 kHz and then rises back to −49 dB at 1 MHz. The ideal one keeps falling to −119 dB. This is a well-known limitation of Sallen-Key filters, and it shows up only with a real op-amp model.
 
-![Real parts against ideal ones](assets/screenshots/09-real-parts.png)
+![All ideal against all real parts](assets/screenshots/09-real-parts.png)
+
+Each node has an inspector with all its parameters, inputs and outputs, and the full log of its last run:
+
+![The node inspector](assets/screenshots/12-graph-inspector.png)
 
 ### The quick path: Simulate
 
 For everyday work there is the classic LTspice-like workflow: choose an analysis (OP / DC / AC / TRAN), press F5 and probe nets on the schematic. The waveform viewer has panes, Bode plots and XY plots, can compare a run with the previous one, and offers cursors, crosshairs and markers.
 
-The screenshot shows the same comparison: V(out) of the ideal filter in orange and V(out_real) of the real one in blue. The **-3 dB markers**, placed from the markers menu, land on **1.123 kHz** and **1.284 kHz**, and the bar under the plot shows their difference. The leak-through above 70 kHz is easy to see.
+The screenshot shows the same comparison: V(out) of the ideal filter in orange and V(out_real) of the real one in blue. The **-3 dB markers**, placed from the markers menu, land on **1.123 kHz** and **1.113 kHz**, and the bar under the plot shows their difference. The leak-through above 70 kHz is easy to see.
 
 ![Simulate workspace](assets/screenshots/06-simulate-bode-markers.png)
 
@@ -114,7 +135,7 @@ The screenshot shows the same comparison: V(out) of the ideal filter in orange a
 | Tolerances | `.step` + scripts, or a separate tool | Monte Carlo node → histogram → requirement with yield |
 | Many measurements | `.meas` lines, results in a log | Measure nodes with outputs, tables and plots |
 | Sweeps | curves you read by eye | a family of curves + a table of measured values |
-| Real parts | vendor models, if there are any | parts made from the datasheet in minutes (values or fitted curves), embedded in the project |
+| Real parts | vendor models, if there are any | parts made from the manufacturer's data in minutes (values, or curves imported and fitted), embedded in the project |
 | Re-running | everything again | only what changed; the cache survives restarts |
 | Sharing the reasoning | screenshots and notes | the graph is saved in the project, with groups and notes |
 

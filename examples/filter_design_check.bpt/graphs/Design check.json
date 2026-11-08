@@ -498,8 +498,8 @@
       ],
       "size": null,
       "params": {
-        "value": "10 nF",
-        "name": "C2 (X7R) nominal"
+        "value": "10.12 nF",
+        "name": "C2 at 0 V (fitted)"
       },
       "param_inputs": []
     },
@@ -532,8 +532,8 @@
       ],
       "size": null,
       "params": {
-        "value": "6.3 V",
-        "name": "V½ of the X7R"
+        "value": "43.63 V",
+        "name": "V½ (fitted)"
       },
       "param_inputs": []
     },
@@ -771,7 +771,7 @@
         -40.0,
         -80.0,
         2000.0,
-        1000.0
+        1140.0
       ]
     },
     {
@@ -779,9 +779,9 @@
       "title": "2 · A production batch: R ±1 %, C ±5 %",
       "color": "sky",
       "rect": [
-        340.0,
+        -40.0,
         1100.0,
-        2000.0,
+        2380.0,
         1000.0
       ]
     },
@@ -790,20 +790,20 @@
       "title": "3 · What C2 does",
       "color": "emerald",
       "rect": [
-        340.0,
+        -40.0,
         2160.0,
-        2000.0,
+        2380.0,
         960.0
       ]
     },
     {
       "id": "g4",
-      "title": "4 · Real parts: an MCP6002 and an X7R capacitor",
+      "title": "4 · All ideal against all real parts",
       "color": "amber",
       "rect": [
-        340.0,
+        -40.0,
         3220.0,
-        2000.0,
+        2380.0,
         1160.0
       ]
     }
@@ -813,11 +813,11 @@
       "id": "n1",
       "text": "The textbook formula gives f0. The simulation shows the -3 dB frequency is higher: Q = 0.74, not 0.707, so the response peaks a little before it falls.",
       "pos": [
-        -40.0,
-        960.0
+        0.0,
+        900.0
       ],
       "size": [
-        360.0,
+        340.0,
         120.0
       ]
     },
@@ -847,14 +847,14 @@
     },
     {
       "id": "n4",
-      "text": "The same filter of real parts made in the part editor: an MCP6002 op-amp from its datasheet and a 10 nF X7R capacitor that loses capacitance under DC bias. C2 sees 2.5 V, so f-3dB moves up by about 15 %. Above 70 kHz the op-amp runs out of gain and the signal leaks through C1: the real filter stops at about -67 dB and rises again, the ideal one keeps falling.",
+      "text": "The same filter with every part real: Vishay CRCW0603 resistors, Murata C0G and X7R capacitors fitted to Murata's measured curves, and an MCP6002 op-amp. This 16 V X7R keeps its capacitance at 2.5 V (Murata's data: +1.3 %), so f-3dB stays within 1 %. The difference is at high frequencies: the op-amp's loop gain falls and the signal leaks through C1, the real filter stops at about -68 dB and rises again, the ideal one keeps falling.",
       "pos": [
         0.0,
         3500.0
       ],
       "size": [
         320.0,
-        220.0
+        240.0
       ]
     }
   ],

@@ -1,0 +1,550 @@
+{
+  "id": "01a1bd43-37b6-7009-92e9-ea18127fc6c4",
+  "name": "GRM155R71C103KA01",
+  "instances": [
+    {
+      "id": "01a1bd43-37b6-7000-8b92-aae9ba6b89a9",
+      "ref": "C1",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "Cnom/(1+(v(1,2)/vhalf)^2)"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        889,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bd43-37b6-7002-82d2-6520ef9ac528",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "{esr}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1905,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bd43-37b6-7004-b0be-09155fc590b3",
+      "ref": "L1",
+      "symbol": "bpt:inductor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "L": "{esl}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2921,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a1bd43-37b6-7001-8f04-853da09bd908",
+      "points": [
+        [
+          1270,
+          0
+        ],
+        [
+          1524,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-7003-a99a-00cb7f388571",
+      "points": [
+        [
+          2286,
+          0
+        ],
+        [
+          2540,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-7005-8629-6c30ea59e0a9",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          508,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-7006-9023-c247a96f03d5",
+      "points": [
+        [
+          3302,
+          0
+        ],
+        [
+          3810,
+          0
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a1bd43-37b6-7007-87eb-ff2429ce6874",
+      "kind": "port",
+      "text": "1",
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a1bd43-37b6-7008-ab5a-a7bf2af8fcf1",
+      "kind": "port",
+      "text": "2",
+      "at": [
+        3810,
+        0
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {
+    "Cnom": "10.12n",
+    "vhalf": "43.63",
+    "esr": "94.89m",
+    "esl": "349.6p"
+  },
+  "port_sides": {
+    "1": "left",
+    "2": "right"
+  },
+  "port_order": [
+    "1",
+    "2"
+  ],
+  "form": [],
+  "symbol": {
+    "id": "sheet:GRM155R71C103KA01",
+    "name": "Capacitor",
+    "description": "Ceramic X5R / X7R capacitor: capacitance falls with DC voltage",
+    "ref_prefix": "C",
+    "pins": [
+      {
+        "number": "1",
+        "name": "",
+        "at": [
+          0,
+          -381
+        ],
+        "length": 330,
+        "orientation": "up",
+        "type": "passive",
+        "implicit_net": null
+      },
+      {
+        "number": "2",
+        "name": "",
+        "at": [
+          0,
+          381
+        ],
+        "length": 330,
+        "orientation": "down",
+        "type": "passive",
+        "implicit_net": null
+      }
+    ],
+    "graphics": [
+      {
+        "kind": "polyline",
+        "points": [
+          [
+            -203,
+            -51
+          ],
+          [
+            203,
+            -51
+          ]
+        ],
+        "fill": false
+      },
+      {
+        "kind": "polyline",
+        "points": [
+          [
+            -203,
+            51
+          ],
+          [
+            203,
+            51
+          ]
+        ],
+        "fill": false
+      }
+    ],
+    "spice": {
+      "element": "C",
+      "nodes": [
+        "1",
+        "2"
+      ]
+    },
+    "power_net": null,
+    "default_params": {
+      "C": "100n"
+    },
+    "default_model": null,
+    "category": "Passive",
+    "ref_at": [
+      279,
+      -64
+    ],
+    "value_at": [
+      279,
+      64
+    ],
+    "value_param": "C",
+    "parasitics": [],
+    "variants": [],
+    "looks": [],
+    "version": 1,
+    "updated": "",
+    "changes": "",
+    "kind": null,
+    "group": "Capacitors",
+    "metadata": {},
+    "ratings": {}
+  },
+  "component": {
+    "id": "cmp:My parts/GRM155R71C103KA01",
+    "name": "GRM155R71C103KA01",
+    "kind": "capacitor",
+    "description": "10 nF ±10 % X7R 16 V 0402. C and V½ fitted to Murata's DC-bias curve (RMS 0.35 %), ESR and ESL to its |Z|(f) (RMS 7.9 %)",
+    "category": "",
+    "metadata": {
+      "manufacturer": "Murata",
+      "part_number": "GRM155R71C103KA01",
+      "technology": "X7R",
+      "package": "0402"
+    },
+    "ratings": {
+      "voltage": "16"
+    },
+    "template": {
+      "name": "mlcc",
+      "values": {
+        "Cnom": "10.12n",
+        "vhalf": "43.63",
+        "esr": "94.89m",
+        "esl": "349.6p"
+      }
+    },
+    "characteristics": [
+      {
+        "name": "C(V)",
+        "x_unit": "V",
+        "y_unit": "F",
+        "points": [
+          [
+            0.0,
+            1.002e-08
+          ],
+          [
+            0.96,
+            1.013e-08
+          ],
+          [
+            2.0,
+            1.016e-08
+          ],
+          [
+            3.04,
+            1.013e-08
+          ],
+          [
+            4.0,
+            1.007e-08
+          ],
+          [
+            4.96,
+            1.001e-08
+          ],
+          [
+            6.0,
+            9.925e-09
+          ],
+          [
+            7.04,
+            9.845e-09
+          ],
+          [
+            8.0,
+            9.77e-09
+          ],
+          [
+            8.96,
+            9.695e-09
+          ],
+          [
+            10.0,
+            9.609e-09
+          ],
+          [
+            11.04,
+            9.516e-09
+          ],
+          [
+            12.0,
+            9.422e-09
+          ],
+          [
+            12.96,
+            9.318e-09
+          ],
+          [
+            14.0,
+            9.193e-09
+          ],
+          [
+            15.04,
+            9.053e-09
+          ],
+          [
+            16.0,
+            8.912e-09
+          ]
+        ],
+        "source": "Murata SimSurfing, 25 °C, 1 Vrms",
+        "weights": [],
+        "scale": "log",
+        "at": {}
+      },
+      {
+        "name": "|Z|(f)",
+        "x_unit": "Hz",
+        "y_unit": "Ω",
+        "points": [
+          [
+            100.0,
+            167100.0
+          ],
+          [
+            149.6,
+            111800.0
+          ],
+          [
+            223.9,
+            74840.0
+          ],
+          [
+            320.3,
+            52360.0
+          ],
+          [
+            479.3,
+            35040.0
+          ],
+          [
+            717.1,
+            23440.0
+          ],
+          [
+            1073.0,
+            15690.0
+          ],
+          [
+            1606.0,
+            10500.0
+          ],
+          [
+            2402.0,
+            7028.0
+          ],
+          [
+            3437.0,
+            4918.0
+          ],
+          [
+            5143.0,
+            3290.0
+          ],
+          [
+            7695.0,
+            2201.0
+          ],
+          [
+            11510.0,
+            1473.0
+          ],
+          [
+            17230.0,
+            985.7
+          ],
+          [
+            24650.0,
+            689.8
+          ],
+          [
+            36880.0,
+            461.7
+          ],
+          [
+            55180.0,
+            309.0
+          ],
+          [
+            82570.0,
+            206.9
+          ],
+          [
+            123500.0,
+            138.5
+          ],
+          [
+            184900.0,
+            92.75
+          ],
+          [
+            264500.0,
+            64.94
+          ],
+          [
+            395700.0,
+            43.5
+          ],
+          [
+            592100.0,
+            29.14
+          ],
+          [
+            886000.0,
+            19.51
+          ],
+          [
+            1326000.0,
+            13.07
+          ],
+          [
+            1983000.0,
+            8.754
+          ],
+          [
+            2838000.0,
+            6.137
+          ],
+          [
+            4246000.0,
+            4.117
+          ],
+          [
+            6353000.0,
+            2.758
+          ],
+          [
+            9506000.0,
+            1.838
+          ],
+          [
+            14220000.0,
+            1.214
+          ],
+          [
+            20350000.0,
+            0.8258
+          ],
+          [
+            30450000.0,
+            0.5148
+          ],
+          [
+            45560000.0,
+            0.2898
+          ],
+          [
+            68170000.0,
+            0.1246
+          ],
+          [
+            102000000.0,
+            0.112
+          ],
+          [
+            152600000.0,
+            0.268
+          ],
+          [
+            218400000.0,
+            0.4481
+          ],
+          [
+            326700000.0,
+            0.6816
+          ],
+          [
+            488900000.0,
+            1.001
+          ]
+        ],
+        "source": "Murata SimSurfing, 25 °C, 0 V DC",
+        "weights": [],
+        "scale": "log",
+        "at": {}
+      }
+    ],
+    "version": 1,
+    "updated": "",
+    "changes": "",
+    "history": []
+  },
+  "owner": "cmp:My parts/GRM155R71C103KA01",
+  "variants": [],
+  "variant_label": ""
+}

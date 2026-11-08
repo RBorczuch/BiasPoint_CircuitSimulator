@@ -1,0 +1,469 @@
+{
+  "id": "01a1bd43-37b6-7013-a419-2dac98bc5627",
+  "name": "GRM2165C1H223JA01",
+  "instances": [
+    {
+      "id": "01a1bd43-37b6-700a-9aed-1fa0f18fcc3b",
+      "ref": "C1",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "{Cnom}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        889,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bd43-37b6-700c-ad43-ce992e3d5a1e",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "{esr}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1905,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bd43-37b6-700e-b8f8-6a06f8e74fe1",
+      "ref": "L1",
+      "symbol": "bpt:inductor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "L": "{esl}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2921,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a1bd43-37b6-700b-83a4-609b7094a405",
+      "points": [
+        [
+          1270,
+          0
+        ],
+        [
+          1524,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-700d-ae97-cd2cf6a0bdf5",
+      "points": [
+        [
+          2286,
+          0
+        ],
+        [
+          2540,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-700f-ba39-808d56c0dbaf",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          508,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bd43-37b6-7010-b577-bf70531486c9",
+      "points": [
+        [
+          3302,
+          0
+        ],
+        [
+          3810,
+          0
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a1bd43-37b6-7011-9c25-1e412942d0dd",
+      "kind": "port",
+      "text": "1",
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a1bd43-37b6-7012-a9c7-7d97bb40fcd0",
+      "kind": "port",
+      "text": "2",
+      "at": [
+        3810,
+        0
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {
+    "Cnom": "22n",
+    "esr": "20.7m",
+    "esl": "464.3p"
+  },
+  "port_sides": {
+    "1": "left",
+    "2": "right"
+  },
+  "port_order": [
+    "1",
+    "2"
+  ],
+  "form": [],
+  "symbol": {
+    "id": "sheet:GRM2165C1H223JA01",
+    "name": "Capacitor",
+    "description": "Capacitance with ESR, ESL and leakage",
+    "ref_prefix": "C",
+    "pins": [
+      {
+        "number": "1",
+        "name": "",
+        "at": [
+          0,
+          -381
+        ],
+        "length": 330,
+        "orientation": "up",
+        "type": "passive",
+        "implicit_net": null
+      },
+      {
+        "number": "2",
+        "name": "",
+        "at": [
+          0,
+          381
+        ],
+        "length": 330,
+        "orientation": "down",
+        "type": "passive",
+        "implicit_net": null
+      }
+    ],
+    "graphics": [
+      {
+        "kind": "polyline",
+        "points": [
+          [
+            -203,
+            -51
+          ],
+          [
+            203,
+            -51
+          ]
+        ],
+        "fill": false
+      },
+      {
+        "kind": "polyline",
+        "points": [
+          [
+            -203,
+            51
+          ],
+          [
+            203,
+            51
+          ]
+        ],
+        "fill": false
+      }
+    ],
+    "spice": {
+      "element": "C",
+      "nodes": [
+        "1",
+        "2"
+      ]
+    },
+    "power_net": null,
+    "default_params": {
+      "C": "100n"
+    },
+    "default_model": null,
+    "category": "Passive",
+    "ref_at": [
+      279,
+      -64
+    ],
+    "value_at": [
+      279,
+      64
+    ],
+    "value_param": "C",
+    "parasitics": [],
+    "variants": [],
+    "looks": [],
+    "version": 1,
+    "updated": "",
+    "changes": "",
+    "kind": null,
+    "group": "Capacitors",
+    "metadata": {},
+    "ratings": {}
+  },
+  "component": {
+    "id": "cmp:My parts/GRM2165C1H223JA01",
+    "name": "GRM2165C1H223JA01",
+    "kind": "capacitor",
+    "description": "22 nF ±5 % C0G 50 V 0805. ESR and ESL fitted to Murata's |Z|(f) (RMS 14 %; the real ESR changes with frequency, the model's does not)",
+    "category": "",
+    "metadata": {
+      "manufacturer": "Murata",
+      "part_number": "GRM2165C1H223JA01",
+      "technology": "C0G",
+      "package": "0805"
+    },
+    "ratings": {
+      "voltage": "50"
+    },
+    "template": {
+      "name": "capacitor",
+      "values": {
+        "Cnom": "22n",
+        "esr": "20.7m",
+        "esl": "464.3p"
+      }
+    },
+    "characteristics": [
+      {
+        "name": "|Z|(f)",
+        "x_unit": "Hz",
+        "y_unit": "Ω",
+        "points": [
+          [
+            1000000.0,
+            7.229
+          ],
+          [
+            1164000.0,
+            6.207
+          ],
+          [
+            1386000.0,
+            5.214
+          ],
+          [
+            1614000.0,
+            4.476
+          ],
+          [
+            1879000.0,
+            3.842
+          ],
+          [
+            2236000.0,
+            3.226
+          ],
+          [
+            2604000.0,
+            2.768
+          ],
+          [
+            3032000.0,
+            2.375
+          ],
+          [
+            3530000.0,
+            2.036
+          ],
+          [
+            4201000.0,
+            1.707
+          ],
+          [
+            4892000.0,
+            1.462
+          ],
+          [
+            5697000.0,
+            1.25
+          ],
+          [
+            6779000.0,
+            1.044
+          ],
+          [
+            7894000.0,
+            0.8902
+          ],
+          [
+            9192000.0,
+            0.757
+          ],
+          [
+            10940000.0,
+            0.6262
+          ],
+          [
+            12740000.0,
+            0.5276
+          ],
+          [
+            14830000.0,
+            0.4413
+          ],
+          [
+            17650000.0,
+            0.3553
+          ],
+          [
+            20550000.0,
+            0.2889
+          ],
+          [
+            23930000.0,
+            0.2294
+          ],
+          [
+            27870000.0,
+            0.1752
+          ],
+          [
+            33170000.0,
+            0.1183
+          ],
+          [
+            38620000.0,
+            0.07191
+          ],
+          [
+            44970000.0,
+            0.02973
+          ],
+          [
+            53520000.0,
+            0.03304
+          ],
+          [
+            62320000.0,
+            0.07677
+          ],
+          [
+            72570000.0,
+            0.1258
+          ],
+          [
+            86360000.0,
+            0.1906
+          ],
+          [
+            100600000.0,
+            0.2648
+          ],
+          [
+            117100000.0,
+            0.2736
+          ],
+          [
+            139300000.0,
+            0.3333
+          ],
+          [
+            162300000.0,
+            0.4368
+          ],
+          [
+            188900000.0,
+            0.4255
+          ],
+          [
+            220000000.0,
+            0.447
+          ],
+          [
+            261800000.0,
+            0.5644
+          ],
+          [
+            304900000.0,
+            0.6697
+          ],
+          [
+            355000000.0,
+            0.7724
+          ],
+          [
+            422500000.0,
+            0.9069
+          ],
+          [
+            492000000.0,
+            1.056
+          ]
+        ],
+        "source": "Murata SimSurfing, 25 °C, 0 V DC",
+        "weights": [],
+        "scale": "log",
+        "at": {}
+      }
+    ],
+    "version": 1,
+    "updated": "",
+    "changes": "",
+    "history": []
+  },
+  "owner": "cmp:My parts/GRM2165C1H223JA01",
+  "variants": [],
+  "variant_label": ""
+}
