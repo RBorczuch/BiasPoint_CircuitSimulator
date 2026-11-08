@@ -1,9 +1,9 @@
 {
-  "id": "01a1bd43-37b6-7009-92e9-ea18127fc6c4",
+  "id": "01a1bd69-b99b-7000-a068-60e65aaa3c58",
   "name": "GRM155R71C103KA01",
   "instances": [
     {
-      "id": "01a1bd43-37b6-7000-8b92-aae9ba6b89a9",
+      "id": "01a1bd69-b99a-7000-942b-d1143810e091",
       "ref": "C1",
       "symbol": "bpt:capacitor",
       "model": {
@@ -26,7 +26,7 @@
       "texts": {}
     },
     {
-      "id": "01a1bd43-37b6-7002-82d2-6520ef9ac528",
+      "id": "01a1bd69-b99a-7002-9992-4826a81cd968",
       "ref": "R1",
       "symbol": "bpt:resistor",
       "model": {
@@ -49,7 +49,7 @@
       "texts": {}
     },
     {
-      "id": "01a1bd43-37b6-7004-b0be-09155fc590b3",
+      "id": "01a1bd69-b99a-7004-893c-db1c6b18a77a",
       "ref": "L1",
       "symbol": "bpt:inductor",
       "model": {
@@ -74,7 +74,7 @@
   ],
   "wires": [
     {
-      "id": "01a1bd43-37b6-7001-8f04-853da09bd908",
+      "id": "01a1bd69-b99a-7001-a86e-902a3c762ae0",
       "points": [
         [
           1270,
@@ -88,7 +88,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-7003-a99a-00cb7f388571",
+      "id": "01a1bd69-b99a-7003-9487-51becdc0fb7f",
       "points": [
         [
           2286,
@@ -102,7 +102,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-7005-8629-6c30ea59e0a9",
+      "id": "01a1bd69-b99a-7005-841a-7040ab2912ed",
       "points": [
         [
           0,
@@ -116,7 +116,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-7006-9023-c247a96f03d5",
+      "id": "01a1bd69-b99a-7006-884f-19124cf5ccb7",
       "points": [
         [
           3302,
@@ -133,7 +133,7 @@
   "junctions": [],
   "labels": [
     {
-      "id": "01a1bd43-37b6-7007-87eb-ff2429ce6874",
+      "id": "01a1bd69-b99a-7007-b297-8f9435fdda11",
       "kind": "port",
       "text": "1",
       "at": [
@@ -143,7 +143,7 @@
       "rot": 0
     },
     {
-      "id": "01a1bd43-37b6-7008-ab5a-a7bf2af8fcf1",
+      "id": "01a1bd69-b99a-7008-a92d-c9b9003e5483",
       "kind": "port",
       "text": "2",
       "at": [
@@ -273,7 +273,8 @@
       "manufacturer": "Murata",
       "part_number": "GRM155R71C103KA01",
       "technology": "X7R",
-      "package": "0402"
+      "package": "0402",
+      "tolerance": "±10 %"
     },
     "ratings": {
       "voltage": "16"

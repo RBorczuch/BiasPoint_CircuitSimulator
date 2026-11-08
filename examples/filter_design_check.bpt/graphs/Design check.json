@@ -170,7 +170,7 @@
       "id": "mc",
       "type": "core/montecarlo",
       "version": 1,
-      "title": "Batch of 200 filters",
+      "title": "Batch of 200 real filters",
       "bypass": false,
       "pos": [
         380.0,
@@ -178,7 +178,7 @@
       ],
       "size": null,
       "params": {
-        "tolerances": "R* ±1%; C* ±5%",
+        "tolerances": "R3 ±1%; R4 ±1%; C3 ±5%; C4 ±10%",
         "runs": 200
       },
       "param_inputs": []
@@ -213,7 +213,7 @@
       ],
       "size": null,
       "params": {
-        "expr": "V(out)"
+        "expr": "V(out_real)"
       },
       "param_inputs": []
     },
@@ -776,7 +776,7 @@
     },
     {
       "id": "g2",
-      "title": "2 · A production batch: R ±1 %, C ±5 %",
+      "title": "2 · A production batch of the real filter",
       "color": "sky",
       "rect": [
         -40.0,
@@ -823,14 +823,14 @@
     },
     {
       "id": "n2",
-      "text": "200 filters with parts drawn within their tolerance. The histogram shows the spread of f-3dB, the requirement how many of them meet 1.10-1.20 kHz (the yield).",
+      "text": "200 real filters (the lower one), each part drawn within the tolerance of its datasheet: resistors ±1 %, the C0G C3 ±5 %, the X7R C4 ±10 %. The histogram shows the spread of f-3dB, the requirement how many meet 1.10-1.20 kHz (the yield). The X7R's ±10 % dominates: a ±5 % C0G for C4 would raise the yield.",
       "pos": [
         0.0,
         1300.0
       ],
       "size": [
         320.0,
-        140.0
+        220.0
       ]
     },
     {

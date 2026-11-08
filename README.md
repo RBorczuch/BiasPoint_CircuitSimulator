@@ -16,7 +16,7 @@ Most simulators stop at "run a simulation, look at a waveform". BiasPoint adds a
 The project `examples/filter_design_check.bpt` (**File → Open example… → Filter design check**) takes a second-order Sallen-Key low-pass filter (R1 = R2 = 10 kΩ, C1 = 22 nF, C2 = 10 nF) and answers four questions a designer asks, in one graph:
 
 1. **Does the circuit do what the formula says?**
-2. **What will a production batch look like, with real part tolerances?**
+2. **What will a production batch of the real filter look like, with each part's own tolerance?**
 3. **What happens if I change C2?**
 4. **What changes when every ideal part is replaced by a real one?** The real parts come from the manufacturers' data, made in the part editor: Murata capacitors fitted to Murata's measured curves, Vishay resistors and a Microchip op-amp.
 
@@ -54,18 +54,18 @@ The two numbers differ on purpose. The formula gives the natural frequency, but 
 
 ![Formula against simulation](assets/screenshots/03-design-vs-simulation.png)
 
-### 2 · A production batch: R ±1 %, C ±5 %
+### 2 · A production batch of the real filter
 
-A **Monte Carlo** node makes 200 copies of the circuit with every resistor and capacitor drawn within its tolerance. Everything after it runs once per copy:
+A **Monte Carlo** node makes 200 copies of the real filter (the lower one). Each part is drawn within the tolerance of its own datasheet: the Vishay resistors ±1 %, the Murata C0G C3 ±5 % (code J) and the Murata X7R C4 ±10 % (code K). The X7R keeps its DC-bias model in every copy. Everything after the node runs once per copy:
 
 - 200 AC sweeps, run in parallel;
 - 200 responses on one plot;
-- the f-3dB of each, shown as a **histogram** (mean 1.124 kHz, σ ≈ 19 Hz);
+- the f-3dB of each, shown as a **histogram** (mean 1.115 kHz, σ ≈ 35 Hz);
 - a **Specification** node that checks the requirement "f-3dB between 1.10 and 1.20 kHz".
 
-The result: **182 of 200 pass (91 % yield)**. The node reports FAIL and lists the runs outside the limits. This is the kind of answer that otherwise takes a script and an afternoon.
+The result: **129 of 200 pass (64.5 % yield)**. The node reports FAIL and lists the runs outside the limits. The X7R's ±10 % dominates the spread, so the conclusion is concrete: use a ±5 % C0G for C4, or relax the requirement. With idealised capacitors at ±5 %, the same batch would have given 91 %. This is the kind of answer that otherwise takes a script and an afternoon.
 
-![Monte Carlo batch](assets/screenshots/04-monte-carlo.png)
+![Monte Carlo batch of the real filter](assets/screenshots/04-monte-carlo.png)
 
 ### 3 · What C2 does
 
@@ -132,7 +132,7 @@ The screenshot shows the same comparison: V(out) of the ideal filter in orange a
 | | Typical simulator | BiasPoint |
 |---|---|---|
 | Formula vs. simulation | calculator on the side | an Equation node next to the measured value, recomputed with the circuit |
-| Tolerances | `.step` + scripts, or a separate tool | Monte Carlo node → histogram → requirement with yield |
+| Tolerances | `.step` + scripts, or a separate tool | Monte Carlo node over real parts with their own tolerances → histogram → requirement with yield |
 | Many measurements | `.meas` lines, results in a log | Measure nodes with outputs, tables and plots |
 | Sweeps | curves you read by eye | a family of curves + a table of measured values |
 | Real parts | vendor models, if there are any | parts made from the manufacturer's data in minutes (values, or curves imported and fitted), embedded in the project |

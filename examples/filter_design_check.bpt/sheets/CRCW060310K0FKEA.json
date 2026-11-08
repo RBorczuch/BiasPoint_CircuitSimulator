@@ -1,9 +1,9 @@
 {
-  "id": "01a1bd43-37b6-7024-b2f7-2bb5267fd67d",
+  "id": "01a1bd69-b99b-701b-a125-62a3259b42d2",
   "name": "CRCW060310K0FKEA",
   "instances": [
     {
-      "id": "01a1bd43-37b6-7016-9b16-8034ed9383e9",
+      "id": "01a1bd69-b99b-700d-a76b-25ee276f164c",
       "ref": "R1",
       "symbol": "bpt:resistor",
       "model": {
@@ -26,7 +26,7 @@
       "texts": {}
     },
     {
-      "id": "01a1bd43-37b6-7018-8a71-ae3fb87a1f28",
+      "id": "01a1bd69-b99b-700f-9454-d20a383f022c",
       "ref": "L1",
       "symbol": "bpt:inductor",
       "model": {
@@ -49,7 +49,7 @@
       "texts": {}
     },
     {
-      "id": "01a1bd43-37b6-701b-bd8c-b5c8fbbd8b97",
+      "id": "01a1bd69-b99b-7012-97bb-38a194bfed20",
       "ref": "C1",
       "symbol": "bpt:capacitor",
       "model": {
@@ -74,7 +74,7 @@
   ],
   "wires": [
     {
-      "id": "01a1bd43-37b6-7014-b6f1-5621460bb96b",
+      "id": "01a1bd69-b99b-700b-a015-1b46624de131",
       "points": [
         [
           508,
@@ -88,7 +88,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-7015-8572-f32ceafc45f6",
+      "id": "01a1bd69-b99b-700c-83ff-262b33b656f5",
       "points": [
         [
           2540,
@@ -102,7 +102,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-7017-973e-cceea60ada28",
+      "id": "01a1bd69-b99b-700e-90e1-b07dac9cb403",
       "points": [
         [
           1524,
@@ -116,7 +116,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-7019-b743-c37655b3a83c",
+      "id": "01a1bd69-b99b-7010-8d4e-30e3e66c6778",
       "points": [
         [
           508,
@@ -130,7 +130,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-701a-8a99-e72be019f1b3",
+      "id": "01a1bd69-b99b-7011-8d1a-58fce57f1524",
       "points": [
         [
           2032,
@@ -144,7 +144,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-701c-a447-06b0e4aa1c42",
+      "id": "01a1bd69-b99b-7013-aa0a-c66912493e6f",
       "points": [
         [
           508,
@@ -158,7 +158,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-701d-9c22-055fb05a8c96",
+      "id": "01a1bd69-b99b-7014-8a4f-d8ad02c2f329",
       "points": [
         [
           2794,
@@ -172,7 +172,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-701e-bc7c-b7b926985140",
+      "id": "01a1bd69-b99b-7015-bf8b-6ecf6601f366",
       "points": [
         [
           0,
@@ -186,7 +186,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-701f-986d-38043e2583e7",
+      "id": "01a1bd69-b99b-7016-8de2-e14ebda7661a",
       "points": [
         [
           2794,
@@ -202,14 +202,14 @@
   ],
   "junctions": [
     {
-      "id": "01a1bd43-37b6-7022-b3e9-ed9e5e74dda6",
+      "id": "01a1bd69-b99b-7019-bb48-92e9e9f38f41",
       "at": [
         508,
         0
       ]
     },
     {
-      "id": "01a1bd43-37b6-7023-b3e6-d8606215dbb1",
+      "id": "01a1bd69-b99b-701a-ad7c-686e6ebf5b43",
       "at": [
         2794,
         0
@@ -218,7 +218,7 @@
   ],
   "labels": [
     {
-      "id": "01a1bd43-37b6-7020-8cc4-c5ddc263a5a7",
+      "id": "01a1bd69-b99b-7017-aa0e-56be54ff9e52",
       "kind": "port",
       "text": "1",
       "at": [
@@ -228,7 +228,7 @@
       "rot": 0
     },
     {
-      "id": "01a1bd43-37b6-7021-9c6d-b539fa08673c",
+      "id": "01a1bd69-b99b-7018-b5d4-05ab0bbc9356",
       "kind": "port",
       "text": "2",
       "at": [
@@ -341,7 +341,8 @@
       "manufacturer": "Vishay",
       "part_number": "CRCW060310K0FKEA",
       "technology": "thick film",
-      "package": "0603"
+      "package": "0603",
+      "tolerance": "±1 %"
     },
     "ratings": {
       "power": "0.1",

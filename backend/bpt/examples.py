@@ -117,7 +117,7 @@ def real_parts() -> list[Component]:
         "description": "10 nF ±10 % X7R 16 V 0402. C and V½ fitted to Murata's DC-bias curve "
                        "(RMS 0.35 %), ESR and ESL to its |Z|(f) (RMS 7.9 %)",
         "metadata": {"manufacturer": "Murata", "part_number": "GRM155R71C103KA01",
-                     "technology": "X7R", "package": "0402"},
+                     "technology": "X7R", "package": "0402", "tolerance": "±10 %"},
         "ratings": {"voltage": "16"},
         "characteristics": [
             Characteristic(name="C(V)", x_unit="V", y_unit="F", points=data.GRM155R71C103KA01_CV,
@@ -131,7 +131,7 @@ def real_parts() -> list[Component]:
         "description": "22 nF ±5 % C0G 50 V 0805. ESR and ESL fitted to Murata's |Z|(f) "
                        "(RMS 14 %; the real ESR changes with frequency, the model's does not)",
         "metadata": {"manufacturer": "Murata", "part_number": "GRM2165C1H223JA01",
-                     "technology": "C0G", "package": "0805"},
+                     "technology": "C0G", "package": "0805", "tolerance": "±5 %"},
         "ratings": {"voltage": "50"},
         "characteristics": [
             Characteristic(name="|Z|(f)", x_unit="Hz", y_unit="Ω", points=data.GRM2165C1H223JA01_Z,
@@ -144,7 +144,7 @@ def real_parts() -> list[Component]:
         "description": "10 kΩ ±1 % thick-film resistor 0603, 0.1 W, 75 V. Series inductance "
                        "and shunt capacitance typical of 0603 (not given in the datasheet)",
         "metadata": {"manufacturer": "Vishay", "part_number": "CRCW060310K0FKEA",
-                     "technology": "thick film", "package": "0603"},
+                     "technology": "thick film", "package": "0603", "tolerance": "±1 %"},
         "ratings": {"power": "0.1", "voltage": "75"},
     })  # fmt: skip
     return [mcp, x7r, c0g, res]
@@ -249,12 +249,12 @@ def filter_design_check() -> Project:
             "core/montecarlo",
             380,
             1260,
-            "Batch of 200 filters",
-            tolerances="R* ±1%; C* ±5%",
+            "Batch of 200 real filters",
+            tolerances="R3 ±1%; R4 ±1%; C3 ±5%; C4 ±10%",  # the parts' own tolerances
             runs=200,
         ),
         n("ac_mc", "sim/ac", 760, 1260, **ac),
-        n("vout_mc", "core/signal", 1140, 1260, expr="V(out)"),
+        n("vout_mc", "core/signal", 1140, 1260, expr="V(out_real)"),
         n("fc_mc", "measure/basic", 1520, 1260, "f-3dB of each", op="f3db"),
         n("spread", "view/histogram", 1900, 1180, "Spread of f-3dB", bins=16),
         n("spec", "view/spec", 1900, 1520, "Requirement 1.10-1.20 kHz", condition="1.1k..1.2k"),
@@ -327,7 +327,7 @@ def filter_design_check() -> Project:
     groups = [
         GraphGroup(id="g1", title="1 · Design formula against the simulation", color="violet",
                    rect=(-40, -80, 2000, 1140)),
-        GraphGroup(id="g2", title="2 · A production batch: R ±1 %, C ±5 %", color="sky",
+        GraphGroup(id="g2", title="2 · A production batch of the real filter", color="sky",
                    rect=(-40, 1100, 2380, 1000)),
         GraphGroup(id="g3", title="3 · What C2 does", color="emerald",
                    rect=(-40, 2160, 2380, 960)),
@@ -338,9 +338,11 @@ def filter_design_check() -> Project:
         GraphNote(id="n1", pos=(0, 900), size=(340, 120), text=(
             "The textbook formula gives f0. The simulation shows the -3 dB frequency is higher: "
             "Q = 0.74, not 0.707, so the response peaks a little before it falls.")),
-        GraphNote(id="n2", pos=(0, 1300), size=(320, 140), text=(
-            "200 filters with parts drawn within their tolerance. The histogram shows the spread "
-            "of f-3dB, the requirement how many of them meet 1.10-1.20 kHz (the yield).")),
+        GraphNote(id="n2", pos=(0, 1300), size=(320, 220), text=(
+            "200 real filters (the lower one), each part drawn within the tolerance of its "
+            "datasheet: resistors ±1 %, the C0G C3 ±5 %, the X7R C4 ±10 %. The histogram shows "
+            "the spread of f-3dB, the requirement how many meet 1.10-1.20 kHz (the yield). The "
+            "X7R's ±10 % dominates: a ±5 % C0G for C4 would raise the yield.")),
         GraphNote(id="n3", pos=(0, 2600), size=(320, 120), text=(
             "C2 swept through four values: one curve each, and a table of f-3dB and the peak. "
             "A smaller C2 raises fc and Q (the response peaks); a larger one flattens it.")),

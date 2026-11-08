@@ -1,9 +1,9 @@
 {
-  "id": "01a1bd43-37b6-7013-a419-2dac98bc5627",
+  "id": "01a1bd69-b99b-700a-a27c-184e8d374280",
   "name": "GRM2165C1H223JA01",
   "instances": [
     {
-      "id": "01a1bd43-37b6-700a-9aed-1fa0f18fcc3b",
+      "id": "01a1bd69-b99b-7001-a4af-efef97f43169",
       "ref": "C1",
       "symbol": "bpt:capacitor",
       "model": {
@@ -26,7 +26,7 @@
       "texts": {}
     },
     {
-      "id": "01a1bd43-37b6-700c-ad43-ce992e3d5a1e",
+      "id": "01a1bd69-b99b-7003-ab26-38e660859080",
       "ref": "R1",
       "symbol": "bpt:resistor",
       "model": {
@@ -49,7 +49,7 @@
       "texts": {}
     },
     {
-      "id": "01a1bd43-37b6-700e-b8f8-6a06f8e74fe1",
+      "id": "01a1bd69-b99b-7005-9b0e-ae73ee57066c",
       "ref": "L1",
       "symbol": "bpt:inductor",
       "model": {
@@ -74,7 +74,7 @@
   ],
   "wires": [
     {
-      "id": "01a1bd43-37b6-700b-83a4-609b7094a405",
+      "id": "01a1bd69-b99b-7002-bb50-606de5409512",
       "points": [
         [
           1270,
@@ -88,7 +88,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-700d-ae97-cd2cf6a0bdf5",
+      "id": "01a1bd69-b99b-7004-acf1-944d419f8bc6",
       "points": [
         [
           2286,
@@ -102,7 +102,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-700f-ba39-808d56c0dbaf",
+      "id": "01a1bd69-b99b-7006-9596-5e2d2556df94",
       "points": [
         [
           0,
@@ -116,7 +116,7 @@
       "bus": false
     },
     {
-      "id": "01a1bd43-37b6-7010-b577-bf70531486c9",
+      "id": "01a1bd69-b99b-7007-831e-4e6879d58465",
       "points": [
         [
           3302,
@@ -133,7 +133,7 @@
   "junctions": [],
   "labels": [
     {
-      "id": "01a1bd43-37b6-7011-9c25-1e412942d0dd",
+      "id": "01a1bd69-b99b-7008-b1b3-1e854f19fe14",
       "kind": "port",
       "text": "1",
       "at": [
@@ -143,7 +143,7 @@
       "rot": 0
     },
     {
-      "id": "01a1bd43-37b6-7012-a9c7-7d97bb40fcd0",
+      "id": "01a1bd69-b99b-7009-aa47-058babec05b1",
       "kind": "port",
       "text": "2",
       "at": [
@@ -272,7 +272,8 @@
       "manufacturer": "Murata",
       "part_number": "GRM2165C1H223JA01",
       "technology": "C0G",
-      "package": "0805"
+      "package": "0805",
+      "tolerance": "±5 %"
     },
     "ratings": {
       "voltage": "50"

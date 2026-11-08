@@ -85,7 +85,8 @@ def test_example_simulates(name: str, tmp_path: Path) -> None:
 @ngspice_marks[1]
 def test_the_filter_design_check_graph(tmp_path: Path) -> None:
     """The showcase graph: formula f0 = 1.07 kHz, simulated f-3dB 1.12 kHz (Q = 0.74), a batch
-    of 200 with most of it within 1.10-1.20 kHz, a table row per C2, and real parts."""
+    of 200 real filters with about two thirds within 1.10-1.20 kHz, a table row per C2, and
+    real parts against ideal ones."""
     from bpt.examples import filter_design_check
     from bpt.graph.executor import ResultCache, execute
     from tests.test_graph import _Ctx
@@ -101,7 +102,13 @@ def test_the_filter_design_check_graph(tmp_path: Path) -> None:
     assert not bad, bad
     assert results["f0"].outputs["value"].value == pytest.approx(1073, rel=1e-3)
     assert results["measure"].outputs["value"].value == pytest.approx(1122, rel=5e-3)
-    assert "PASS" in results["spec"].state.summary[0] or "FAIL" in results["spec"].state.summary[0]
+    # The batch of real filters, each part within its datasheet tolerance (the X7R's ±10 %
+    # dominates): about two thirds meet 1.10-1.20 kHz.
+    verdict = results["spec"].state.summary[0]
+    assert (
+        verdict.startswith("FAIL")
+        and 0.55 < float(verdict.rsplit("= ", 1)[1].rstrip("%")) / 100 < 0.75
+    )
     assert len(results["make_sw"].outputs["table"].rows) == 4
     # Real parts (Murata capacitors fitted to Murata's data): the 16 V X7R keeps its capacitance
     # at 2.5 V, f-3dB stays within 1 %; the op-amp's finite gain lets the signal leak through.
