@@ -1,0 +1,22 @@
+[build-system]
+requires = ["maturin>=1.15,<2"]
+build-backend = "maturin"
+
+[project]
+name = "bpt-native"
+description = "Rust extension module for BiasPoint"
+requires-python = ">=3.13"
+dynamic = ["version"]
+
+[tool.maturin]
+module-name = "bpt_native"
+
+[tool.uv]
+# Rebuild the extension when any Rust source in the workspace changes.
+cache-keys = [
+  { file = "pyproject.toml" },
+  { file = "Cargo.toml" },
+  { file = "src/**/*.rs" },
+  { file = "../bpt-dsp/src/**/*.rs" },
+  { file = "../../Cargo.toml" },
+]

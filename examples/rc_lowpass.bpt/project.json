@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "01a155f3-748d-700b-808b-d061984cc36e",
+  "name": "rc_lowpass",
+  "parameters": {},
+  "models": {},
+  "simulation": {
+    "active": "tran",
+    "cards": {
+      "op": ".op",
+      "dc": ".dc V1 0 1 0.1",
+      "ac": ".ac dec 20 1 100k",
+      "tran": ".tran 10u 20m"
+    }
+  },
+  "sheets": [
+    {
+      "id": "01a155f3-748c-7000-b1cb-1d146a99954e",
+      "name": "root"
+    }
+  ]
+}

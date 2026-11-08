@@ -1,0 +1,2226 @@
+{
+  "$defs": {
+    "Arc": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "arc",
+          "default": "arc",
+          "title": "Kind",
+          "type": "string"
+        },
+        "start": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Start",
+          "type": "array"
+        },
+        "mid": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Mid",
+          "type": "array"
+        },
+        "end": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "End",
+          "type": "array"
+        }
+      },
+      "required": [
+        "start",
+        "mid",
+        "end"
+      ],
+      "title": "Arc",
+      "type": "object"
+    },
+    "Characteristic": {
+      "additionalProperties": false,
+      "description": "Source points of a characteristic (datasheet, measurement): |Z|(f), C(V), I-V...",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "x_unit": {
+          "default": "",
+          "title": "X Unit",
+          "type": "string"
+        },
+        "y_unit": {
+          "default": "",
+          "title": "Y Unit",
+          "type": "string"
+        },
+        "points": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Points",
+          "type": "array"
+        },
+        "source": {
+          "default": "",
+          "title": "Source",
+          "type": "string"
+        },
+        "weights": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Weights",
+          "type": "array"
+        },
+        "scale": {
+          "default": "log",
+          "enum": [
+            "log",
+            "lin"
+          ],
+          "title": "Scale",
+          "type": "string"
+        },
+        "at": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "At",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Characteristic",
+      "type": "object"
+    },
+    "Circle": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "circle",
+          "default": "circle",
+          "title": "Kind",
+          "type": "string"
+        },
+        "center": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Center",
+          "type": "array"
+        },
+        "radius": {
+          "title": "Radius",
+          "type": "integer"
+        },
+        "fill": {
+          "default": false,
+          "title": "Fill",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "center",
+        "radius"
+      ],
+      "title": "Circle",
+      "type": "object"
+    },
+    "ComponentInfo": {
+      "additionalProperties": false,
+      "description": "What makes a block a real part (D15, FR-CMP): kind, metadata, ratings, versions.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "default": "other",
+          "enum": [
+            "resistor",
+            "capacitor",
+            "inductor",
+            "transformer",
+            "diode",
+            "transistor",
+            "ic",
+            "module",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "category": {
+          "default": "",
+          "title": "Category",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Metadata",
+          "type": "object"
+        },
+        "ratings": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Ratings",
+          "type": "object"
+        },
+        "template": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Template"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "characteristics": {
+          "items": {
+            "$ref": "#/$defs/Characteristic"
+          },
+          "title": "Characteristics",
+          "type": "array"
+        },
+        "version": {
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "updated": {
+          "default": "",
+          "title": "Updated",
+          "type": "string"
+        },
+        "changes": {
+          "default": "",
+          "title": "Changes",
+          "type": "string"
+        },
+        "history": {
+          "items": {
+            "$ref": "#/$defs/VersionNote"
+          },
+          "title": "History",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "ComponentInfo",
+      "type": "object"
+    },
+    "Directive": {
+      "additionalProperties": false,
+      "description": "Free SPICE text placed on the schematic (``.param``, ``.include``, ...).",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "at": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "at"
+      ],
+      "title": "Directive",
+      "type": "object"
+    },
+    "Graph": {
+      "additionalProperties": false,
+      "description": "Analysis graph (see node.md): simulations, calculations and views as connected nodes.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/GraphNode"
+          },
+          "title": "Nodes",
+          "type": "array"
+        },
+        "edges": {
+          "items": {
+            "$ref": "#/$defs/GraphEdge"
+          },
+          "title": "Edges",
+          "type": "array"
+        },
+        "groups": {
+          "items": {
+            "$ref": "#/$defs/GraphGroup"
+          },
+          "title": "Groups",
+          "type": "array"
+        },
+        "notes": {
+          "items": {
+            "$ref": "#/$defs/GraphNote"
+          },
+          "title": "Notes",
+          "type": "array"
+        },
+        "reroutes": {
+          "items": {
+            "$ref": "#/$defs/GraphReroute"
+          },
+          "title": "Reroutes",
+          "type": "array"
+        },
+        "subgraphs": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Subgraph"
+          },
+          "title": "Subgraphs",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Graph",
+      "type": "object"
+    },
+    "GraphEdge": {
+      "additionalProperties": false,
+      "description": "Output ``output`` of node ``source`` feeds input ``input`` of node ``target``.",
+      "properties": {
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "output": {
+          "title": "Output",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "input": {
+          "title": "Input",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "output",
+        "target",
+        "input"
+      ],
+      "title": "GraphEdge",
+      "type": "object"
+    },
+    "GraphGroup": {
+      "additionalProperties": false,
+      "description": "A frame around nodes with a title (the nodes inside it move with it on the canvas).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "color": {
+          "default": "",
+          "title": "Color",
+          "type": "string"
+        },
+        "rect": {
+          "default": [
+            0.0,
+            0.0,
+            400.0,
+            300.0
+          ],
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Rect",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "GraphGroup",
+      "type": "object"
+    },
+    "GraphNode": {
+      "additionalProperties": false,
+      "description": "A node of an analysis graph: its type (``sim/tran``), widget values and placement.\n\n``version``: of its type's parameters when it was made (older ones are migrated by the\ncatalogue); ``title``: the user's name for it (\"\" = the type's); ``bypass``: switched off,\nits input passed on to an output of the same type, else its branch skipped;\n``param_inputs``: parameters turned into ``scalar`` input sockets of the same name (a number\nfrom another node sets them).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "version": {
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "bypass": {
+          "default": false,
+          "title": "Bypass",
+          "type": "boolean"
+        },
+        "pos": {
+          "default": [
+            0.0,
+            0.0
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pos",
+          "type": "array"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size"
+        },
+        "params": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "title": "Params",
+          "type": "object"
+        },
+        "param_inputs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Param Inputs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "title": "GraphNode",
+      "type": "object"
+    },
+    "GraphNote": {
+      "additionalProperties": false,
+      "description": "Text on the canvas (Markdown).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "default": "",
+          "title": "Text",
+          "type": "string"
+        },
+        "pos": {
+          "default": [
+            0.0,
+            0.0
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pos",
+          "type": "array"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "GraphNote",
+      "type": "object"
+    },
+    "GraphReroute": {
+      "additionalProperties": false,
+      "description": "A point an edge passes through (to route it): what comes in (input ``in``) goes out\n(output ``out``) unchanged.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "pos": {
+          "default": [
+            0.0,
+            0.0
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pos",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "GraphReroute",
+      "type": "object"
+    },
+    "Instance": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        },
+        "symbol": {
+          "title": "Symbol",
+          "type": "string"
+        },
+        "model": {
+          "$ref": "#/$defs/ModelRef"
+        },
+        "at": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        },
+        "rot": {
+          "default": 0,
+          "enum": [
+            0,
+            90,
+            180,
+            270
+          ],
+          "title": "Rot",
+          "type": "integer"
+        },
+        "mirror": {
+          "default": false,
+          "title": "Mirror",
+          "type": "boolean"
+        },
+        "look": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Look"
+        },
+        "ratings": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Ratings",
+          "type": "object"
+        },
+        "texts": {
+          "additionalProperties": {
+            "$ref": "#/$defs/TextPlace"
+          },
+          "title": "Texts",
+          "type": "object"
+        }
+      },
+      "required": [
+        "ref",
+        "symbol",
+        "at"
+      ],
+      "title": "Instance",
+      "type": "object"
+    },
+    "Junction": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "at": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        }
+      },
+      "required": [
+        "at"
+      ],
+      "title": "Junction",
+      "type": "object"
+    },
+    "Label": {
+      "additionalProperties": false,
+      "description": "Net label; ``local`` labels join nets within a sheet, ``global`` across sheets.",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "default": "local",
+          "enum": [
+            "local",
+            "global",
+            "port"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "at": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        },
+        "rot": {
+          "default": 0,
+          "enum": [
+            0,
+            90,
+            180,
+            270
+          ],
+          "title": "Rot",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "text",
+        "at"
+      ],
+      "title": "Label",
+      "type": "object"
+    },
+    "Look": {
+      "additionalProperties": false,
+      "description": "Another drawing of the same part (ANSI zigzag, electrolytic capacitor...); same pins.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "standard": {
+          "anyOf": [
+            {
+              "enum": [
+                "iec",
+                "ansi"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Standard"
+        },
+        "signal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signal"
+        },
+        "default": {
+          "type": "boolean",
+          "default": false,
+          "title": "Default"
+        },
+        "graphics": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "arc": "#/$defs/Arc",
+                "circle": "#/$defs/Circle",
+                "polyline": "#/$defs/Polyline",
+                "rect": "#/$defs/Rect",
+                "text": "#/$defs/Text"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/Polyline"
+              },
+              {
+                "$ref": "#/$defs/Rect"
+              },
+              {
+                "$ref": "#/$defs/Circle"
+              },
+              {
+                "$ref": "#/$defs/Arc"
+              },
+              {
+                "$ref": "#/$defs/Text"
+              }
+            ]
+          },
+          "title": "Graphics",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "graphics"
+      ],
+      "title": "Look",
+      "type": "object"
+    },
+    "ModelCard": {
+      "additionalProperties": false,
+      "description": "A SPICE ``.model`` card: ``.model <name> <type>(<params>)``.",
+      "properties": {
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Params",
+          "type": "object"
+        },
+        "source": {
+          "default": "",
+          "title": "Source",
+          "type": "string"
+        },
+        "original": {
+          "default": "",
+          "title": "Original",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "ModelCard",
+      "type": "object"
+    },
+    "ModelRef": {
+      "additionalProperties": false,
+      "description": "What simulates an instance.\n\n``builtin``: the symbol's default SPICE element, configured by ``params``\n(e.g. ``{\"R\": \"10k\"}`` or ``{\"dc\": \"5\", \"tran\": \"SIN(0 1 1k)\"}``).\n``model`` optionally names a model card (``.model``) from the project or a library.",
+      "properties": {
+        "kind": {
+          "const": "builtin",
+          "default": "builtin",
+          "title": "Kind",
+          "type": "string"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Params",
+          "type": "object"
+        },
+        "pins": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pins"
+        },
+        "variant": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Variant"
+        }
+      },
+      "title": "ModelRef",
+      "type": "object"
+    },
+    "Parasitic": {
+      "additionalProperties": false,
+      "description": "A non-ideal property of a part: an extra R, L or C in series or in parallel with it.\n\nStored like any parameter (``key`` in the instance params); empty = absent (ideal).\nThe netlister expands it into a separate element.",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "element": {
+          "enum": [
+            "R",
+            "L",
+            "C"
+          ],
+          "title": "Element",
+          "type": "string"
+        },
+        "connection": {
+          "enum": [
+            "series",
+            "parallel"
+          ],
+          "title": "Connection",
+          "type": "string"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "element",
+        "connection",
+        "unit"
+      ],
+      "title": "Parasitic",
+      "type": "object"
+    },
+    "Pin": {
+      "additionalProperties": false,
+      "description": "``at`` is the connection point relative to the symbol origin (unrotated).",
+      "properties": {
+        "number": {
+          "title": "Number",
+          "type": "string"
+        },
+        "name": {
+          "default": "",
+          "title": "Name",
+          "type": "string"
+        },
+        "at": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        },
+        "length": {
+          "default": 127,
+          "title": "Length",
+          "type": "integer"
+        },
+        "orientation": {
+          "default": "up",
+          "enum": [
+            "left",
+            "right",
+            "up",
+            "down"
+          ],
+          "title": "Orientation",
+          "type": "string"
+        },
+        "type": {
+          "default": "passive",
+          "enum": [
+            "passive",
+            "input",
+            "output",
+            "bidirectional",
+            "power_in",
+            "power_out"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "implicit_net": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Implicit Net"
+        }
+      },
+      "required": [
+        "number",
+        "at"
+      ],
+      "title": "Pin",
+      "type": "object"
+    },
+    "Polyline": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "polyline",
+          "default": "polyline",
+          "title": "Kind",
+          "type": "string"
+        },
+        "points": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Points",
+          "type": "array"
+        },
+        "fill": {
+          "default": false,
+          "title": "Fill",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "points"
+      ],
+      "title": "Polyline",
+      "type": "object"
+    },
+    "Rect": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "rect",
+          "default": "rect",
+          "title": "Kind",
+          "type": "string"
+        },
+        "start": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Start",
+          "type": "array"
+        },
+        "end": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "End",
+          "type": "array"
+        },
+        "fill": {
+          "default": false,
+          "title": "Fill",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "Rect",
+      "type": "object"
+    },
+    "Sheet": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "instances": {
+          "items": {
+            "$ref": "#/$defs/Instance"
+          },
+          "title": "Instances",
+          "type": "array"
+        },
+        "wires": {
+          "items": {
+            "$ref": "#/$defs/Wire"
+          },
+          "title": "Wires",
+          "type": "array"
+        },
+        "junctions": {
+          "items": {
+            "$ref": "#/$defs/Junction"
+          },
+          "title": "Junctions",
+          "type": "array"
+        },
+        "labels": {
+          "items": {
+            "$ref": "#/$defs/Label"
+          },
+          "title": "Labels",
+          "type": "array"
+        },
+        "directives": {
+          "items": {
+            "$ref": "#/$defs/Directive"
+          },
+          "title": "Directives",
+          "type": "array"
+        },
+        "parameters": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Parameters",
+          "type": "object"
+        },
+        "port_sides": {
+          "additionalProperties": {
+            "enum": [
+              "left",
+              "right",
+              "top",
+              "bottom"
+            ],
+            "type": "string"
+          },
+          "title": "Port Sides",
+          "type": "object"
+        },
+        "port_order": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Port Order",
+          "type": "array"
+        },
+        "form": {
+          "items": {
+            "$ref": "#/$defs/TemplateField"
+          },
+          "title": "Form",
+          "type": "array"
+        },
+        "symbol": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Symbol"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "component": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ComponentInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "owner": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Owner"
+        },
+        "variants": {
+          "items": {
+            "$ref": "#/$defs/SheetVariant"
+          },
+          "title": "Variants",
+          "type": "array"
+        },
+        "variant_label": {
+          "default": "",
+          "title": "Variant Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Sheet",
+      "type": "object"
+    },
+    "SheetVariant": {
+      "additionalProperties": false,
+      "description": "Another model of a block (FR-CMP-8, FR-HIE-3): a sheet with the same ports simulated\ninstead when a block chooses it (\"Simulate as\"), e.g. an averaged model of a converter.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "sheet": {
+          "title": "Sheet",
+          "type": "string"
+        },
+        "faster": {
+          "default": false,
+          "title": "Faster",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "sheet"
+      ],
+      "title": "SheetVariant",
+      "type": "object"
+    },
+    "Simulation": {
+      "additionalProperties": false,
+      "description": "Last parameters of each analysis kind (SPICE cards) and which one runs; the circuit\ntemperature and simulator options apply to every analysis started from Simulate.",
+      "properties": {
+        "active": {
+          "default": "op",
+          "enum": [
+            "op",
+            "dc",
+            "ac",
+            "tran"
+          ],
+          "title": "Active",
+          "type": "string"
+        },
+        "cards": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Cards",
+          "type": "object"
+        },
+        "temperature": {
+          "default": "",
+          "title": "Temperature",
+          "type": "string"
+        },
+        "options": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Options",
+          "type": "object"
+        }
+      },
+      "title": "Simulation",
+      "type": "object"
+    },
+    "SpiceMapping": {
+      "additionalProperties": false,
+      "description": "How an instance becomes a SPICE element line.\n\n``nodes`` lists pin numbers in SPICE node order; ``\"=0\"`` stands for the ground node\n(used e.g. by the ideal op-amp, a VCVS referenced to ground).",
+      "properties": {
+        "element": {
+          "enum": [
+            "R",
+            "C",
+            "L",
+            "V",
+            "I",
+            "E",
+            "F",
+            "G",
+            "H",
+            "B",
+            "D",
+            "Q",
+            "M",
+            "J",
+            "S",
+            "X",
+            "A"
+          ],
+          "title": "Element",
+          "type": "string"
+        },
+        "nodes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Nodes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "element",
+        "nodes"
+      ],
+      "title": "SpiceMapping",
+      "type": "object"
+    },
+    "StressRules": {
+      "additionalProperties": false,
+      "description": "Stress analysis margins (FR-SIM-7): the part of each rating a design may use.",
+      "properties": {
+        "voltage": {
+          "default": 80.0,
+          "title": "Voltage",
+          "type": "number"
+        },
+        "current": {
+          "default": 80.0,
+          "title": "Current",
+          "type": "number"
+        },
+        "power": {
+          "default": 50.0,
+          "title": "Power",
+          "type": "number"
+        },
+        "temperature": {
+          "default": 25.0,
+          "title": "Temperature",
+          "type": "number"
+        },
+        "ambient": {
+          "default": 25.0,
+          "title": "Ambient",
+          "type": "number"
+        }
+      },
+      "title": "StressRules",
+      "type": "object"
+    },
+    "SubcktModel": {
+      "additionalProperties": false,
+      "description": "A device model written as a subcircuit (``.subckt name pins params: ... .ends``).\n\n``body`` holds the ngspice lines between the header and ``.ends``; ``original`` the text\nas found in the manufacturer's file. Parts use it as an ``X`` element.",
+      "properties": {
+        "pins": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Pins",
+          "type": "array"
+        },
+        "params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Params",
+          "type": "object"
+        },
+        "body": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Body",
+          "type": "array"
+        },
+        "source": {
+          "default": "",
+          "title": "Source",
+          "type": "string"
+        },
+        "original": {
+          "default": "",
+          "title": "Original",
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "pins"
+      ],
+      "title": "SubcktModel",
+      "type": "object"
+    },
+    "Subgraph": {
+      "additionalProperties": false,
+      "description": "A graph used as one node (G4): its sockets and parameters at its boundary.",
+      "properties": {
+        "version": {
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "inputs": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Inputs",
+          "type": "array"
+        },
+        "outputs": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Outputs",
+          "type": "array"
+        },
+        "params": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Params",
+          "type": "array"
+        },
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/GraphNode"
+          },
+          "title": "Nodes",
+          "type": "array"
+        },
+        "edges": {
+          "items": {
+            "$ref": "#/$defs/GraphEdge"
+          },
+          "title": "Edges",
+          "type": "array"
+        }
+      },
+      "title": "Subgraph",
+      "type": "object"
+    },
+    "Symbol": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "ref_prefix": {
+          "title": "Ref Prefix",
+          "type": "string"
+        },
+        "pins": {
+          "items": {
+            "$ref": "#/$defs/Pin"
+          },
+          "title": "Pins",
+          "type": "array"
+        },
+        "graphics": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "arc": "#/$defs/Arc",
+                "circle": "#/$defs/Circle",
+                "polyline": "#/$defs/Polyline",
+                "rect": "#/$defs/Rect",
+                "text": "#/$defs/Text"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/Polyline"
+              },
+              {
+                "$ref": "#/$defs/Rect"
+              },
+              {
+                "$ref": "#/$defs/Circle"
+              },
+              {
+                "$ref": "#/$defs/Arc"
+              },
+              {
+                "$ref": "#/$defs/Text"
+              }
+            ]
+          },
+          "title": "Graphics",
+          "type": "array"
+        },
+        "spice": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SpiceMapping"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "power_net": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Power Net"
+        },
+        "default_params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Default Params",
+          "type": "object"
+        },
+        "default_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default Model"
+        },
+        "category": {
+          "default": "Misc",
+          "title": "Category",
+          "type": "string"
+        },
+        "ref_at": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": [
+            152,
+            -64
+          ],
+          "title": "Ref At"
+        },
+        "value_at": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": [
+            152,
+            64
+          ],
+          "title": "Value At"
+        },
+        "value_param": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Param"
+        },
+        "parasitics": {
+          "items": {
+            "$ref": "#/$defs/Parasitic"
+          },
+          "title": "Parasitics",
+          "type": "array"
+        },
+        "variants": {
+          "items": {
+            "$ref": "#/$defs/Variant"
+          },
+          "title": "Variants",
+          "type": "array"
+        },
+        "looks": {
+          "items": {
+            "$ref": "#/$defs/Look"
+          },
+          "title": "Looks",
+          "type": "array"
+        },
+        "version": {
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "updated": {
+          "default": "",
+          "title": "Updated",
+          "type": "string"
+        },
+        "changes": {
+          "default": "",
+          "title": "Changes",
+          "type": "string"
+        },
+        "kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Kind"
+        },
+        "group": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Group"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Metadata",
+          "type": "object"
+        },
+        "ratings": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Ratings",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "ref_prefix",
+        "pins"
+      ],
+      "title": "Symbol",
+      "type": "object"
+    },
+    "Template": {
+      "additionalProperties": false,
+      "description": "The standard equivalent circuit the sheets were generated from, with its form values.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "values": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Values",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Template",
+      "type": "object"
+    },
+    "TemplateField": {
+      "additionalProperties": false,
+      "description": "A form field of a user template: one parameter of its top sheet.",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "default": "",
+          "title": "Label",
+          "type": "string"
+        },
+        "unit": {
+          "default": "",
+          "title": "Unit",
+          "type": "string"
+        },
+        "default": {
+          "type": "string",
+          "default": "",
+          "title": "Default"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "minimum": {
+          "default": "",
+          "title": "Minimum",
+          "type": "string"
+        },
+        "maximum": {
+          "default": "",
+          "title": "Maximum",
+          "type": "string"
+        },
+        "group": {
+          "default": "",
+          "title": "Group",
+          "type": "string"
+        },
+        "help": {
+          "default": "",
+          "title": "Help",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "title": "TemplateField",
+      "type": "object"
+    },
+    "Text": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "text",
+          "default": "text",
+          "title": "Kind",
+          "type": "string"
+        },
+        "at": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "size": {
+          "default": 127,
+          "title": "Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "at",
+        "text"
+      ],
+      "title": "Text",
+      "type": "object"
+    },
+    "TextPlace": {
+      "additionalProperties": false,
+      "description": "Where a part's text (reference, value) was put by hand: offset from the part's origin in\nsheet axes and its rotation (90 = read bottom to top).",
+      "properties": {
+        "at": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        },
+        "rot": {
+          "default": 0,
+          "enum": [
+            0,
+            90
+          ],
+          "title": "Rot",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "at"
+      ],
+      "title": "TextPlace",
+      "type": "object"
+    },
+    "Variant": {
+      "additionalProperties": false,
+      "description": "Another way to simulate the same part (ideal / behavioural / transistor level...).",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "faster": {
+          "default": false,
+          "title": "Faster",
+          "type": "boolean"
+        },
+        "spice": {
+          "$ref": "#/$defs/SpiceMapping"
+        },
+        "default_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default Model"
+        },
+        "default_params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Default Params",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "spice"
+      ],
+      "title": "Variant",
+      "type": "object"
+    },
+    "VersionNote": {
+      "additionalProperties": false,
+      "description": "An earlier version of a library part or template: when and what changed in it.",
+      "properties": {
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        },
+        "updated": {
+          "default": "",
+          "title": "Updated",
+          "type": "string"
+        },
+        "changes": {
+          "default": "",
+          "title": "Changes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version"
+      ],
+      "title": "VersionNote",
+      "type": "object"
+    },
+    "Wire": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "points": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "type": "array"
+          },
+          "minItems": 2,
+          "title": "Points",
+          "type": "array"
+        },
+        "bus": {
+          "default": false,
+          "title": "Bus",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "points"
+      ],
+      "title": "Wire",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "sheets": {
+      "items": {
+        "$ref": "#/$defs/Sheet"
+      },
+      "title": "Sheets",
+      "type": "array"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Parameters",
+      "type": "object"
+    },
+    "models": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ModelCard"
+      },
+      "title": "Models",
+      "type": "object"
+    },
+    "subcircuits": {
+      "additionalProperties": {
+        "$ref": "#/$defs/SubcktModel"
+      },
+      "title": "Subcircuits",
+      "type": "object"
+    },
+    "simulation": {
+      "$ref": "#/$defs/Simulation"
+    },
+    "stress": {
+      "$ref": "#/$defs/StressRules"
+    },
+    "graphs": {
+      "items": {
+        "$ref": "#/$defs/Graph"
+      },
+      "title": "Graphs",
+      "type": "array"
+    },
+    "symbols": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Symbol"
+      },
+      "title": "Symbols",
+      "type": "object"
+    },
+    "linked": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked",
+      "type": "array"
+    },
+    "looks": {
+      "additionalProperties": {
+        "items": {
+          "$ref": "#/$defs/Look"
+        },
+        "type": "array"
+      },
+      "title": "Looks",
+      "type": "object"
+    },
+    "default_looks": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Default Looks",
+      "type": "object"
+    },
+    "symbol_standard": {
+      "anyOf": [
+        {
+          "enum": [
+            "iec",
+            "ansi"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Symbol Standard"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "Project",
+  "type": "object"
+}

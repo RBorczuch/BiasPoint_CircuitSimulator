@@ -1,0 +1,36 @@
+{
+  "description": "Resistive divider: Vout = 10 * 3k / 4k = 7.5 V, source current 2.5 mA (SPICE sign: negative). DC sweep of V1 0..10 V: Vout = 0.75 * V1.",
+  "checks": [
+    {
+      "analysis": {
+        "kind": "op"
+      },
+      "signal": "V(out)",
+      "reduce": "value",
+      "expected": 7.5,
+      "rtol": 1e-09
+    },
+    {
+      "analysis": {
+        "kind": "op"
+      },
+      "signal": "I(V1)",
+      "reduce": "value",
+      "expected": -0.0025,
+      "rtol": 1e-09
+    },
+    {
+      "analysis": {
+        "kind": "dc",
+        "source": "V1",
+        "start": "0",
+        "stop": "10",
+        "step": "0.5"
+      },
+      "signal": "V(out)",
+      "at": 4.0,
+      "expected": 3.0,
+      "rtol": 1e-09
+    }
+  ]
+}

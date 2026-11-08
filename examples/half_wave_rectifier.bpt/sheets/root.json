@@ -1,0 +1,237 @@
+{
+  "id": "01a155f3-7491-7000-9106-843a4760988d",
+  "name": "root",
+  "instances": [
+    {
+      "id": "01a155f3-7491-7001-9aef-cae23a905f34",
+      "ref": "V1",
+      "symbol": "bpt:vsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "dc": "0",
+          "tran": "SIN(0 10 50)"
+        }
+      },
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-7491-7002-acba-3a53bd3cb5b0",
+      "ref": "D1",
+      "symbol": "bpt:diode",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {}
+      },
+      "at": [
+        1016,
+        -1016
+      ],
+      "rot": 270,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-7491-7003-bdb4-e7c39e2e5aa6",
+      "ref": "C1",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "100u"
+        }
+      },
+      "at": [
+        2032,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-7491-7004-9003-6dce2400f2fa",
+      "ref": "RL",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "1k"
+        }
+      },
+      "at": [
+        2794,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-7491-7009-b1ce-b5cb1d558085",
+      "ref": "#GND1",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {}
+      },
+      "at": [
+        0,
+        762
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-7491-700b-8d59-d18bdf1d5a80",
+      "ref": "#GND2",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {}
+      },
+      "at": [
+        2032,
+        762
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-7491-700d-b129-3d19f3e44615",
+      "ref": "#GND3",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {}
+      },
+      "at": [
+        2794,
+        762
+      ],
+      "rot": 0,
+      "mirror": false
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a155f3-7491-7005-b0ab-841a36d9bf93",
+      "points": [
+        [
+          0,
+          -381
+        ],
+        [
+          0,
+          -1016
+        ],
+        [
+          635,
+          -1016
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-7491-7006-b661-cb42c8150acc",
+      "points": [
+        [
+          1397,
+          -1016
+        ],
+        [
+          2794,
+          -1016
+        ],
+        [
+          2794,
+          -381
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-7491-7007-8bc7-feb0084e0cd4",
+      "points": [
+        [
+          2032,
+          -1016
+        ],
+        [
+          2032,
+          -381
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-7491-7008-b4f7-44b33dd78fa4",
+      "points": [
+        [
+          0,
+          381
+        ],
+        [
+          0,
+          762
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-7491-700a-8522-1ad0e36072dd",
+      "points": [
+        [
+          2032,
+          381
+        ],
+        [
+          2032,
+          762
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-7491-700c-8f00-d60fdd304056",
+      "points": [
+        [
+          2794,
+          381
+        ],
+        [
+          2794,
+          762
+        ]
+      ]
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a155f3-7491-700e-81bc-c47f80f02f3f",
+      "kind": "local",
+      "text": "in",
+      "at": [
+        254,
+        -1016
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a155f3-7491-700f-8824-7f0d02ed0fd9",
+      "kind": "local",
+      "text": "out",
+      "at": [
+        2413,
+        -1016
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": []
+}

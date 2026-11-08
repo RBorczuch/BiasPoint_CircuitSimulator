@@ -1,0 +1,434 @@
+{
+  "id": "01a170de-1ed7-7018-b436-019b8920ec8b",
+  "name": "lm2596_module_avg",
+  "instances": [
+    {
+      "id": "01a170de-1ed7-7019-8f0f-1318ec308335",
+      "ref": "U1",
+      "symbol": "sheet:lm2596",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": "averaged"
+      },
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-701a-97fe-7944eb3ae29d",
+      "ref": "C1",
+      "symbol": "sheet:470uF 35V electrolytic",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        -2540,
+        254
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-701b-8a94-3830b00944fd",
+      "ref": "D1",
+      "symbol": "sheet:SS34",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1778,
+        254
+      ],
+      "rot": 180,
+      "mirror": true,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-701c-832c-a155ce2a5d70",
+      "ref": "L1",
+      "symbol": "sheet:33uH power inductor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2540,
+        -127
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-701d-9b38-7d73a10a5d80",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "{1k*(vout/1.23-1)}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3556,
+        254
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-701e-8b09-acbdc69aa975",
+      "ref": "R2",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "1k"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3556,
+        1016
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-701f-b4e6-19faf0014bd7",
+      "ref": "C2",
+      "symbol": "sheet:220uF 35V electrolytic",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        5588,
+        254
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a170de-1ed7-7021-b36f-44f5c3f74cb6",
+      "points": [
+        [
+          -4064,
+          -127
+        ],
+        [
+          -2540,
+          -127
+        ],
+        [
+          -889,
+          -127
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7022-ae96-4887fb880b22",
+      "points": [
+        [
+          -889,
+          127
+        ],
+        [
+          -1524,
+          127
+        ],
+        [
+          -1524,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7023-b4c0-bb278f5eff0a",
+      "points": [
+        [
+          889,
+          -127
+        ],
+        [
+          1778,
+          -127
+        ],
+        [
+          2159,
+          -127
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7026-bc8d-7cc901a4fdbe",
+      "points": [
+        [
+          2921,
+          -127
+        ],
+        [
+          3556,
+          -127
+        ],
+        [
+          5588,
+          -127
+        ],
+        [
+          6604,
+          -127
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7027-a44d-24a8a1b99fcf",
+      "points": [
+        [
+          889,
+          127
+        ],
+        [
+          1270,
+          127
+        ],
+        [
+          1270,
+          1270
+        ],
+        [
+          3048,
+          1270
+        ],
+        [
+          3048,
+          635
+        ],
+        [
+          3556,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7029-8caa-92746abf7a2f",
+      "points": [
+        [
+          -2540,
+          635
+        ],
+        [
+          -2540,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-702a-8333-ac84b3116bff",
+      "points": [
+        [
+          0,
+          635
+        ],
+        [
+          0,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-702b-8994-3aeea2c68f6a",
+      "points": [
+        [
+          1778,
+          635
+        ],
+        [
+          1778,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-702c-90f4-aeb6488542a9",
+      "points": [
+        [
+          3556,
+          1397
+        ],
+        [
+          3556,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-702d-b4e8-3c47b9097414",
+      "points": [
+        [
+          5588,
+          635
+        ],
+        [
+          5588,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-702f-afbd-53b15ba45661",
+      "points": [
+        [
+          -4064,
+          1778
+        ],
+        [
+          -2540,
+          1778
+        ],
+        [
+          -1524,
+          1778
+        ],
+        [
+          0,
+          1778
+        ],
+        [
+          1778,
+          1778
+        ],
+        [
+          3556,
+          1778
+        ],
+        [
+          5588,
+          1778
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a170de-1ed7-7020-9836-91c89342998c",
+      "kind": "port",
+      "text": "IN+",
+      "at": [
+        -4064,
+        -127
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1ed7-7024-ab61-e4b1308627e8",
+      "kind": "local",
+      "text": "sw",
+      "at": [
+        1270,
+        -127
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1ed7-7025-8181-730677894133",
+      "kind": "port",
+      "text": "OUT+",
+      "at": [
+        6604,
+        -127
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1ed7-7028-a331-656beb72d60b",
+      "kind": "local",
+      "text": "fb",
+      "at": [
+        3302,
+        635
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1ed7-702e-b172-84c670c66f5f",
+      "kind": "port",
+      "text": "GND",
+      "at": [
+        -4064,
+        1778
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {
+    "vout": "5"
+  },
+  "port_sides": {
+    "IN+": "left",
+    "OUT+": "right",
+    "GND": "bottom"
+  },
+  "port_order": [
+    "IN+",
+    "OUT+",
+    "GND"
+  ],
+  "symbol": null,
+  "component": null,
+  "owner": "cmp:Standard examples/LM2596 step-down module",
+  "variants": [],
+  "variant_label": ""
+}

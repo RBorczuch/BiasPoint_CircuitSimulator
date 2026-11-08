@@ -1,0 +1,7 @@
+{
+  "description": "Half-wave rectifier: output peak = 5 V minus the diode drop at ~4.3 mA (about 0.64 V); negative half-wave blocked.",
+  "checks": [
+    {"analysis": {"kind": "tran", "tstep": "20u", "tstop": "40m", "tmax": "20u"}, "signal": "V(out)", "reduce": "max", "range": [4.25, 4.45]},
+    {"analysis": {"kind": "tran", "tstep": "20u", "tstop": "40m", "tmax": "20u"}, "signal": "V(out)", "reduce": "min", "range": [-1e-6, 1e-6]}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "description": "RC low-pass step: Vout(t) = 1 - exp(-t/tau), tau = 1 ms.",
+  "checks": [
+    {"analysis": {"kind": "tran", "tstep": "10u", "tstop": "5m", "tmax": "10u"}, "signal": "V(out)", "at": 0.001, "expected": 0.6321205588, "rtol": 1e-3},
+    {"analysis": {"kind": "tran", "tstep": "10u", "tstop": "5m", "tmax": "10u"}, "signal": "V(out)", "at": 0.005, "expected": 0.9932620530, "rtol": 1e-3}
+  ]
+}

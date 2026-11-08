@@ -1,0 +1,161 @@
+{
+  "id": "01a16135-8aa3-7000-99f8-77b432e1af0d",
+  "name": "filter",
+  "instances": [
+    {
+      "id": "01a16135-8aa2-700a-aa92-567ca61620d4",
+      "ref": "R2",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "{Rv}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3556,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a16135-8aa2-700f-b4dc-2b68168bc9e2",
+      "ref": "C1",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "100n"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        5334,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a16135-8aa2-7013-83f2-41d4d0255de6",
+      "ref": "#GND2",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        5334,
+        635
+      ],
+      "rot": 0,
+      "mirror": false
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a16135-8aa2-700b-97e9-fa8f77148a3c",
+      "points": [
+        [
+          3556,
+          -381
+        ],
+        [
+          3556,
+          -635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a16135-8aa2-700d-9bc8-5e909a5df6e8",
+      "points": [
+        [
+          3556,
+          381
+        ],
+        [
+          3556,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a16135-8aa2-7010-b9a0-2e385e285865",
+      "points": [
+        [
+          5334,
+          -381
+        ],
+        [
+          5334,
+          -635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a16135-8aa2-7012-83de-3225306bf6d9",
+      "points": [
+        [
+          5334,
+          381
+        ],
+        [
+          5334,
+          635
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a16135-8aa2-700c-a8d7-6e55dc85b44e",
+      "kind": "port",
+      "text": "mid",
+      "at": [
+        3556,
+        -635
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a16135-8aa2-700e-b560-b2ceed859067",
+      "kind": "port",
+      "text": "out",
+      "at": [
+        3556,
+        635
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a16135-8aa2-7011-b72e-aef264901627",
+      "kind": "local",
+      "text": "out",
+      "at": [
+        5334,
+        -635
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {
+    "Cval": "100n"
+  },
+  "port_sides": {},
+  "port_order": []
+}

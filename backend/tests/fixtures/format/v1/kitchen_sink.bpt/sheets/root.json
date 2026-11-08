@@ -1,0 +1,315 @@
+{
+  "id": "01a16135-8aa1-7000-8a47-9da6064e3175",
+  "name": "root",
+  "instances": [
+    {
+      "id": "01a16135-8aa2-7000-a6dc-40a2b3102a9a",
+      "ref": "V1",
+      "symbol": "bpt:vsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "dc": "1",
+          "ac": "1"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a16135-8aa2-7004-9780-c869445dde6a",
+      "ref": "#GND1",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        635
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a16135-8aa2-7005-abcf-9047f0d65b7d",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "4k7"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1778,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a16135-8aa2-7014-8b0d-9cec5ad97cc8",
+      "ref": "D1",
+      "symbol": "bpt:diode",
+      "model": {
+        "kind": "builtin",
+        "model": "DFIX",
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        7112,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a16135-8aa2-7018-82aa-6ca8b2dad489",
+      "ref": "#GND3",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        7112,
+        635
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a16135-8aa3-7001-97a3-6df671beed4c",
+      "ref": "X1",
+      "symbol": "sheet:filter",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        4445,
+        254
+      ],
+      "rot": 0,
+      "mirror": false
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a16135-8aa2-7001-9040-fc1f658f042a",
+      "points": [
+        [
+          0,
+          -381
+        ],
+        [
+          0,
+          -635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a16135-8aa2-7003-8c55-69cd6de65a38",
+      "points": [
+        [
+          0,
+          381
+        ],
+        [
+          0,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a16135-8aa2-7006-8253-76997941b512",
+      "points": [
+        [
+          1778,
+          -381
+        ],
+        [
+          1778,
+          -635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a16135-8aa2-7008-9b96-3e5352b3f82c",
+      "points": [
+        [
+          1778,
+          381
+        ],
+        [
+          1778,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a16135-8aa2-7015-a668-ed4dc2fc2b76",
+      "points": [
+        [
+          7112,
+          -381
+        ],
+        [
+          7112,
+          -635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a16135-8aa2-7017-afba-1eb0a511b08a",
+      "points": [
+        [
+          7112,
+          381
+        ],
+        [
+          7112,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a16135-8aa4-7000-bcbd-c22b42682043",
+      "points": [
+        [
+          0,
+          3000
+        ],
+        [
+          2000,
+          3000
+        ]
+      ],
+      "bus": true
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a16135-8aa2-7002-895d-2328bdfa9e7f",
+      "kind": "local",
+      "text": "in",
+      "at": [
+        0,
+        -635
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a16135-8aa2-7007-b169-5eff99e48380",
+      "kind": "local",
+      "text": "in",
+      "at": [
+        1778,
+        -635
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a16135-8aa2-7009-9633-5463805cd456",
+      "kind": "local",
+      "text": "mid",
+      "at": [
+        1778,
+        635
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a16135-8aa2-7016-b652-f0f68a05b719",
+      "kind": "local",
+      "text": "out",
+      "at": [
+        7112,
+        -635
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a16135-8aa3-7002-b85c-a2fd09b2871b",
+      "kind": "local",
+      "text": "mid",
+      "at": [
+        3683,
+        127
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a16135-8aa3-7003-84b1-f1c81d7532f1",
+      "kind": "local",
+      "text": "out",
+      "at": [
+        3683,
+        381
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a16135-8aa4-7001-a108-7e8f78413480",
+      "kind": "local",
+      "text": "D[0..3]",
+      "at": [
+        0,
+        3000
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a16135-8aa4-7002-81eb-6bc008f8d7e6",
+      "kind": "global",
+      "text": "VCC",
+      "at": [
+        2000,
+        0
+      ],
+      "rot": 90
+    }
+  ],
+  "directives": [
+    {
+      "id": "01a16135-8aa4-7003-8e82-f80d2d0a3bf6",
+      "text": ".temp 27",
+      "at": [
+        0,
+        4000
+      ]
+    }
+  ],
+  "parameters": {},
+  "port_sides": {},
+  "port_order": []
+}

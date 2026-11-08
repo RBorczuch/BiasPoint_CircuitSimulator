@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "01a155f3-7491-7010-a1aa-cfc2c27c36e1",
+  "name": "half_wave_rectifier",
+  "parameters": {},
+  "models": {},
+  "simulation": {
+    "active": "tran",
+    "cards": {
+      "op": ".op",
+      "dc": ".dc V1 0 5 0.1",
+      "ac": ".ac dec 20 10 1meg",
+      "tran": ".tran 50u 100m"
+    }
+  },
+  "sheets": [
+    {
+      "id": "01a155f3-7491-7000-9106-843a4760988d",
+      "name": "root"
+    }
+  ]
+}

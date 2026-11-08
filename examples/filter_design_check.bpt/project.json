@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "01a1bcfb-4aac-7015-bbe9-0df38a512e0d",
+  "name": "filter_design_check",
+  "parameters": {},
+  "models": {},
+  "subcircuits": {},
+  "simulation": {
+    "active": "ac",
+    "cards": {
+      "op": ".op",
+      "dc": ".dc V1 0 5 0.1",
+      "ac": ".ac dec 50 10 100k",
+      "tran": ".tran 5u 5m"
+    },
+    "temperature": "",
+    "options": {}
+  },
+  "stress": {
+    "voltage": 80.0,
+    "current": 80.0,
+    "power": 50.0,
+    "temperature": 25.0,
+    "ambient": 25.0
+  },
+  "linked": [],
+  "looks": {},
+  "default_looks": {},
+  "symbol_standard": null,
+  "sheets": [
+    {
+      "id": "01a1bcfb-4aac-7000-9a81-e50aac970116",
+      "name": "root"
+    }
+  ]
+}

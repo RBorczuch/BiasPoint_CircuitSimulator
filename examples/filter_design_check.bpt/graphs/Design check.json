@@ -1,0 +1,609 @@
+{
+  "schema_version": 2,
+  "name": "Design check",
+  "nodes": [
+    {
+      "id": "circuit",
+      "type": "core/circuit",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        0.0,
+        140.0
+      ],
+      "size": null,
+      "params": {},
+      "param_inputs": []
+    },
+    {
+      "id": "ac",
+      "type": "sim/ac",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        380.0,
+        100.0
+      ],
+      "size": null,
+      "params": {
+        "points": 50,
+        "start": "10 Hz",
+        "stop": "100 kHz"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "vout",
+      "type": "core/signal",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        760.0,
+        100.0
+      ],
+      "size": null,
+      "params": {
+        "expr": "V(out)"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "measure",
+      "type": "measure/basic",
+      "version": 2,
+      "title": "Simulated response",
+      "bypass": false,
+      "pos": [
+        1140.0,
+        0.0
+      ],
+      "size": null,
+      "params": {
+        "op": "f3db, max"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "results",
+      "type": "view/table",
+      "version": 1,
+      "title": "Simulated",
+      "bypass": false,
+      "pos": [
+        1520.0,
+        0.0
+      ],
+      "size": null,
+      "params": {},
+      "param_inputs": []
+    },
+    {
+      "id": "bode",
+      "type": "view/plot",
+      "version": 1,
+      "title": "Bode plot",
+      "bypass": false,
+      "pos": [
+        1520.0,
+        230.0
+      ],
+      "size": null,
+      "params": {
+        "complex": "bode",
+        "lines": "-3 dB; 0 dB"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "r",
+      "type": "math/number",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        0.0,
+        420.0
+      ],
+      "size": null,
+      "params": {
+        "value": "10 kΩ",
+        "name": "R1 = R2"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "c1",
+      "type": "math/number",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        0.0,
+        580.0
+      ],
+      "size": null,
+      "params": {
+        "value": "22 nF",
+        "name": "C1"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "c2",
+      "type": "math/number",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        0.0,
+        740.0
+      ],
+      "size": null,
+      "params": {
+        "value": "10 nF",
+        "name": "C2"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "f0",
+      "type": "view/equation",
+      "version": 1,
+      "title": "Design formula",
+      "bypass": false,
+      "pos": [
+        380.0,
+        560.0
+      ],
+      "size": null,
+      "params": {
+        "expr": "1/(2*pi*sqrt(a*a*b*c))",
+        "unit": "Hz",
+        "name": "f0"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "mc",
+      "type": "core/montecarlo",
+      "version": 1,
+      "title": "Batch of 200 filters",
+      "bypass": false,
+      "pos": [
+        380.0,
+        1260.0
+      ],
+      "size": null,
+      "params": {
+        "tolerances": "R* ±1%; C* ±5%",
+        "runs": 200
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "ac_mc",
+      "type": "sim/ac",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        760.0,
+        1260.0
+      ],
+      "size": null,
+      "params": {
+        "points": 50,
+        "start": "10 Hz",
+        "stop": "100 kHz"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "vout_mc",
+      "type": "core/signal",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        1140.0,
+        1260.0
+      ],
+      "size": null,
+      "params": {
+        "expr": "V(out)"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "fc_mc",
+      "type": "measure/basic",
+      "version": 2,
+      "title": "f-3dB of each",
+      "bypass": false,
+      "pos": [
+        1520.0,
+        1260.0
+      ],
+      "size": null,
+      "params": {
+        "op": "f3db"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "spread",
+      "type": "view/histogram",
+      "version": 1,
+      "title": "Spread of f-3dB",
+      "bypass": false,
+      "pos": [
+        1900.0,
+        1180.0
+      ],
+      "size": null,
+      "params": {
+        "bins": 16
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "spec",
+      "type": "view/spec",
+      "version": 1,
+      "title": "Requirement 1.10-1.20 kHz",
+      "bypass": false,
+      "pos": [
+        1900.0,
+        1520.0
+      ],
+      "size": null,
+      "params": {
+        "condition": "1.1k..1.2k"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "bode_mc",
+      "type": "view/plot",
+      "version": 1,
+      "title": "All 200 responses",
+      "bypass": false,
+      "pos": [
+        1140.0,
+        1500.0
+      ],
+      "size": null,
+      "params": {},
+      "param_inputs": []
+    },
+    {
+      "id": "sweep",
+      "type": "core/sweep",
+      "version": 1,
+      "title": "C2 values",
+      "bypass": false,
+      "pos": [
+        380.0,
+        2400.0
+      ],
+      "size": null,
+      "params": {
+        "name": "C2",
+        "values": "4.7n 10n 22n 47n"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "ac_sw",
+      "type": "sim/ac",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        760.0,
+        2300.0
+      ],
+      "size": null,
+      "params": {
+        "points": 50,
+        "start": "10 Hz",
+        "stop": "100 kHz"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "vout_sw",
+      "type": "core/signal",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        1140.0,
+        2300.0
+      ],
+      "size": null,
+      "params": {
+        "expr": "V(out)"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "bode_sw",
+      "type": "view/plot",
+      "version": 1,
+      "title": "Response for each C2",
+      "bypass": false,
+      "pos": [
+        1520.0,
+        2240.0
+      ],
+      "size": null,
+      "params": {},
+      "param_inputs": []
+    },
+    {
+      "id": "fc_sw",
+      "type": "measure/basic",
+      "version": 2,
+      "title": "f-3dB and peak",
+      "bypass": false,
+      "pos": [
+        1140.0,
+        2600.0
+      ],
+      "size": null,
+      "params": {
+        "op": "f3db, max"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "make_sw",
+      "type": "table/make",
+      "version": 1,
+      "title": "",
+      "bypass": false,
+      "pos": [
+        1900.0,
+        2600.0
+      ],
+      "size": null,
+      "params": {
+        "name": "against C2"
+      },
+      "param_inputs": []
+    },
+    {
+      "id": "table_sw",
+      "type": "view/table",
+      "version": 1,
+      "title": "f-3dB and peak against C2",
+      "bypass": false,
+      "pos": [
+        1900.0,
+        2780.0
+      ],
+      "size": null,
+      "params": {},
+      "param_inputs": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "circuit",
+      "output": "circuit",
+      "target": "ac",
+      "input": "circuit"
+    },
+    {
+      "source": "ac",
+      "output": "run",
+      "target": "vout",
+      "input": "run"
+    },
+    {
+      "source": "vout",
+      "output": "signal",
+      "target": "measure",
+      "input": "signal"
+    },
+    {
+      "source": "measure",
+      "output": "table",
+      "target": "results",
+      "input": "table"
+    },
+    {
+      "source": "vout",
+      "output": "signal",
+      "target": "bode",
+      "input": "signals"
+    },
+    {
+      "source": "r",
+      "output": "value",
+      "target": "f0",
+      "input": "a"
+    },
+    {
+      "source": "c1",
+      "output": "value",
+      "target": "f0",
+      "input": "b"
+    },
+    {
+      "source": "c2",
+      "output": "value",
+      "target": "f0",
+      "input": "c"
+    },
+    {
+      "source": "circuit",
+      "output": "circuit",
+      "target": "mc",
+      "input": "circuit"
+    },
+    {
+      "source": "mc",
+      "output": "circuit",
+      "target": "ac_mc",
+      "input": "circuit"
+    },
+    {
+      "source": "ac_mc",
+      "output": "run",
+      "target": "vout_mc",
+      "input": "run"
+    },
+    {
+      "source": "vout_mc",
+      "output": "signal",
+      "target": "fc_mc",
+      "input": "signal"
+    },
+    {
+      "source": "fc_mc",
+      "output": "value",
+      "target": "spread",
+      "input": "values"
+    },
+    {
+      "source": "fc_mc",
+      "output": "value",
+      "target": "spec",
+      "input": "value"
+    },
+    {
+      "source": "vout_mc",
+      "output": "signal",
+      "target": "bode_mc",
+      "input": "signals"
+    },
+    {
+      "source": "circuit",
+      "output": "circuit",
+      "target": "ac_sw",
+      "input": "circuit"
+    },
+    {
+      "source": "sweep",
+      "output": "params",
+      "target": "ac_sw",
+      "input": "params"
+    },
+    {
+      "source": "ac_sw",
+      "output": "run",
+      "target": "vout_sw",
+      "input": "run"
+    },
+    {
+      "source": "vout_sw",
+      "output": "signal",
+      "target": "bode_sw",
+      "input": "signals"
+    },
+    {
+      "source": "vout_sw",
+      "output": "signal",
+      "target": "fc_sw",
+      "input": "signal"
+    },
+    {
+      "source": "fc_sw",
+      "output": "value",
+      "target": "make_sw",
+      "input": "values"
+    },
+    {
+      "source": "fc_sw",
+      "output": "max",
+      "target": "make_sw",
+      "input": "values"
+    },
+    {
+      "source": "make_sw",
+      "output": "table",
+      "target": "table_sw",
+      "input": "table"
+    }
+  ],
+  "groups": [
+    {
+      "id": "g1",
+      "title": "1 · Design formula against the simulation",
+      "color": "violet",
+      "rect": [
+        -40.0,
+        -80.0,
+        2000.0,
+        1000.0
+      ]
+    },
+    {
+      "id": "g2",
+      "title": "2 · A production batch: R ±1 %, C ±5 %",
+      "color": "sky",
+      "rect": [
+        340.0,
+        1100.0,
+        2000.0,
+        1000.0
+      ]
+    },
+    {
+      "id": "g3",
+      "title": "3 · What C2 does",
+      "color": "emerald",
+      "rect": [
+        340.0,
+        2160.0,
+        2000.0,
+        960.0
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "n1",
+      "text": "The textbook formula gives f0. The simulation shows the -3 dB frequency is higher: Q = 0.74, not 0.707, so the response peaks a little before it falls.",
+      "pos": [
+        -40.0,
+        960.0
+      ],
+      "size": [
+        360.0,
+        120.0
+      ]
+    },
+    {
+      "id": "n2",
+      "text": "200 filters with parts drawn within their tolerance. The histogram shows the spread of f-3dB, the requirement how many of them meet 1.10-1.20 kHz (the yield).",
+      "pos": [
+        0.0,
+        1300.0
+      ],
+      "size": [
+        320.0,
+        140.0
+      ]
+    },
+    {
+      "id": "n3",
+      "text": "C2 swept through four values: one curve each, and a table of f-3dB and the peak. A smaller C2 raises fc and Q (the response peaks); a larger one flattens it.",
+      "pos": [
+        0.0,
+        2600.0
+      ],
+      "size": [
+        320.0,
+        120.0
+      ]
+    }
+  ],
+  "reroutes": [],
+  "subgraphs": {}
+}

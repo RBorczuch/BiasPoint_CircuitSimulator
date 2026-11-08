@@ -1,0 +1,238 @@
+{
+  "id": "01a170de-1ed6-7000-99d7-086fbc3e88be",
+  "name": "SS34",
+  "instances": [
+    {
+      "id": "01a170de-1ed1-7053-97b4-44f73aa7e8cc",
+      "ref": "D1",
+      "symbol": "bpt:diode",
+      "model": {
+        "kind": "builtin",
+        "model": "devmodel",
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a170de-1ed1-7054-ae1c-199419da639c",
+      "points": [
+        [
+          0,
+          -381
+        ],
+        [
+          0,
+          -635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed1-7056-9576-1710a33d9283",
+      "points": [
+        [
+          0,
+          381
+        ],
+        [
+          0,
+          635
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a170de-1ed1-7058-8b64-bf13b7a3c5cc",
+      "kind": "port",
+      "text": "A",
+      "at": [
+        0,
+        -635
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1ed1-7059-b37f-87d56caf1f6b",
+      "kind": "port",
+      "text": "K",
+      "at": [
+        0,
+        635
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [
+    {
+      "id": "01a170de-1ed1-705a-9525-8ca1d43e2f61",
+      "text": ".model devmodel D(IS={is} N={n} RS={rs} BV={bv} IBV={ibv} CJO={cjo} VJ={vj} M={mj} TT={tt})",
+      "at": [
+        -762,
+        762
+      ]
+    }
+  ],
+  "parameters": {
+    "is": "5u",
+    "n": "1.1",
+    "rs": "40m",
+    "bv": "40",
+    "ibv": "1m",
+    "cjo": "300p",
+    "vj": "0.4",
+    "mj": "0.5",
+    "tt": "0"
+  },
+  "port_sides": {},
+  "port_order": [
+    "A",
+    "K"
+  ],
+  "symbol": {
+    "id": "sheet:SS34",
+    "name": "Diode",
+    "description": "",
+    "ref_prefix": "D",
+    "pins": [
+      {
+        "number": "A",
+        "name": "A",
+        "at": [
+          0,
+          -381
+        ],
+        "length": 279,
+        "orientation": "up",
+        "type": "passive",
+        "implicit_net": null
+      },
+      {
+        "number": "K",
+        "name": "K",
+        "at": [
+          0,
+          381
+        ],
+        "length": 279,
+        "orientation": "down",
+        "type": "passive",
+        "implicit_net": null
+      }
+    ],
+    "graphics": [
+      {
+        "kind": "polyline",
+        "points": [
+          [
+            -127,
+            -102
+          ],
+          [
+            127,
+            -102
+          ],
+          [
+            0,
+            102
+          ],
+          [
+            -127,
+            -102
+          ]
+        ],
+        "fill": true
+      },
+      {
+        "kind": "polyline",
+        "points": [
+          [
+            -127,
+            102
+          ],
+          [
+            127,
+            102
+          ]
+        ],
+        "fill": false
+      }
+    ],
+    "spice": {
+      "element": "D",
+      "nodes": [
+        "A",
+        "K"
+      ]
+    },
+    "power_net": null,
+    "default_params": {},
+    "default_model": null,
+    "category": "Semiconductor",
+    "ref_at": [
+      203,
+      -64
+    ],
+    "value_at": [
+      203,
+      64
+    ],
+    "value_param": null,
+    "parasitics": [],
+    "variants": [],
+    "looks": [],
+    "version": 1,
+    "updated": "",
+    "changes": "",
+    "kind": null
+  },
+  "component": {
+    "id": "cmp:Standard examples/SS34",
+    "name": "SS34",
+    "kind": "diode",
+    "description": "3 A 40 V Schottky rectifier (model from typical datasheet values)",
+    "metadata": {
+      "part_number": "SS34",
+      "technology": "Schottky",
+      "package": "SMA (DO-214AC)"
+    },
+    "ratings": {
+      "voltage": "40",
+      "current": "3"
+    },
+    "template": {
+      "name": "tpl:Standard templates/Diode (signal)",
+      "values": {
+        "is": "5u",
+        "n": "1.1",
+        "rs": "40m",
+        "bv": "40",
+        "ibv": "1m",
+        "cjo": "300p",
+        "vj": "0.4",
+        "mj": "0.5",
+        "tt": "0"
+      }
+    },
+    "characteristics": [],
+    "version": 1,
+    "updated": "",
+    "changes": ""
+  },
+  "owner": "cmp:Standard examples/LM2596 step-down module",
+  "variants": [],
+  "variant_label": ""
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "id": "01a170de-1edf-700d-a029-3441f94f5a9f",
+  "name": "lm2596_module",
+  "parameters": {},
+  "models": {},
+  "subcircuits": {},
+  "simulation": {
+    "active": "tran",
+    "cards": {
+      "op": ".op",
+      "dc": ".dc V1 0 5 0.1",
+      "ac": ".ac dec 20 10 1meg",
+      "tran": ".tran 1u 5m 0 50n"
+    },
+    "temperature": "",
+    "options": {}
+  },
+  "stress": {
+    "voltage": 80.0,
+    "current": 80.0,
+    "power": 50.0,
+    "temperature": 25.0,
+    "ambient": 25.0
+  },
+  "linked": [],
+  "looks": {},
+  "sheets": [
+    {
+      "id": "01a170de-1edd-7000-abba-891374cf311b",
+      "name": "root"
+    },
+    {
+      "id": "01a170de-1ed7-7000-aaf5-b4823a22541d",
+      "name": "lm2596_module"
+    },
+    {
+      "id": "01a170de-1ed7-7018-b436-019b8920ec8b",
+      "name": "lm2596_module_avg"
+    },
+    {
+      "id": "01a170de-1eb7-7000-a8f0-97a8cb6fbdd9",
+      "name": "lm2596"
+    },
+    {
+      "id": "01a170de-1eb8-7031-a288-9b7d2da26652",
+      "name": "lm2596_avg"
+    },
+    {
+      "id": "01a170de-1eb8-7076-9966-360aafd10355",
+      "name": "470uF 35V electrolytic"
+    },
+    {
+      "id": "01a170de-1eba-7009-b6f6-7154abc4dce1",
+      "name": "220uF 35V electrolytic"
+    },
+    {
+      "id": "01a170de-1eba-7011-a495-af920a214bea",
+      "name": "33uH power inductor"
+    },
+    {
+      "id": "01a170de-1ed6-7000-99d7-086fbc3e88be",
+      "name": "SS34"
+    }
+  ]
+}

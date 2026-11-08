@@ -1,0 +1,326 @@
+{
+  "id": "01a155f3-748e-7000-9449-4c3dcb02a0b0",
+  "name": "root",
+  "instances": [
+    {
+      "id": "01a155f3-748e-7001-985c-bd3484c5e937",
+      "ref": "V1",
+      "symbol": "bpt:vsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "dc": "0",
+          "ac": "1",
+          "tran": "SIN(0 1 1k)"
+        }
+      },
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-748e-7002-991e-fbe53edc84d4",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "10k"
+        }
+      },
+      "at": [
+        1016,
+        -1016
+      ],
+      "rot": 270,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-748e-7003-bd9d-2a063c60248e",
+      "ref": "R2",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "10k"
+        }
+      },
+      "at": [
+        2540,
+        -1016
+      ],
+      "rot": 270,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-748e-7004-92d3-a476de8bb0da",
+      "ref": "C1",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "22n"
+        }
+      },
+      "at": [
+        3302,
+        -1778
+      ],
+      "rot": 270,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-748e-7005-b9a9-acccfddc1765",
+      "ref": "C2",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "10n"
+        }
+      },
+      "at": [
+        3302,
+        0
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-748e-7006-a849-670b7572371d",
+      "ref": "U1",
+      "symbol": "bpt:opamp_ideal",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {}
+      },
+      "at": [
+        4064,
+        -889
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-748e-7011-91d6-1eda483315a6",
+      "ref": "#GND1",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {}
+      },
+      "at": [
+        0,
+        762
+      ],
+      "rot": 0,
+      "mirror": false
+    },
+    {
+      "id": "01a155f3-748e-7012-baf6-f4a95ed12455",
+      "ref": "#GND2",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {}
+      },
+      "at": [
+        3302,
+        762
+      ],
+      "rot": 0,
+      "mirror": false
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a155f3-748e-7007-9ead-b271e65e4054",
+      "points": [
+        [
+          0,
+          -381
+        ],
+        [
+          0,
+          -1016
+        ],
+        [
+          635,
+          -1016
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-748e-7008-94a9-a16d043511ec",
+      "points": [
+        [
+          1397,
+          -1016
+        ],
+        [
+          2159,
+          -1016
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-748e-7009-81c9-e17a056e9d0f",
+      "points": [
+        [
+          2921,
+          -1016
+        ],
+        [
+          3683,
+          -1016
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-748e-700a-a780-18018840c730",
+      "points": [
+        [
+          3302,
+          -1016
+        ],
+        [
+          3302,
+          -381
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-748e-700b-a49b-6774ec161abb",
+      "points": [
+        [
+          1778,
+          -1016
+        ],
+        [
+          1778,
+          -1778
+        ],
+        [
+          2921,
+          -1778
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-748e-700c-815f-5b879ec9aa9b",
+      "points": [
+        [
+          3683,
+          -1778
+        ],
+        [
+          4826,
+          -1778
+        ],
+        [
+          4826,
+          -889
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-748e-700d-9a83-6e1b856a5e6b",
+      "points": [
+        [
+          4445,
+          -889
+        ],
+        [
+          5207,
+          -889
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-748e-700e-bf58-71c2c521dddc",
+      "points": [
+        [
+          3683,
+          -762
+        ],
+        [
+          3556,
+          -762
+        ],
+        [
+          3556,
+          -508
+        ],
+        [
+          4826,
+          -508
+        ],
+        [
+          4826,
+          -889
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-748e-700f-aa2a-9c1a78d02bb2",
+      "points": [
+        [
+          0,
+          381
+        ],
+        [
+          0,
+          762
+        ]
+      ]
+    },
+    {
+      "id": "01a155f3-748e-7010-a9fe-bb6dfd9c5fd5",
+      "points": [
+        [
+          3302,
+          381
+        ],
+        [
+          3302,
+          762
+        ]
+      ]
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a155f3-748e-7013-9e6f-9d4be8e485da",
+      "kind": "local",
+      "text": "in",
+      "at": [
+        254,
+        -1016
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a155f3-748e-7014-854c-01e0820e7650",
+      "kind": "local",
+      "text": "out",
+      "at": [
+        5080,
+        -889
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": []
+}

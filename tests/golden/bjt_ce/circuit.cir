@@ -1,0 +1,11 @@
+Common-emitter amplifier, divider bias, no emitter bypass
+VCC vcc 0 DC 12
+VIN sig 0 DC 0 AC 1
+CIN sig b 10u
+R1 vcc b 47k
+R2 b 0 10k
+RC vcc c 4.7k
+RE e 0 1k
+Q1 c b e NPN
+.model NPN npn(is=1e-14 bf=200 vaf=100)
+.end

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "name": "sweep",
+  "nodes": [
+    {
+      "id": "c",
+      "type": "core/circuit",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "size": null,
+      "params": {}
+    },
+    {
+      "id": "sw",
+      "type": "core/sweep",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "size": null,
+      "params": {
+        "name": "Rv",
+        "values": "1k 2k 5k"
+      }
+    },
+    {
+      "id": "ac",
+      "type": "sim/ac",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "size": null,
+      "params": {
+        "start": "10 Hz",
+        "stop": "100 kHz"
+      }
+    },
+    {
+      "id": "v",
+      "type": "core/signal",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "size": null,
+      "params": {
+        "expr": "V(out)"
+      }
+    },
+    {
+      "id": "fc",
+      "type": "measure/basic",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "size": null,
+      "params": {
+        "op": "f3db"
+      }
+    },
+    {
+      "id": "table",
+      "type": "view/table",
+      "pos": [
+        0.0,
+        0.0
+      ],
+      "size": null,
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "source": "c",
+      "output": "circuit",
+      "target": "ac",
+      "input": "circuit"
+    },
+    {
+      "source": "sw",
+      "output": "params",
+      "target": "ac",
+      "input": "params"
+    },
+    {
+      "source": "ac",
+      "output": "run",
+      "target": "v",
+      "input": "run"
+    },
+    {
+      "source": "v",
+      "output": "signal",
+      "target": "fc",
+      "input": "signal"
+    },
+    {
+      "source": "fc",
+      "output": "value",
+      "target": "table",
+      "input": "values"
+    }
+  ]
+}

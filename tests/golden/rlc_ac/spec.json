@@ -1,0 +1,8 @@
+{
+  "description": "Series RLC: f0 = 1/(2*pi*sqrt(LC)) = 5032.92 Hz, |H(f0)| = 1 (0 dB), phase 0.",
+  "checks": [
+    {"analysis": {"kind": "ac", "variation": "lin", "points": 2001, "fstart": "4k", "fstop": "6k"}, "signal": "V(out)", "at": 5032.9212, "expected": 1.0, "rtol": 1e-4},
+    {"analysis": {"kind": "ac", "variation": "lin", "points": 2001, "fstart": "4k", "fstop": "6k"}, "signal": "V(out)", "at": 5032.9212, "expected_phase_deg": 0.0, "atol": 0.05},
+    {"analysis": {"kind": "ac", "variation": "dec", "points": 50, "fstart": "10", "fstop": "1meg"}, "signal": "V(out)", "at": 50, "expected_db": -50.056, "atol": 0.05}
+  ]
+}

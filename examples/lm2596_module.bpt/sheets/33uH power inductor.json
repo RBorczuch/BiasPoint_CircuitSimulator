@@ -1,0 +1,280 @@
+{
+  "id": "01a170de-1eba-7011-a495-af920a214bea",
+  "name": "33uH power inductor",
+  "instances": [
+    {
+      "id": "01a170de-1eba-700a-a5dd-98793b4f71cd",
+      "ref": "L1",
+      "symbol": "bpt:inductor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "L": "{Lnom}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        889,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eba-700c-8887-5f3c2e352e68",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "{dcr}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1905,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a170de-1eba-700b-bea9-d38006e1ffaa",
+      "points": [
+        [
+          1270,
+          0
+        ],
+        [
+          1524,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eba-700d-bd83-a3ba16d9caeb",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          508,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eba-700e-8ea0-eff458377060",
+      "points": [
+        [
+          2286,
+          0
+        ],
+        [
+          2794,
+          0
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a170de-1eba-700f-8e0a-a42df2730b6a",
+      "kind": "port",
+      "text": "1",
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eba-7010-9048-d5affda258a2",
+      "kind": "port",
+      "text": "2",
+      "at": [
+        2794,
+        0
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {
+    "Lnom": "33u",
+    "dcr": "50m"
+  },
+  "port_sides": {
+    "1": "left",
+    "2": "right"
+  },
+  "port_order": [
+    "1",
+    "2"
+  ],
+  "symbol": {
+    "id": "sheet:33uH power inductor",
+    "name": "Inductor",
+    "description": "Inductance with winding resistance and capacitance, core loss and saturation",
+    "ref_prefix": "L",
+    "pins": [
+      {
+        "number": "1",
+        "name": "",
+        "at": [
+          0,
+          -381
+        ],
+        "length": 127,
+        "orientation": "up",
+        "type": "passive",
+        "implicit_net": null
+      },
+      {
+        "number": "2",
+        "name": "",
+        "at": [
+          0,
+          381
+        ],
+        "length": 127,
+        "orientation": "down",
+        "type": "passive",
+        "implicit_net": null
+      }
+    ],
+    "graphics": [
+      {
+        "kind": "arc",
+        "start": [
+          0,
+          -254
+        ],
+        "mid": [
+          64,
+          -190
+        ],
+        "end": [
+          0,
+          -127
+        ]
+      },
+      {
+        "kind": "arc",
+        "start": [
+          0,
+          -127
+        ],
+        "mid": [
+          64,
+          -63
+        ],
+        "end": [
+          0,
+          0
+        ]
+      },
+      {
+        "kind": "arc",
+        "start": [
+          0,
+          0
+        ],
+        "mid": [
+          64,
+          64
+        ],
+        "end": [
+          0,
+          127
+        ]
+      },
+      {
+        "kind": "arc",
+        "start": [
+          0,
+          127
+        ],
+        "mid": [
+          64,
+          191
+        ],
+        "end": [
+          0,
+          254
+        ]
+      }
+    ],
+    "spice": {
+      "element": "L",
+      "nodes": [
+        "1",
+        "2"
+      ]
+    },
+    "power_net": null,
+    "default_params": {
+      "L": "10u"
+    },
+    "default_model": null,
+    "category": "Passive",
+    "ref_at": [
+      152,
+      -64
+    ],
+    "value_at": [
+      152,
+      64
+    ],
+    "value_param": "L",
+    "parasitics": [],
+    "variants": [],
+    "looks": [],
+    "version": 1,
+    "updated": "",
+    "changes": "",
+    "kind": null
+  },
+  "component": {
+    "id": "cmp:Standard examples/33uH power inductor",
+    "name": "33uH power inductor",
+    "kind": "inductor",
+    "description": "33 uH toroidal power inductor of the module",
+    "metadata": {
+      "technology": "ferrite toroid",
+      "package": "toroid"
+    },
+    "ratings": {
+      "current": "3"
+    },
+    "template": {
+      "name": "inductor",
+      "values": {
+        "Lnom": "33u",
+        "dcr": "50m"
+      }
+    },
+    "characteristics": [],
+    "version": 1,
+    "updated": "",
+    "changes": ""
+  },
+  "owner": "cmp:Standard examples/LM2596 step-down module",
+  "variants": [],
+  "variant_label": ""
+}

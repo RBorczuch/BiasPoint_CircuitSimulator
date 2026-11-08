@@ -1,0 +1,8 @@
+{
+  "description": "Bias: Vth = 2.1 V, Rth = 8.25k, Ic about 1.39 mA, Vc about 5.5 V. Midband gain about -RC/(RE + re) = -4.6.",
+  "checks": [
+    {"analysis": {"kind": "op"}, "signal": "V(c)", "reduce": "value", "range": [5.0, 6.0]},
+    {"analysis": {"kind": "op"}, "signal": "V(e)", "reduce": "value", "range": [1.3, 1.5]},
+    {"analysis": {"kind": "ac", "variation": "dec", "points": 20, "fstart": "10", "fstop": "100k"}, "signal": "V(c)", "at": 1000, "range": [4.3, 4.7]}
+  ]
+}

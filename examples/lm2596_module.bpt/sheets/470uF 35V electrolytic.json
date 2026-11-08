@@ -1,0 +1,409 @@
+{
+  "id": "01a170de-1eb8-7076-9966-360aafd10355",
+  "name": "470uF 35V electrolytic",
+  "instances": [
+    {
+      "id": "01a170de-1eb8-7066-a6cc-2335e28aa9de",
+      "ref": "C1",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "{Cnom}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1143,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7069-a8a7-49eb8e1540b0",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "{rleak}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1143,
+        635
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-706d-9466-724a0ac159d2",
+      "ref": "R2",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "{esr}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2413,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-706f-83be-8679b35e7f3f",
+      "ref": "L1",
+      "symbol": "bpt:inductor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "L": "{esl}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3429,
+        0
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a170de-1eb8-7064-b1fd-ac183f0f0a18",
+      "points": [
+        [
+          508,
+          0
+        ],
+        [
+          762,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7065-941e-e6d6862778ce",
+      "points": [
+        [
+          1524,
+          0
+        ],
+        [
+          1778,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7067-b96b-1001abd1e47d",
+      "points": [
+        [
+          508,
+          635
+        ],
+        [
+          762,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7068-bb72-427bdace2253",
+      "points": [
+        [
+          1524,
+          635
+        ],
+        [
+          1778,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-706a-8982-e7191b1a002b",
+      "points": [
+        [
+          508,
+          0
+        ],
+        [
+          508,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-706b-920c-f691b62247f0",
+      "points": [
+        [
+          1778,
+          0
+        ],
+        [
+          1778,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-706c-8096-b39df5c11401",
+      "points": [
+        [
+          1778,
+          0
+        ],
+        [
+          2032,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-706e-8771-7e2bfe58b197",
+      "points": [
+        [
+          2794,
+          0
+        ],
+        [
+          3048,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7070-bd34-80131b832640",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          508,
+          0
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7071-a5de-e476f805919d",
+      "points": [
+        [
+          3810,
+          0
+        ],
+        [
+          4318,
+          0
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [
+    {
+      "id": "01a170de-1eb8-7074-a97b-815c9e618144",
+      "at": [
+        508,
+        0
+      ]
+    },
+    {
+      "id": "01a170de-1eb8-7075-a3a6-2c71321fc003",
+      "at": [
+        1778,
+        0
+      ]
+    }
+  ],
+  "labels": [
+    {
+      "id": "01a170de-1eb8-7072-b164-8b35b5c993f2",
+      "kind": "port",
+      "text": "1",
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eb8-7073-aae0-80dda7287d12",
+      "kind": "port",
+      "text": "2",
+      "at": [
+        4318,
+        0
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {
+    "Cnom": "470u",
+    "esr": "80m",
+    "esl": "15n",
+    "rleak": "100k"
+  },
+  "port_sides": {
+    "1": "left",
+    "2": "right"
+  },
+  "port_order": [
+    "1",
+    "2"
+  ],
+  "symbol": {
+    "id": "sheet:470uF 35V electrolytic",
+    "name": "Capacitor",
+    "description": "Aluminium or tantalum capacitor: ESR higher at low frequency",
+    "ref_prefix": "C",
+    "pins": [
+      {
+        "number": "1",
+        "name": "",
+        "at": [
+          0,
+          -381
+        ],
+        "length": 330,
+        "orientation": "up",
+        "type": "passive",
+        "implicit_net": null
+      },
+      {
+        "number": "2",
+        "name": "",
+        "at": [
+          0,
+          381
+        ],
+        "length": 330,
+        "orientation": "down",
+        "type": "passive",
+        "implicit_net": null
+      }
+    ],
+    "graphics": [
+      {
+        "kind": "polyline",
+        "points": [
+          [
+            -203,
+            -51
+          ],
+          [
+            203,
+            -51
+          ]
+        ],
+        "fill": false
+      },
+      {
+        "kind": "polyline",
+        "points": [
+          [
+            -203,
+            51
+          ],
+          [
+            203,
+            51
+          ]
+        ],
+        "fill": false
+      }
+    ],
+    "spice": {
+      "element": "C",
+      "nodes": [
+        "1",
+        "2"
+      ]
+    },
+    "power_net": null,
+    "default_params": {
+      "C": "100n"
+    },
+    "default_model": null,
+    "category": "Passive",
+    "ref_at": [
+      279,
+      -64
+    ],
+    "value_at": [
+      279,
+      64
+    ],
+    "value_param": "C",
+    "parasitics": [],
+    "variants": [],
+    "looks": [],
+    "version": 1,
+    "updated": "",
+    "changes": "",
+    "kind": null
+  },
+  "component": {
+    "id": "cmp:Standard examples/470uF 35V electrolytic",
+    "name": "470uF 35V electrolytic",
+    "kind": "capacitor",
+    "description": "470uF aluminium electrolytic, low ESR (typical of the module's board)",
+    "metadata": {
+      "technology": "aluminium electrolytic",
+      "package": "radial"
+    },
+    "ratings": {
+      "voltage": "35"
+    },
+    "template": {
+      "name": "electrolytic",
+      "values": {
+        "Cnom": "470u",
+        "esr": "80m",
+        "esl": "15n",
+        "rleak": "100k"
+      }
+    },
+    "characteristics": [],
+    "version": 1,
+    "updated": "",
+    "changes": ""
+  },
+  "owner": "cmp:Standard examples/LM2596 step-down module",
+  "variants": [],
+  "variant_label": ""
+}

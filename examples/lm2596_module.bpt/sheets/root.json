@@ -1,0 +1,245 @@
+{
+  "id": "01a170de-1edd-7000-abba-891374cf311b",
+  "name": "root",
+  "instances": [
+    {
+      "id": "01a170de-1edf-7000-bfec-5c7160813db5",
+      "ref": "V1",
+      "symbol": "bpt:vsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "dc": "0",
+          "tran": "PWL(0 0 0.2m 12)"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1edf-7001-9106-5faf73b1e9b6",
+      "ref": "U1",
+      "symbol": "sheet:lm2596_module",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "vout": "5"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2032,
+        -1016
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1edf-7002-b65b-01176b903f68",
+      "ref": "RL",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "5"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        4064,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1edf-7006-b498-7839bf18cf64",
+      "ref": "#GND1",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2032,
+        -254
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1edf-7008-8d99-114145d1579b",
+      "ref": "#GND2",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        762
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1edf-700a-ba38-e8da765e79b6",
+      "ref": "#GND3",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        4064,
+        762
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a170de-1edf-7003-810e-c0e4b3578b47",
+      "points": [
+        [
+          0,
+          -381
+        ],
+        [
+          0,
+          -1016
+        ],
+        [
+          1143,
+          -1016
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1edf-7004-b053-c4ccb463a31b",
+      "points": [
+        [
+          2921,
+          -1016
+        ],
+        [
+          4064,
+          -1016
+        ],
+        [
+          4064,
+          -381
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1edf-7005-9155-64c7809bb59f",
+      "points": [
+        [
+          2032,
+          -508
+        ],
+        [
+          2032,
+          -254
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1edf-7007-a40d-efef2d885bf9",
+      "points": [
+        [
+          0,
+          381
+        ],
+        [
+          0,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1edf-7009-96f8-823f4dec7ed5",
+      "points": [
+        [
+          4064,
+          381
+        ],
+        [
+          4064,
+          762
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a170de-1edf-700b-ba87-da3e8a05ae2d",
+      "kind": "local",
+      "text": "in",
+      "at": [
+        508,
+        -1016
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1edf-700c-b9d1-3681844b7b4b",
+      "kind": "local",
+      "text": "out",
+      "at": [
+        3556,
+        -1016
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {},
+  "port_sides": {},
+  "port_order": [],
+  "symbol": null,
+  "component": null,
+  "owner": null,
+  "variants": [],
+  "variant_label": ""
+}

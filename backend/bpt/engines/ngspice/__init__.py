@@ -1,0 +1,1 @@
+"""ngspice shared-library engine."""

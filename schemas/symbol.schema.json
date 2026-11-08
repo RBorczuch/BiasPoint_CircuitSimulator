@@ -1,0 +1,790 @@
+{
+  "$defs": {
+    "Arc": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "arc",
+          "default": "arc",
+          "title": "Kind",
+          "type": "string"
+        },
+        "start": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Start",
+          "type": "array"
+        },
+        "mid": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Mid",
+          "type": "array"
+        },
+        "end": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "End",
+          "type": "array"
+        }
+      },
+      "required": [
+        "start",
+        "mid",
+        "end"
+      ],
+      "title": "Arc",
+      "type": "object"
+    },
+    "Circle": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "circle",
+          "default": "circle",
+          "title": "Kind",
+          "type": "string"
+        },
+        "center": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Center",
+          "type": "array"
+        },
+        "radius": {
+          "title": "Radius",
+          "type": "integer"
+        },
+        "fill": {
+          "default": false,
+          "title": "Fill",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "center",
+        "radius"
+      ],
+      "title": "Circle",
+      "type": "object"
+    },
+    "Look": {
+      "additionalProperties": false,
+      "description": "Another drawing of the same part (ANSI zigzag, electrolytic capacitor...); same pins.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "standard": {
+          "anyOf": [
+            {
+              "enum": [
+                "iec",
+                "ansi"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Standard"
+        },
+        "signal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signal"
+        },
+        "default": {
+          "type": "boolean",
+          "default": false,
+          "title": "Default"
+        },
+        "graphics": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "arc": "#/$defs/Arc",
+                "circle": "#/$defs/Circle",
+                "polyline": "#/$defs/Polyline",
+                "rect": "#/$defs/Rect",
+                "text": "#/$defs/Text"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/Polyline"
+              },
+              {
+                "$ref": "#/$defs/Rect"
+              },
+              {
+                "$ref": "#/$defs/Circle"
+              },
+              {
+                "$ref": "#/$defs/Arc"
+              },
+              {
+                "$ref": "#/$defs/Text"
+              }
+            ]
+          },
+          "title": "Graphics",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "graphics"
+      ],
+      "title": "Look",
+      "type": "object"
+    },
+    "Parasitic": {
+      "additionalProperties": false,
+      "description": "A non-ideal property of a part: an extra R, L or C in series or in parallel with it.\n\nStored like any parameter (``key`` in the instance params); empty = absent (ideal).\nThe netlister expands it into a separate element.",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "element": {
+          "enum": [
+            "R",
+            "L",
+            "C"
+          ],
+          "title": "Element",
+          "type": "string"
+        },
+        "connection": {
+          "enum": [
+            "series",
+            "parallel"
+          ],
+          "title": "Connection",
+          "type": "string"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "element",
+        "connection",
+        "unit"
+      ],
+      "title": "Parasitic",
+      "type": "object"
+    },
+    "Pin": {
+      "additionalProperties": false,
+      "description": "``at`` is the connection point relative to the symbol origin (unrotated).",
+      "properties": {
+        "number": {
+          "title": "Number",
+          "type": "string"
+        },
+        "name": {
+          "default": "",
+          "title": "Name",
+          "type": "string"
+        },
+        "at": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        },
+        "length": {
+          "default": 127,
+          "title": "Length",
+          "type": "integer"
+        },
+        "orientation": {
+          "default": "up",
+          "enum": [
+            "left",
+            "right",
+            "up",
+            "down"
+          ],
+          "title": "Orientation",
+          "type": "string"
+        },
+        "type": {
+          "default": "passive",
+          "enum": [
+            "passive",
+            "input",
+            "output",
+            "bidirectional",
+            "power_in",
+            "power_out"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "implicit_net": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Implicit Net"
+        }
+      },
+      "required": [
+        "number",
+        "at"
+      ],
+      "title": "Pin",
+      "type": "object"
+    },
+    "Polyline": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "polyline",
+          "default": "polyline",
+          "title": "Kind",
+          "type": "string"
+        },
+        "points": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "type": "array"
+          },
+          "title": "Points",
+          "type": "array"
+        },
+        "fill": {
+          "default": false,
+          "title": "Fill",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "points"
+      ],
+      "title": "Polyline",
+      "type": "object"
+    },
+    "Rect": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "rect",
+          "default": "rect",
+          "title": "Kind",
+          "type": "string"
+        },
+        "start": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Start",
+          "type": "array"
+        },
+        "end": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "End",
+          "type": "array"
+        },
+        "fill": {
+          "default": false,
+          "title": "Fill",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "Rect",
+      "type": "object"
+    },
+    "SpiceMapping": {
+      "additionalProperties": false,
+      "description": "How an instance becomes a SPICE element line.\n\n``nodes`` lists pin numbers in SPICE node order; ``\"=0\"`` stands for the ground node\n(used e.g. by the ideal op-amp, a VCVS referenced to ground).",
+      "properties": {
+        "element": {
+          "enum": [
+            "R",
+            "C",
+            "L",
+            "V",
+            "I",
+            "E",
+            "F",
+            "G",
+            "H",
+            "B",
+            "D",
+            "Q",
+            "M",
+            "J",
+            "S",
+            "X",
+            "A"
+          ],
+          "title": "Element",
+          "type": "string"
+        },
+        "nodes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Nodes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "element",
+        "nodes"
+      ],
+      "title": "SpiceMapping",
+      "type": "object"
+    },
+    "Text": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "text",
+          "default": "text",
+          "title": "Kind",
+          "type": "string"
+        },
+        "at": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "size": {
+          "default": 127,
+          "title": "Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "at",
+        "text"
+      ],
+      "title": "Text",
+      "type": "object"
+    },
+    "Variant": {
+      "additionalProperties": false,
+      "description": "Another way to simulate the same part (ideal / behavioural / transistor level...).",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "faster": {
+          "default": false,
+          "title": "Faster",
+          "type": "boolean"
+        },
+        "spice": {
+          "$ref": "#/$defs/SpiceMapping"
+        },
+        "default_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default Model"
+        },
+        "default_params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Default Params",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "spice"
+      ],
+      "title": "Variant",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "ref_prefix": {
+      "title": "Ref Prefix",
+      "type": "string"
+    },
+    "pins": {
+      "items": {
+        "$ref": "#/$defs/Pin"
+      },
+      "title": "Pins",
+      "type": "array"
+    },
+    "graphics": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "arc": "#/$defs/Arc",
+            "circle": "#/$defs/Circle",
+            "polyline": "#/$defs/Polyline",
+            "rect": "#/$defs/Rect",
+            "text": "#/$defs/Text"
+          },
+          "propertyName": "kind"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/Polyline"
+          },
+          {
+            "$ref": "#/$defs/Rect"
+          },
+          {
+            "$ref": "#/$defs/Circle"
+          },
+          {
+            "$ref": "#/$defs/Arc"
+          },
+          {
+            "$ref": "#/$defs/Text"
+          }
+        ]
+      },
+      "title": "Graphics",
+      "type": "array"
+    },
+    "spice": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SpiceMapping"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "power_net": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Power Net"
+    },
+    "default_params": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Default Params",
+      "type": "object"
+    },
+    "default_model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Default Model"
+    },
+    "category": {
+      "default": "Misc",
+      "title": "Category",
+      "type": "string"
+    },
+    "ref_at": {
+      "anyOf": [
+        {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": [
+        152,
+        -64
+      ],
+      "title": "Ref At"
+    },
+    "value_at": {
+      "anyOf": [
+        {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": [
+        152,
+        64
+      ],
+      "title": "Value At"
+    },
+    "value_param": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Param"
+    },
+    "parasitics": {
+      "items": {
+        "$ref": "#/$defs/Parasitic"
+      },
+      "title": "Parasitics",
+      "type": "array"
+    },
+    "variants": {
+      "items": {
+        "$ref": "#/$defs/Variant"
+      },
+      "title": "Variants",
+      "type": "array"
+    },
+    "looks": {
+      "items": {
+        "$ref": "#/$defs/Look"
+      },
+      "title": "Looks",
+      "type": "array"
+    },
+    "version": {
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "updated": {
+      "default": "",
+      "title": "Updated",
+      "type": "string"
+    },
+    "changes": {
+      "default": "",
+      "title": "Changes",
+      "type": "string"
+    },
+    "kind": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Kind"
+    },
+    "group": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Group"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "ratings": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Ratings",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "ref_prefix",
+    "pins"
+  ],
+  "title": "Symbol",
+  "type": "object"
+}

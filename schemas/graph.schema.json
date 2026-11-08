@@ -1,0 +1,392 @@
+{
+  "$defs": {
+    "GraphEdge": {
+      "additionalProperties": false,
+      "description": "Output ``output`` of node ``source`` feeds input ``input`` of node ``target``.",
+      "properties": {
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "output": {
+          "title": "Output",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "input": {
+          "title": "Input",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "output",
+        "target",
+        "input"
+      ],
+      "title": "GraphEdge",
+      "type": "object"
+    },
+    "GraphGroup": {
+      "additionalProperties": false,
+      "description": "A frame around nodes with a title (the nodes inside it move with it on the canvas).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "color": {
+          "default": "",
+          "title": "Color",
+          "type": "string"
+        },
+        "rect": {
+          "default": [
+            0.0,
+            0.0,
+            400.0,
+            300.0
+          ],
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Rect",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "GraphGroup",
+      "type": "object"
+    },
+    "GraphNode": {
+      "additionalProperties": false,
+      "description": "A node of an analysis graph: its type (``sim/tran``), widget values and placement.\n\n``version``: of its type's parameters when it was made (older ones are migrated by the\ncatalogue); ``title``: the user's name for it (\"\" = the type's); ``bypass``: switched off,\nits input passed on to an output of the same type, else its branch skipped;\n``param_inputs``: parameters turned into ``scalar`` input sockets of the same name (a number\nfrom another node sets them).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "version": {
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "bypass": {
+          "default": false,
+          "title": "Bypass",
+          "type": "boolean"
+        },
+        "pos": {
+          "default": [
+            0.0,
+            0.0
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pos",
+          "type": "array"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size"
+        },
+        "params": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "title": "Params",
+          "type": "object"
+        },
+        "param_inputs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Param Inputs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "title": "GraphNode",
+      "type": "object"
+    },
+    "GraphNote": {
+      "additionalProperties": false,
+      "description": "Text on the canvas (Markdown).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "default": "",
+          "title": "Text",
+          "type": "string"
+        },
+        "pos": {
+          "default": [
+            0.0,
+            0.0
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pos",
+          "type": "array"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "GraphNote",
+      "type": "object"
+    },
+    "GraphReroute": {
+      "additionalProperties": false,
+      "description": "A point an edge passes through (to route it): what comes in (input ``in``) goes out\n(output ``out``) unchanged.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "pos": {
+          "default": [
+            0.0,
+            0.0
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pos",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "GraphReroute",
+      "type": "object"
+    },
+    "Subgraph": {
+      "additionalProperties": false,
+      "description": "A graph used as one node (G4): its sockets and parameters at its boundary.",
+      "properties": {
+        "version": {
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "inputs": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Inputs",
+          "type": "array"
+        },
+        "outputs": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Outputs",
+          "type": "array"
+        },
+        "params": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Params",
+          "type": "array"
+        },
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/GraphNode"
+          },
+          "title": "Nodes",
+          "type": "array"
+        },
+        "edges": {
+          "items": {
+            "$ref": "#/$defs/GraphEdge"
+          },
+          "title": "Edges",
+          "type": "array"
+        }
+      },
+      "title": "Subgraph",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Analysis graph (see node.md): simulations, calculations and views as connected nodes.",
+  "properties": {
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/GraphNode"
+      },
+      "title": "Nodes",
+      "type": "array"
+    },
+    "edges": {
+      "items": {
+        "$ref": "#/$defs/GraphEdge"
+      },
+      "title": "Edges",
+      "type": "array"
+    },
+    "groups": {
+      "items": {
+        "$ref": "#/$defs/GraphGroup"
+      },
+      "title": "Groups",
+      "type": "array"
+    },
+    "notes": {
+      "items": {
+        "$ref": "#/$defs/GraphNote"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "reroutes": {
+      "items": {
+        "$ref": "#/$defs/GraphReroute"
+      },
+      "title": "Reroutes",
+      "type": "array"
+    },
+    "subgraphs": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Subgraph"
+      },
+      "title": "Subgraphs",
+      "type": "object"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "Graph",
+  "type": "object"
+}

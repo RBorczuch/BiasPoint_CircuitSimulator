@@ -1,0 +1,459 @@
+{
+  "id": "01a170de-1ed7-7000-aaf5-b4823a22541d",
+  "name": "lm2596_module",
+  "instances": [
+    {
+      "id": "01a170de-1ed7-7001-b9d0-0fd44bfecd31",
+      "ref": "U1",
+      "symbol": "sheet:lm2596",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-7002-94b2-fd0bb7b27c4c",
+      "ref": "C1",
+      "symbol": "sheet:470uF 35V electrolytic",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        -2540,
+        254
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-7003-84ed-fa0fced8047b",
+      "ref": "D1",
+      "symbol": "sheet:SS34",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1778,
+        254
+      ],
+      "rot": 180,
+      "mirror": true,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-7004-9a2b-bdffdac01507",
+      "ref": "L1",
+      "symbol": "sheet:33uH power inductor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2540,
+        -127
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-7005-b13d-8fd826d56155",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "{1k*(vout/1.23-1)}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3556,
+        254
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-7006-96ef-64369693f15c",
+      "ref": "R2",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "1k"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3556,
+        1016
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1ed7-7007-89e5-07c45b402160",
+      "ref": "C2",
+      "symbol": "sheet:220uF 35V electrolytic",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        5588,
+        254
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a170de-1ed7-7009-98f8-53c7f5aad31f",
+      "points": [
+        [
+          -4064,
+          -127
+        ],
+        [
+          -2540,
+          -127
+        ],
+        [
+          -889,
+          -127
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-700a-8dbd-bc55776190e0",
+      "points": [
+        [
+          -889,
+          127
+        ],
+        [
+          -1524,
+          127
+        ],
+        [
+          -1524,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-700b-9b02-d714399346cd",
+      "points": [
+        [
+          889,
+          -127
+        ],
+        [
+          1778,
+          -127
+        ],
+        [
+          2159,
+          -127
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-700e-b622-9880a24bc0c3",
+      "points": [
+        [
+          2921,
+          -127
+        ],
+        [
+          3556,
+          -127
+        ],
+        [
+          5588,
+          -127
+        ],
+        [
+          6604,
+          -127
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-700f-8b0a-a90cf29c94e1",
+      "points": [
+        [
+          889,
+          127
+        ],
+        [
+          1270,
+          127
+        ],
+        [
+          1270,
+          1270
+        ],
+        [
+          3048,
+          1270
+        ],
+        [
+          3048,
+          635
+        ],
+        [
+          3556,
+          635
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7011-a1d6-b59055197e1e",
+      "points": [
+        [
+          -2540,
+          635
+        ],
+        [
+          -2540,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7012-b47c-1b25d41517fa",
+      "points": [
+        [
+          0,
+          635
+        ],
+        [
+          0,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7013-9298-2e804290f380",
+      "points": [
+        [
+          1778,
+          635
+        ],
+        [
+          1778,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7014-a9f8-af4c09316252",
+      "points": [
+        [
+          3556,
+          1397
+        ],
+        [
+          3556,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7015-99f6-769df11a981d",
+      "points": [
+        [
+          5588,
+          635
+        ],
+        [
+          5588,
+          1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1ed7-7017-afbe-980b941a1dc1",
+      "points": [
+        [
+          -4064,
+          1778
+        ],
+        [
+          -2540,
+          1778
+        ],
+        [
+          -1524,
+          1778
+        ],
+        [
+          0,
+          1778
+        ],
+        [
+          1778,
+          1778
+        ],
+        [
+          3556,
+          1778
+        ],
+        [
+          5588,
+          1778
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a170de-1ed7-7008-be75-ab0b4debd506",
+      "kind": "port",
+      "text": "IN+",
+      "at": [
+        -4064,
+        -127
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1ed7-700c-9213-c1d68d8c6f08",
+      "kind": "local",
+      "text": "sw",
+      "at": [
+        1270,
+        -127
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1ed7-700d-bdfc-99a3fe0f5ba8",
+      "kind": "port",
+      "text": "OUT+",
+      "at": [
+        6604,
+        -127
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1ed7-7010-a23b-bb13164ba8d7",
+      "kind": "local",
+      "text": "fb",
+      "at": [
+        3302,
+        635
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1ed7-7016-8183-42f2b83bd972",
+      "kind": "port",
+      "text": "GND",
+      "at": [
+        -4064,
+        1778
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {
+    "vout": "5"
+  },
+  "port_sides": {
+    "IN+": "left",
+    "OUT+": "right",
+    "GND": "bottom"
+  },
+  "port_order": [
+    "IN+",
+    "OUT+",
+    "GND"
+  ],
+  "symbol": null,
+  "component": {
+    "id": "cmp:Standard examples/LM2596 step-down module",
+    "name": "LM2596 step-down module",
+    "kind": "module",
+    "description": "The common blue DC-DC board: 4.5-40 V in, adjustable out, up to 3 A",
+    "metadata": {
+      "technology": "LM2596S-ADJ, 33 uH, 470 uF / 220 uF electrolytics, SS34",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/lm2596.pdf"
+    },
+    "ratings": {
+      "voltage": "35",
+      "current": "3"
+    },
+    "template": null,
+    "characteristics": [],
+    "version": 1,
+    "updated": "",
+    "changes": ""
+  },
+  "owner": "cmp:Standard examples/LM2596 step-down module",
+  "variants": [
+    {
+      "name": "averaged",
+      "label": "Averaged (no switching)",
+      "description": "Average of each switching period: the same control loop and start-up, no ripple, many times faster. Use it for long runs and load steps.",
+      "sheet": "lm2596_module_avg"
+    }
+  ],
+  "variant_label": "Switching (full)"
+}

@@ -1,0 +1,19 @@
+[package]
+name = "bpt-py"
+description = "Python bindings (module bpt_native): DSP and rendering helpers for BiasPoint"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[lib]
+name = "bpt_native"
+crate-type = ["cdylib"]
+
+[lints]
+workspace = true
+
+[dependencies]
+bpt-dsp = { path = "../bpt-dsp" }
+pyo3 = { version = "0.30.1", features = ["abi3-py313"] }
+resvg = "0.48.1"

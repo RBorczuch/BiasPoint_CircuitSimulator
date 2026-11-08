@@ -1,0 +1,879 @@
+{
+  "id": "01a170de-1eb8-7031-a288-9b7d2da26652",
+  "name": "lm2596_avg",
+  "instances": [
+    {
+      "id": "01a170de-1eb8-7037-828f-c5a08bdbce3d",
+      "ref": "Rfb",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "10meg"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        -3048,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7038-9106-cc9ab44bbf18",
+      "ref": "Ren",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "10meg"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        -2032,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7039-957f-47517ddde266",
+      "ref": "Bq",
+      "symbol": "bpt:bsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "i": "{iq}+V(d,GND)*I(Vsns)"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        -1016,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-703e-ad3e-e271afb4063c",
+      "ref": "Bavg",
+      "symbol": "bpt:bsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "v": "V(d,GND)*(V(VIN,GND)-{ron}*I(Vsns))-(1-V(d,GND))*{vf}*tanh(I(Vsns)/0.1)"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        10160,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-703f-b42c-351e3926d596",
+      "ref": "Vsns",
+      "symbol": "bpt:vsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "dc": "0"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        11176,
+        -2032
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7043-b641-e55ad677469a",
+      "ref": "Bon",
+      "symbol": "bpt:bsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "v": "soft(10*(V(VIN,GND)-4.5))*soft(20*(1.3-V(ONOFF,GND)))"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7044-b42e-f90504cae2d1",
+      "ref": "Bss",
+      "symbol": "bpt:bsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "i": "10u*V(on,GND)"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        4572,
+        0
+      ],
+      "rot": 180,
+      "mirror": true,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7045-bd95-df2833a06b37",
+      "ref": "Css",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "{10u*tss/vref}"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        6350,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7046-9b78-e34d458a691c",
+      "ref": "Bref",
+      "symbol": "bpt:bsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "i": "max(V(css,GND)-{vref},0)"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        8128,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7055-bf9a-555a838383d9",
+      "ref": "Bea",
+      "symbol": "bpt:bsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "i": "20u*(V(css,GND)-V(FB,GND))"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        3048
+      ],
+      "rot": 180,
+      "mirror": true,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7056-92b8-7d719d8c93bb",
+      "ref": "Ro",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "100meg"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2794,
+        3048
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7057-a9a2-af50b6282144",
+      "ref": "Cc",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "22n"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3810,
+        3048
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-7058-9f46-2432a4ae7501",
+      "ref": "Bclamp",
+      "symbol": "bpt:bsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "i": "1m*(V(comp,GND)-min(max(V(comp,GND),0),1.1))"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        4826,
+        3048
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    },
+    {
+      "id": "01a170de-1eb8-705b-b8ae-b7251d584bb0",
+      "ref": "Bd",
+      "symbol": "bpt:bsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "v": "V(on,GND)*min(max(V(comp,GND),0),1)"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        8636,
+        3048
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a170de-1eb8-703a-922f-e378ac51f14d",
+      "points": [
+        [
+          -5080,
+          -1016
+        ],
+        [
+          -3048,
+          -1016
+        ],
+        [
+          -3048,
+          -381
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-703b-b194-b2a48b23e232",
+      "points": [
+        [
+          -5080,
+          -1524
+        ],
+        [
+          -2032,
+          -1524
+        ],
+        [
+          -2032,
+          -381
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-703c-820a-1d2d9171247b",
+      "points": [
+        [
+          -5080,
+          -2032
+        ],
+        [
+          -1016,
+          -2032
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-703d-b341-f95a7d362c4f",
+      "points": [
+        [
+          -1016,
+          -381
+        ],
+        [
+          -1016,
+          -2032
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7041-a487-6ff00ccc3f24",
+      "points": [
+        [
+          10160,
+          -381
+        ],
+        [
+          10160,
+          -2032
+        ],
+        [
+          10795,
+          -2032
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7042-88c7-a0f0c9af8ce5",
+      "points": [
+        [
+          11557,
+          -2032
+        ],
+        [
+          12700,
+          -2032
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7047-be15-2caa31ec3ed2",
+      "points": [
+        [
+          0,
+          -381
+        ],
+        [
+          0,
+          -762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7049-b756-9b07b1404e21",
+      "points": [
+        [
+          4572,
+          -381
+        ],
+        [
+          6350,
+          -381
+        ],
+        [
+          8128,
+          -381
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-704b-8aa6-8886792eb1ec",
+      "points": [
+        [
+          -3048,
+          381
+        ],
+        [
+          -3048,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-704c-a176-1160d03e535a",
+      "points": [
+        [
+          -2032,
+          381
+        ],
+        [
+          -2032,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-704d-9a46-449ec7cbab0e",
+      "points": [
+        [
+          -1016,
+          381
+        ],
+        [
+          -1016,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-704e-9098-c27ab5f92bb0",
+      "points": [
+        [
+          0,
+          381
+        ],
+        [
+          0,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-704f-9dc2-a367051e1c9d",
+      "points": [
+        [
+          4572,
+          381
+        ],
+        [
+          4572,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7050-91ca-8bfe1c4725f0",
+      "points": [
+        [
+          6350,
+          381
+        ],
+        [
+          6350,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7051-969d-ec44f638a173",
+      "points": [
+        [
+          8128,
+          381
+        ],
+        [
+          8128,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7052-94a3-c599c3a4265c",
+      "points": [
+        [
+          10160,
+          381
+        ],
+        [
+          10160,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7053-b64b-a8b179e64b0e",
+      "points": [
+        [
+          -3048,
+          762
+        ],
+        [
+          -2032,
+          762
+        ],
+        [
+          -1016,
+          762
+        ],
+        [
+          0,
+          762
+        ],
+        [
+          4572,
+          762
+        ],
+        [
+          6350,
+          762
+        ],
+        [
+          8128,
+          762
+        ],
+        [
+          10160,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7054-88be-1b8a783df857",
+      "points": [
+        [
+          -3048,
+          762
+        ],
+        [
+          -3048,
+          3810
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7059-9af5-fad70277f9ff",
+      "points": [
+        [
+          0,
+          2667
+        ],
+        [
+          2794,
+          2667
+        ],
+        [
+          3810,
+          2667
+        ],
+        [
+          4826,
+          2667
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-705c-8721-d57e2a7f516e",
+      "points": [
+        [
+          8636,
+          2667
+        ],
+        [
+          8636,
+          2286
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-705e-ae19-750f7ae1faaa",
+      "points": [
+        [
+          0,
+          3429
+        ],
+        [
+          0,
+          3810
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-705f-bbeb-1d5a5454793d",
+      "points": [
+        [
+          2794,
+          3429
+        ],
+        [
+          2794,
+          3810
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7060-b2e2-0954e38a7eb4",
+      "points": [
+        [
+          3810,
+          3429
+        ],
+        [
+          3810,
+          3810
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7061-bba7-e0187a43dee1",
+      "points": [
+        [
+          4826,
+          3429
+        ],
+        [
+          4826,
+          3810
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7062-b06f-ab3685b343bb",
+      "points": [
+        [
+          8636,
+          3429
+        ],
+        [
+          8636,
+          3810
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a170de-1eb8-7063-bddb-0a15ab931c8d",
+      "points": [
+        [
+          -5080,
+          3810
+        ],
+        [
+          -3048,
+          3810
+        ],
+        [
+          0,
+          3810
+        ],
+        [
+          2794,
+          3810
+        ],
+        [
+          3810,
+          3810
+        ],
+        [
+          4826,
+          3810
+        ],
+        [
+          8636,
+          3810
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a170de-1eb8-7033-b3d0-69d91e4a11f9",
+      "kind": "port",
+      "text": "VIN",
+      "at": [
+        -5080,
+        -2032
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eb8-7034-9dff-e38f9df53f80",
+      "kind": "port",
+      "text": "ONOFF",
+      "at": [
+        -5080,
+        -1524
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eb8-7035-a292-8517d94f25cd",
+      "kind": "port",
+      "text": "FB",
+      "at": [
+        -5080,
+        -1016
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eb8-7036-9c42-d522a9e4d8e0",
+      "kind": "port",
+      "text": "GND",
+      "at": [
+        -5080,
+        3810
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eb8-7040-8f81-eeeb808efc61",
+      "kind": "port",
+      "text": "OUT",
+      "at": [
+        12700,
+        -2032
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eb8-7048-a710-9fd6591be2ee",
+      "kind": "local",
+      "text": "on",
+      "at": [
+        0,
+        -762
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eb8-704a-ad2f-e04f1dc96a68",
+      "kind": "local",
+      "text": "css",
+      "at": [
+        5334,
+        -381
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eb8-705a-a9ce-ffa56f26f7d1",
+      "kind": "local",
+      "text": "comp",
+      "at": [
+        1397,
+        2667
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a170de-1eb8-705d-a2b5-9f29ae871705",
+      "kind": "local",
+      "text": "d",
+      "at": [
+        8636,
+        2286
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [
+    {
+      "id": "01a170de-1eb8-7032-b65d-8659501681b3",
+      "text": ".func soft(x) {0.5+0.5*tanh(x)}\n.func sat(x, m) {x/pwr(1+pwr(x*x/(m*m),4),0.125)}",
+      "at": [
+        -5080,
+        -3302
+      ]
+    }
+  ],
+  "parameters": {
+    "fsw": "150k",
+    "vref": "1.23",
+    "ron": "0.39",
+    "ilim": "3.6",
+    "iq": "5m",
+    "tss": "1m",
+    "vf": "0.4"
+  },
+  "port_sides": {
+    "VIN": "left",
+    "ONOFF": "left",
+    "OUT": "right",
+    "FB": "right",
+    "GND": "bottom"
+  },
+  "port_order": [
+    "VIN",
+    "ONOFF",
+    "OUT",
+    "FB",
+    "GND"
+  ],
+  "symbol": null,
+  "component": null,
+  "owner": "cmp:Standard examples/LM2596 step-down module",
+  "variants": [],
+  "variant_label": ""
+}

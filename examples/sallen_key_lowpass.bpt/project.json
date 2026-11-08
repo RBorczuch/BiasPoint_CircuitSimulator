@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "01a155f3-748e-7015-b964-9835af1bfefd",
+  "name": "sallen_key_lowpass",
+  "parameters": {},
+  "models": {},
+  "simulation": {
+    "active": "ac",
+    "cards": {
+      "op": ".op",
+      "dc": ".dc V1 0 5 0.1",
+      "ac": ".ac dec 50 10 100k",
+      "tran": ".tran 5u 5m"
+    }
+  },
+  "sheets": [
+    {
+      "id": "01a155f3-748e-7000-9449-4c3dcb02a0b0",
+      "name": "root"
+    }
+  ]
+}

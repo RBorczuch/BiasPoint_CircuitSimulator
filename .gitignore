@@ -1,0 +1,53 @@
+# --- Python -----------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# --- Node / web app ---------------------------------------------------------------------------
+node_modules/
+apps/*/dist/
+*.tsbuildinfo
+apps/web/test-results/
+apps/web/playwright-report/
+apps/web/blob-report/
+apps/web/e2e/zz_*
+
+# --- Rust (native helper module) -------------------------------------------------------------
+target/
+
+# --- Project data -----------------------------------------------------------------------------
+# Simulation results, graph caches, snapshots and agent captures live next to a saved project;
+# they can be recomputed and can be hundreds of MB.
+/results/
+*.bpt/results/
+*.bpt/.snapshots/
+*.bpt/.captures/
+.snapshots/
+.captures/
+
+# --- Logs and local environment ---------------------------------------------------------------
+*.log
+.env
+.env.*
+!.env.example
+
+# --- Editors, OS, AI assistants ---------------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+.claude/settings.local.json
+
+# --- Reference source code (external projects, read-only, mixed licences) ---------------------
+Referencje/

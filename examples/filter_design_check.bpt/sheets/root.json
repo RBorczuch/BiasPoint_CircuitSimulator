@@ -1,0 +1,385 @@
+{
+  "id": "01a1bcfb-4aac-7000-9a81-e50aac970116",
+  "name": "root",
+  "instances": [
+    {
+      "id": "01a1bcfb-4aac-7001-9fbd-49189462ec43",
+      "ref": "V1",
+      "symbol": "bpt:vsource",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "dc": "0",
+          "ac": "1",
+          "tran": "SIN(0 1 1k)"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bcfb-4aac-7002-9fcb-ecc811a94e9a",
+      "ref": "R1",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "10k"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        1016,
+        -1016
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bcfb-4aac-7003-a11c-b208af7c89d5",
+      "ref": "R2",
+      "symbol": "bpt:resistor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "R": "10k"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        2540,
+        -1016
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bcfb-4aac-7004-a67e-35fd34b71f6f",
+      "ref": "C1",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "22n"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3302,
+        -1778
+      ],
+      "rot": 270,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bcfb-4aac-7005-a02a-cfae453439e7",
+      "ref": "C2",
+      "symbol": "bpt:capacitor",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {
+          "C": "10n"
+        },
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3302,
+        0
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bcfb-4aac-7006-b305-651955c768ef",
+      "ref": "U1",
+      "symbol": "bpt:opamp_ideal",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        4064,
+        -889
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bcfb-4aac-7011-bf56-f48866eac353",
+      "ref": "#GND1",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        0,
+        762
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    },
+    {
+      "id": "01a1bcfb-4aac-7012-8160-739b3b1d5f0a",
+      "ref": "#GND2",
+      "symbol": "bpt:gnd",
+      "model": {
+        "kind": "builtin",
+        "model": null,
+        "params": {},
+        "pins": null,
+        "variant": null
+      },
+      "at": [
+        3302,
+        762
+      ],
+      "rot": 0,
+      "mirror": false,
+      "look": null,
+      "ratings": {},
+      "texts": {}
+    }
+  ],
+  "wires": [
+    {
+      "id": "01a1bcfb-4aac-7007-bfd3-ce0e7e0a7688",
+      "points": [
+        [
+          0,
+          -381
+        ],
+        [
+          0,
+          -1016
+        ],
+        [
+          635,
+          -1016
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bcfb-4aac-7008-9692-6adbb4fe2906",
+      "points": [
+        [
+          1397,
+          -1016
+        ],
+        [
+          2159,
+          -1016
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bcfb-4aac-7009-bd97-07b826b7e9a2",
+      "points": [
+        [
+          2921,
+          -1016
+        ],
+        [
+          3683,
+          -1016
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bcfb-4aac-700a-a9be-4528039e66de",
+      "points": [
+        [
+          3302,
+          -1016
+        ],
+        [
+          3302,
+          -381
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bcfb-4aac-700b-9f32-e7a21a32930c",
+      "points": [
+        [
+          1778,
+          -1016
+        ],
+        [
+          1778,
+          -1778
+        ],
+        [
+          2921,
+          -1778
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bcfb-4aac-700c-8239-fbcb5e7fb812",
+      "points": [
+        [
+          3683,
+          -1778
+        ],
+        [
+          4826,
+          -1778
+        ],
+        [
+          4826,
+          -889
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bcfb-4aac-700d-8966-0e2affbf87c2",
+      "points": [
+        [
+          4445,
+          -889
+        ],
+        [
+          5207,
+          -889
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bcfb-4aac-700e-b122-376d65a6b7ba",
+      "points": [
+        [
+          3683,
+          -762
+        ],
+        [
+          3556,
+          -762
+        ],
+        [
+          3556,
+          -508
+        ],
+        [
+          4826,
+          -508
+        ],
+        [
+          4826,
+          -889
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bcfb-4aac-700f-a3d4-1d3bc8142c20",
+      "points": [
+        [
+          0,
+          381
+        ],
+        [
+          0,
+          762
+        ]
+      ],
+      "bus": false
+    },
+    {
+      "id": "01a1bcfb-4aac-7010-b5b7-1878faf63228",
+      "points": [
+        [
+          3302,
+          381
+        ],
+        [
+          3302,
+          762
+        ]
+      ],
+      "bus": false
+    }
+  ],
+  "junctions": [],
+  "labels": [
+    {
+      "id": "01a1bcfb-4aac-7013-9195-6139d4c00d76",
+      "kind": "local",
+      "text": "in",
+      "at": [
+        254,
+        -1016
+      ],
+      "rot": 0
+    },
+    {
+      "id": "01a1bcfb-4aac-7014-805e-085e675435df",
+      "kind": "local",
+      "text": "out",
+      "at": [
+        5080,
+        -889
+      ],
+      "rot": 0
+    }
+  ],
+  "directives": [],
+  "parameters": {},
+  "port_sides": {},
+  "port_order": [],
+  "form": [],
+  "symbol": null,
+  "component": null,
+  "owner": null,
+  "variants": [],
+  "variant_label": ""
+}

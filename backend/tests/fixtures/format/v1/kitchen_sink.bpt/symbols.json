@@ -1,0 +1,173 @@
+{
+  "user:Fixture/OPA": {
+    "id": "user:Fixture/OPA",
+    "name": "OPA",
+    "description": "Op-amp model with gain, bandwidth and output limited by the supplies; choose a manufacturer's model in the inspector",
+    "ref_prefix": "U",
+    "pins": [
+      {
+        "number": "+",
+        "name": "+",
+        "at": [
+          -381,
+          -127
+        ],
+        "length": 127,
+        "orientation": "left",
+        "type": "input",
+        "implicit_net": null
+      },
+      {
+        "number": "-",
+        "name": "-",
+        "at": [
+          -381,
+          127
+        ],
+        "length": 127,
+        "orientation": "left",
+        "type": "input",
+        "implicit_net": null
+      },
+      {
+        "number": "V+",
+        "name": "V+",
+        "at": [
+          0,
+          -381
+        ],
+        "length": 254,
+        "orientation": "up",
+        "type": "power_in",
+        "implicit_net": null
+      },
+      {
+        "number": "V-",
+        "name": "V-",
+        "at": [
+          0,
+          381
+        ],
+        "length": 254,
+        "orientation": "down",
+        "type": "power_in",
+        "implicit_net": null
+      },
+      {
+        "number": "out",
+        "name": "out",
+        "at": [
+          381,
+          0
+        ],
+        "length": 127,
+        "orientation": "right",
+        "type": "output",
+        "implicit_net": null
+      }
+    ],
+    "graphics": [
+      {
+        "kind": "polyline",
+        "points": [
+          [
+            -254,
+            -254
+          ],
+          [
+            -254,
+            254
+          ],
+          [
+            254,
+            0
+          ],
+          [
+            -254,
+            -254
+          ]
+        ],
+        "fill": false
+      },
+      {
+        "kind": "text",
+        "at": [
+          -190,
+          -127
+        ],
+        "text": "+",
+        "size": 102
+      },
+      {
+        "kind": "text",
+        "at": [
+          -190,
+          127
+        ],
+        "text": "−",
+        "size": 102
+      }
+    ],
+    "spice": {
+      "element": "X",
+      "nodes": [
+        "+",
+        "-",
+        "V+",
+        "V-",
+        "out"
+      ]
+    },
+    "power_net": null,
+    "default_params": {},
+    "default_model": "OPAMP",
+    "category": "Fixture",
+    "ref_at": [
+      178,
+      -254
+    ],
+    "value_at": [
+      178,
+      254
+    ],
+    "value_param": null,
+    "parasitics": [],
+    "variants": [
+      {
+        "name": "macro",
+        "label": "Single-pole, output within the supplies",
+        "description": "",
+        "spice": {
+          "element": "X",
+          "nodes": [
+            "+",
+            "-",
+            "V+",
+            "V-",
+            "out"
+          ]
+        },
+        "default_model": "OPAMP",
+        "default_params": {}
+      },
+      {
+        "name": "ideal",
+        "label": "Ideal (supplies ignored)",
+        "description": "",
+        "spice": {
+          "element": "E",
+          "nodes": [
+            "out",
+            "=0",
+            "+",
+            "-"
+          ]
+        },
+        "default_model": null,
+        "default_params": {
+          "gain": "1meg"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+(kicad_sch (version 20231120) (generator "test")
+  (lib_symbols
+    (symbol "Device:R" (pin_numbers hide) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+      (property "Reference" "R" (at 2.032 0 90) (effects (font (size 1.27 1.27))))
+      (property "Value" "R" (at 0 0 90) (effects (font (size 1.27 1.27))))
+      (symbol "R_0_1" (rectangle (start -1.016 -2.54) (end 1.016 2.54) (stroke (width 0.254)) (fill (type none))))
+      (symbol "R_1_1"
+        (pin passive line (at 0 3.81 270) (length 1.27) (name "~") (number "1"))
+        (pin passive line (at 0 -3.81 90) (length 1.27) (name "~") (number "2")))))
+  (hierarchical_label "IN" (shape input) (at 25.4 20.32 180))
+  (symbol (lib_id "Device:R") (at 30.48 24.13 0) (mirror x) (unit 1)
+    (property "Reference" "R?" (at 0 0 0)) (property "Value" "2k2" (at 0 0 0)))
+  (wire (pts (xy 25.4 20.32) (xy 30.48 20.32)))
+  (global_label "GND" (shape input) (at 30.48 27.94 270)))

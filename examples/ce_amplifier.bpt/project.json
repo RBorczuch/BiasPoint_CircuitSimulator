@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "01a155f3-7490-7014-9569-18616af43cac",
+  "name": "ce_amplifier",
+  "parameters": {},
+  "models": {
+    "Q2N3904": {
+      "type": "npn",
+      "params": {
+        "IS": "6.734f",
+        "BF": "416.4",
+        "NF": "1",
+        "VAF": "74.03",
+        "IKF": "66.78m",
+        "ISE": "6.734f",
+        "NE": "1.259",
+        "BR": "0.7371",
+        "RB": "10",
+        "RC": "1",
+        "CJE": "4.493p",
+        "MJE": "0.2593",
+        "VJE": "0.75",
+        "CJC": "3.638p",
+        "MJC": "0.3085",
+        "VJC": "0.75",
+        "TF": "301.2p",
+        "TR": "239.5n"
+      }
+    }
+  },
+  "simulation": {
+    "active": "tran",
+    "cards": {
+      "op": ".op",
+      "dc": ".dc VCC 0 15 0.1",
+      "ac": ".ac dec 20 10 10meg",
+      "tran": ".tran 10u 5m"
+    }
+  },
+  "sheets": [
+    {
+      "id": "01a155f3-748f-7000-9884-3c48f53141f4",
+      "name": "root"
+    }
+  ]
+}
